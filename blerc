@@ -1,0 +1,9 @@
+# Readline & PS0 settings
+bind 'set show-mode-in-prompt on'
+bind $'set vi-cmd-mode-string \1\eD\eM\e7\e[9999B\r\e[K\e[1m~\e[m\e8\2'
+bind $'set vi-ins-mode-string \1\eD\eM\e7\e[9999B\r\e[K\e[1m-- INSERT --\e[m\e8\2'
+PS0=$'\1\e7\eD\eM\e[9999B\e[2K\e8\2'
+
+# Turn off ble.sh mode names
+bleopt keymap_vi_mode_show:=
+bleopt info_display=bottom
