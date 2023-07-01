@@ -1,9 +1,13 @@
-# Readline & PS0 settings
-bind 'set show-mode-in-prompt on'
-bind $'set vi-cmd-mode-string \1\eD\eM\e7\e[9999B\r\e[K\e[1m~\e[m\e8\2'
-bind $'set vi-ins-mode-string \1\eD\eM\e7\e[9999B\r\e[K\e[1m-- INSERT --\e[m\e8\2'
-PS0=$'\1\e7\eD\eM\e[9999B\e[2K\e8\2'
-
-# Turn off ble.sh mode names
-bleopt keymap_vi_mode_show:=
 bleopt info_display=bottom
+
+function my-mode-line-settings-for-blesh {
+  bleopt keymap_vi_mode_string_nmap=$'\e[1m-- NORMAL --\e[m'
+  bleopt keymap_vi_mode_name_insert='INSERT'
+  bleopt keymap_vi_mode_name_replace='REPLACE'
+  bleopt keymap_vi_mode_name_vreplace='VREPLACE'
+  bleopt keymap_vi_mode_name_visual='VISUAL'
+  bleopt keymap_vi_mode_name_select='SELECT'
+  bleopt keymap_vi_mode_name_linewise='LINE'
+  bleopt keymap_vi_mode_name_blockwise='BLOCK'
+ }
+blehook/eval-after-load keymap_vi my-mode-line-settings-for-blesh
