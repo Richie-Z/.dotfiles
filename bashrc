@@ -115,14 +115,15 @@ fi
 set -o vi
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-eval "$(oh-my-posh init bash)"
-eval "$(oh-my-posh init bash --config ~/oh-my-posh-themes/bubbles.omp.json)"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export XDG_CONFIG_HOME="$HOME/.config"
-
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-    tmux attach -t default || tmux new -s default
-fi
 source ~/.local/share/blesh/ble.sh
+
+eval "$(oh-my-posh init bash --config ~/oh-my-posh-themes/mt.omp.json)"
+
+export PATH=$PATH:/home/richie/.spicetify
+
+xprop -root -f _NET_DESKTOP_LAYOUT 32cccc -set _NET_DESKTOP_LAYOUT 0,2,2,0 # XCFE layout to 2x2
