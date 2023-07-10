@@ -1,3 +1,4 @@
+alias sudo='sudo '
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -12,3 +13,5 @@ alias filezilla='/opt/FileZilla3/bin/filezilla'
 alias postman='/opt/Postman/Postman'
 alias sd="cd ~ && cd \$(find * -type d | fzf)"
 alias sad="cd ~ && cd \$(find . -type d | fzf)"
+alias nvim="/opt/nvim/nvim.appimage"
+alias ccc="xclip -sel clip"
