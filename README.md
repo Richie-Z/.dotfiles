@@ -36,6 +36,7 @@ Prerequisite: curl
 	```sh
 	cd ~/.config/i3/
 	curl -O https://gitlab.com/aquator/i3-scratchpad/-/raw/master/i3-scratchpad
+	chmod +x ./i3-scratchpad
 	```
 - [tmux](https://github.com/tmux/tmux/wiki/Installing)
 	- [tpm](https://github.com/tmux-plugins/tpm#installation)
