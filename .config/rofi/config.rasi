@@ -1,0 +1,7 @@
+@theme "/usr/share/rofi/themes/Monokai.rasi"
+
+configuration {
+ modi: "window,drun,ssh,combi,power-menu:~/.config/rofi/rofi-power-menu";
+ font: "JetBrainsMono Nerd Font 12";
+ combi-modi: "drun,run";
+ }
