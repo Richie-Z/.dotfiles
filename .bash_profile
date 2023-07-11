@@ -1,3 +1,7 @@
+if [ -f ~/.bash_aliases ]; then
+  . ~/.bash_aliases
+fi
+
 set -o vi
 
 export PATH=$PATH:/home/richie/.spicetify:/sbin/
