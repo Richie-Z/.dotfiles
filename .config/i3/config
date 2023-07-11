@@ -73,10 +73,10 @@ bindsym $mod+Shift+Up   	move up
 bindsym $mod+Shift+Right 	move right
 
 # split in horizontal orientation
-bindsym $mod+Shift+v 		split h
+bindsym $mod+Shift+b 		split h
 
 # split in vertical orientation
-bindsym $mod+v 			split v
+bindsym $mod+b 			split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f 			fullscreen toggle
@@ -113,13 +113,13 @@ floating_modifier 			$mod
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 			"1-terminal" 
-set $ws2 			"2-text-editor"
+set $ws2 			"2-terminal" 
 set $ws3 			"3-chrome"
 set $ws4 			"4-file-manager"
 set $ws5 			"5-utility"
 set $ws6 			"6"
 set $ws7 			"7"
-set $ws8 			"8"
+set $ws8 			"8-text-editor"
 set $ws9 			"9-spotify"
 set $ws10 			"0-code"
 
@@ -148,7 +148,7 @@ bindsym $mod+Shift+9 		move container to workspace $ws9
 bindsym $mod+Shift+0 		move container to workspace $ws10
 
 # assign class to only in open in that workspace
-for_window [class="FeatherPad"]         move container to workspace $ws2
+for_window [class="FeatherPad"]         move container to workspace $ws8
 for_window [class="Google-chrome"]      move container to workspace $ws3
 for_window [class="Spotify"]            move container to workspace $ws9
 
@@ -222,6 +222,9 @@ bindsym $mod+Return     exec --no-startup-id alacritty
 # open rofi
 bindsym $mod+d          exec rofi -show combi
 
+# open diodon
+bindsym $mod+v          exec diodon
+
 
 # ------------------------- STRATCHPAD -------------------------
 # start a terminal
@@ -237,7 +240,7 @@ exec_always feh --bg-scale ~/Pictures/wallpaper/power.jpg
 exec xinput disable "FocalTechPS/2 FocalTech Touchpad"
 exec xinput disable "AT Translated Set 2 keyboard"
 
-exec --no-startup-id featherpad
+exec --no-startup-id alacritty
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id spotify --no-zygote
 
