@@ -117,7 +117,7 @@ set $ws2 			"2-terminal"
 set $ws3 			"3-chrome"
 set $ws4 			"4-file-manager"
 set $ws5 			"5-utility"
-set $ws6 			"6"
+set $ws6 			"6-comic"
 set $ws7 			"7"
 set $ws8 			"8-text-editor"
 set $ws9 			"9-spotify"
@@ -154,6 +154,8 @@ for_window [class="Spotify"]            move container to workspace $ws9
 for_window [class="Postman"]            move container to workspace $ws5
 for_window [class="MeowSQL"]            move container to workspace $ws5
 for_window [class="Thunar"]             move container to workspace $ws4
+for_window [class="DBeaver"]            move container to workspace $ws5
+for_window [class="MComix"]             move container to workspace $ws6
 
 
 # ------------------------- GAPS -------------------------
@@ -246,7 +248,3 @@ exec xinput disable "AT Translated Set 2 keyboard"
 exec --no-startup-id alacritty
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id spotify --no-zygote
-
-
-
-
