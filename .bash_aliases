@@ -12,6 +12,7 @@ alias osu='/opt/osu/osu.AppImage'
 alias filezilla='/opt/FileZilla3/bin/filezilla'
 alias postman='/opt/Postman/Postman'
 alias sd="cd ~ && cd \$(find * -type d -not -path 'Android/Sdk/*' -not -path 'Development/*' -not -path '*/node_modules/*' -not -path '*/vendor/*' -not -path '*/.git/*'| fzf)"
+alias sdp="cd ~/Documents/Programming && cd \$(find * -type d -not -path '*/node_modules/*' -not -path '*/vendor/*' -not -path '*/.*/*'| fzf)"
 alias sad="cd ~ && cd \$(find . -type d | fzf)"
 alias nvim="/opt/nvim/nvim.appimage"
 alias ccc="xclip -sel clip"
