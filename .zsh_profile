@@ -1,0 +1,15 @@
+if [ -f ~/.zsh_aliases ]; then
+  source ~/.zsh_aliases
+fi
+
+set -o vi
+
+export PATH=$PATH:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:"$HOME/Development/flutter/bin"
+
+export ANDROID_HOME=$HOME/Library/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/34.0.0:$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/latest/bin/
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
