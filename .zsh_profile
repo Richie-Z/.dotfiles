@@ -4,7 +4,10 @@ fi
 
 set -o vi
 
-export PATH=$PATH:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:"$HOME/Development/flutter/bin"
+export PATH=$PATH:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:"$HOME/Development/flutter/bin":/opt/homebrew/opt/openjdk/bin:/opt/homebrew/opt/postgresql@16/bin
+
+export LDFLAGS="-L/opt/homebrew/opt/postgresql@16/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/postgresql@16/include"
 
 export ANDROID_HOME=$HOME/Library/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/34.0.0:$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/latest/bin/
