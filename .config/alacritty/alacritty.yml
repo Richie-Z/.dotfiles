@@ -1,10 +1,11 @@
 window:
   opacity: 0.9
+  option_as_alt: Both
 
 font:
-  family: 'FiraCodeMono Nerd Font'
-  size: 13
+  normal:
+    family: "FiraCode Nerd Font Mono"
+  size: 15
   offset:
     x: 0
-    y: -3
-
+    y: 3
