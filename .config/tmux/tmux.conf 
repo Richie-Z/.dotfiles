@@ -1,9 +1,23 @@
+# Plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @plugin 'richie-z/minimal-tmux'
+
+run  '~/.tmux/plugins/tpm/tpm'
+
 set-option -sa terminal-overrides ",xterm*:Tc"
 set -g mouse on
 
+# Prefix 
 unbind C-b
 set -g prefix C-Space
 bind C-space send-prefix
+
+# reload config file (change file location to your the tmux.conf you want to use)
+bind r source-file ~/.tmux.conf
 
 # Start windows and panes at 1, not 0
 set -g base-index 1
@@ -21,23 +35,13 @@ bind l select-pane -R
 bind -n M-H previous-window
 bind -n M-L next-window
 
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-sensible'
-set -g @plugin 'tmux-plugins/tmux-yank'
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'christoomey/vim-tmux-navigator'
-set -g @plugin 'maxpetretta/tmux-monokai-pro'
-
-run  '~/.tmux/plugins/tpm/tpm'
-
+# Yanking in vim style!
 set-window-option -g mode-keys vi
 set-option -s set-clipboard on
 bind-key -T copy-mode-vi v send-keys -X begin-selection
 bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
 bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -in -selection clipboard'
 
-bind '"' split-window -v -c "#{pane_current_path}"
-bind % split-window -h -c "#{pane_current_path}"
-
-bind '\' split-window -v -c "#{pane_current_path}"
+# Splitting Pane
 bind '|' split-window -h -c "#{pane_current_path}"
+bind '\' split-window -v -c "#{pane_current_path}"
