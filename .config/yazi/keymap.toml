@@ -1,0 +1,3 @@
+[[manager.prepend_keymap]]
+on   = [ "c", "a" ]
+run  = "plugin compress"

@@ -10,6 +10,8 @@ run  '~/.tmux/plugins/tpm/tpm'
 
 set-option -sa terminal-overrides ",xterm*:Tc"
 set -g mouse on
+set -g set-titles on
+set -g set-titles-string "#S:#W"
 
 # Prefix 
 unbind C-b

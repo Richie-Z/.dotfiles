@@ -3,6 +3,7 @@ if [ -f ~/.zsh_aliases ]; then
 fi
 
 set -o vi
+export EDITOR="nvim"
 
 export LDFLAGS="-L/opt/homebrew/opt/postgresql@16/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/postgresql@16/include"
@@ -15,3 +16,19 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH=$PATH:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:"$HOME/Development/flutter/bin":/opt/homebrew/opt/openjdk/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/sbin:/opt/homebrew/bin:/usr/local/bin
+
+# MASON
+export MASON_PACKAGES_PATH="/Users/richie/.local/share/nvim/mason/packages"
+export PATH=$PATH:$MASON_PACKAGES_PATH/phpactor
+
+# MINIFORGE
+export PATH=$PATH:$HOME/miniforge3/bin
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}

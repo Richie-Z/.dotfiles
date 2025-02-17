@@ -1,0 +1,9 @@
+[[plugin.deps]]
+use = "KKV9/compress"
+rev = "60b24af"
+hash = "ee025be766240cc98e671754ac836da3"
+
+[[flavor.deps]]
+use = "sanjinso/monokai-vibrant"
+rev = "8b68223"
+hash = "f4458ebaf8961d714eba05fe5ba40166"
