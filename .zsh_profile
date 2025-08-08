@@ -1,34 +1,56 @@
+# Load aliases if available
 if [ -f ~/.zsh_aliases ]; then
-  source ~/.zsh_aliases
+	source ~/.zsh_aliases
 fi
 
+# Shell & editor preferences
 set -o vi
 export EDITOR="nvim"
 
+# PostgreSQL (Homebrew)
 export LDFLAGS="-L/opt/homebrew/opt/postgresql@16/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/postgresql@16/include"
+export PATH="$PATH:/opt/homebrew/opt/postgresql@16/bin"
 
-export ANDROID_HOME=$HOME/Library/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/34.0.0:$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/latest/bin/
+# Android SDK
+export ANDROID_HOME="$HOME/Library/Android/Sdk"
+export PATH="$PATH:$ANDROID_HOME"
+export PATH="$PATH:$ANDROID_HOME/platform-tools"
+export PATH="$PATH:$ANDROID_HOME/build-tools/34.0.0"
+export PATH="$PATH:$ANDROID_HOME/emulator"
+export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin/"
 
+# NVM (Node Version Manager)
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
 
-export PATH=$PATH:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:"$HOME/Development/flutter/bin":/opt/homebrew/opt/openjdk/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/sbin:/opt/homebrew/bin:/usr/local/bin
+# Flutter
+export PATH="$PATH:$HOME/Development/flutter/bin"
 
-# MASON
-export MASON_PACKAGES_PATH="/Users/richie/.local/share/nvim/mason/packages"
-export PATH=$PATH:$MASON_PACKAGES_PATH/phpactor
+# Homebrew & macOS system paths
+export PATH="$PATH:/usr/local/bin"
+export PATH="$PATH:/opt/homebrew/bin"
+export PATH="$PATH:/opt/homebrew/sbin"
+export PATH="$PATH:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
-# MINIFORGE
-export PATH=$PATH:$HOME/miniforge3/bin
+# Mason (Neovim LSP packages)
+export MASON_PACKAGES_PATH="$HOME/.local/share/nvim/mason/packages"
+export PATH="$PATH:$MASON_PACKAGES_PATH/phpactor"
 
+# Miniforge (Python)
+export PATH="$PATH:$HOME/miniforge3/bin"
+
+# JAVA
+export JAVA_HOME="/opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk/Contents/Home"
+export PATH="$JAVA_HOME/bin:$PATH"
+
+# yazi (TUI file manager) integration with directory tracking
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
+	if cwd="$(<"$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd "$cwd"
 	fi
-	rm -f -- "$tmp"
+	rm -f "$tmp"
 }
