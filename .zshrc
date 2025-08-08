@@ -7,10 +7,9 @@ plugins=(git zsh-autosuggestions flutter laravel tmux)
 export ZSH_TMUX_AUTONAME_SESSION=true
 source $ZSH/oh-my-zsh.sh
 
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/richie/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/richie/miniforge3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -22,4 +21,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
