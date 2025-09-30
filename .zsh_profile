@@ -34,6 +34,9 @@ export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH:/opt/homebrew/sbin"
 export PATH="$PATH:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
+# Global Var
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # Mason (Neovim LSP packages)
 export MASON_PACKAGES_PATH="$HOME/.local/share/nvim/mason/packages"
 export PATH="$PATH:$MASON_PACKAGES_PATH/phpactor"
@@ -42,8 +45,11 @@ export PATH="$PATH:$MASON_PACKAGES_PATH/phpactor"
 export PATH="$PATH:$HOME/miniforge3/bin"
 
 # JAVA
-export JAVA_HOME="/opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk/Contents/Home"
+export JAVA_HOME="$(mise which java | xargs dirname | xargs dirname)"
 export PATH="$JAVA_HOME/bin:$PATH"
+
+# VS Code
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # yazi (TUI file manager) integration with directory tracking
 function y() {
