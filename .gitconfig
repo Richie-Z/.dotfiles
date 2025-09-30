@@ -1,0 +1,11 @@
+[user]
+	name = Richie-Z
+	email = 
+[init]
+	defaultBranch = main
+[color]
+	ui = auto
+[core]
+	editor = nvim
+[credential]
+	helper = store
