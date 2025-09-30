@@ -1,0 +1,9 @@
+[tools]
+dotnet = "9"
+flutter = "3.13"
+go = "1.24"
+java = "zulu-17"
+node = "22"
+php = "8.2"
+pnpm = "latest"
+ruby = "latest"
