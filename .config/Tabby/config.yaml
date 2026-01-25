@@ -1,4 +1,4 @@
-version: 7
+version: 8
 profiles: []
 groups: []
 configSync:
@@ -176,27 +176,29 @@ hotkeys:
 terminal:
   searchOptions: {}
   colorScheme:
-    name: AtelierSulphurpool
-    foreground: "#979db4"
-    background: "#202746"
-    cursor: "#979db4"
+    name: Catppuccin Mocha
+    foreground: "#cdd6f4"
+    background: "#1e1e2e"
+    selection: null
+    cursor: "#f5e0dc"
+    cursorAccent: null
     colors:
-      - "#202746"
-      - "#c94922"
-      - "#ac9739"
-      - "#c08b30"
-      - "#3d8fd1"
-      - "#6679cc"
-      - "#22a2c9"
-      - "#979db4"
-      - "#6b7394"
-      - "#c76b29"
-      - "#293256"
-      - "#5e6687"
-      - "#898ea4"
-      - "#dfe2f1"
-      - "#9c637a"
-      - "#f5f7ff"
+      - "#45475a"
+      - "#f38ba8"
+      - "#a6e3a1"
+      - "#f9e2af"
+      - "#89b4fa"
+      - "#f5c2e7"
+      - "#94e2d5"
+      - "#bac2de"
+      - "#585b70"
+      - "#f38ba8"
+      - "#a6e3a1"
+      - "#f9e2af"
+      - "#89b4fa"
+      - "#f5c2e7"
+      - "#94e2d5"
+      - "#a6adc8"
   font: FiraCode Nerd Font
   customColorSchemes: []
   altIsMeta: true
