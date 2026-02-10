@@ -1,0 +1,81 @@
+CONNECT_CODER_PATH="$WORKBENCH_PATH/connect-coder"
+
+. "$DOTFILES_PATH/scripts/clipboard.sh"
+
+# -----------------------
+# Shell quality-of-life
+# -----------------------
+alias sudo='sudo '
+alias q='exit'
+alias cls='clear'
+alias c='clear'
+alias sczsh='source ~/.zshrc'
+
+# -----------------------
+# ls shortcuts
+# -----------------------
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# -----------------------
+# Networking
+# -----------------------
+alias pg='ping google.com'
+alias pgh='ping github.com'
+
+# -----------------------
+# Navigation (fzf-powered)
+# -----------------------
+alias sd='cd ~ && cd "$(find . -type d \
+  -not -path "./Android/Sdk/*" \
+  -not -path "./Development/*" \
+  -not -path "*/node_modules/*" \
+  -not -path "*/vendor/*" \
+  -not -path "*/.git/*" | fzf)"'
+
+alias sdp='cd "$PROGRAMMING_PATH" && cd "$(find . -maxdepth 2 -type d \
+  -not -path "*/node_modules/*" \
+  -not -path "*/vendor/*" \
+  -not -path "*/.*/*" | fzf)"'
+
+alias sad='cd ~ && cd "$(find . -type d | fzf)"'
+
+# -----------------------
+# Clipboard
+# -----------------------
+alias ccc='clipboard_copy'
+
+# -----------------------
+# Tools
+# -----------------------
+alias n='nvim'
+alias lg='lazygit'
+alias ld='lazydocker'
+alias ms='muxspace'
+alias translate='trans en:id -I'
+alias asciiquarium='/usr/local/bin/asciiquarium'
+#
+# -----------------------
+# Custom scripts
+# -----------------------
+alias cc='$CONNECT_CODER_PATH/connect_coder.sh'
+alias ccn='$CONNECT_CODER_PATH/connect_coder.sh -np'
+alias ccp='$CONNECT_CODER_PATH/connect_coder.sh -p'
+
+# -----------------------
+# Android / Java / PHP
+# -----------------------
+alias emu='emulator -avd main -no-snapshot-load'
+alias phpserve='php -S 127.0.0.1:8000 -t public'
+alias bundletool='java -jar "$PROGRAMMING_PATH/bundletool.jar"'
+
+# -----------------------
+# Virtualenv
+# -----------------------
+alias devenv='source ~/.venv/dev/bin/activate'
+
+# -----------------------
+# Containers
+# -----------------------
+alias docker='podman'
