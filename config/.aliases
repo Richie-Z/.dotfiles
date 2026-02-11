@@ -1,4 +1,4 @@
-CONNECT_CODER_PATH="$WORKBENCH_PATH/connect-coder"
+CONNECT_CODER_PATH="$PROGRAMMING_PATH/Workbench/connect-coder"
 
 . "$DOTFILES_PATH/scripts/clipboard.sh"
 
@@ -12,11 +12,25 @@ alias c='clear'
 alias sczsh='source ~/.zshrc'
 
 # -----------------------
+# cd shortcuts
+# -----------------------
+alias cd='z'
+alias cdi='zi'
+alias j='z'
+
+# -----------------------
 # ls shortcuts
 # -----------------------
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias ls='eza --color=always --group-directories-first --icons'
+alias l='eza -blGF --header --git --color=always --group-directories-first --icons'
+
+alias ll='eza -l --icons --octal-permissions --group-directories-first'
+alias la='eza --long --all --icons --group --group-directories-first'
+
+alias l.="eza -a | grep -E '^\.'"
+
+alias lx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --color=always --group-directories-first --icons'
+alias lt='eza --tree --level=2 --color=always --group-directories-first --icons'
 
 # -----------------------
 # Networking
@@ -55,7 +69,8 @@ alias ld='lazydocker'
 alias ms='muxspace'
 alias translate='trans en:id -I'
 alias asciiquarium='/usr/local/bin/asciiquarium'
-#
+alias code='codium'
+
 # -----------------------
 # Custom scripts
 # -----------------------

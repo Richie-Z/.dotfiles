@@ -27,7 +27,7 @@ if [ "$OS" = "linux" ]; then
 fi
 
 # =======================
-# PATH bootstrap (clean)
+# PATH bootstrap
 # =======================
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
