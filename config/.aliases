@@ -46,14 +46,14 @@ alias sd='cd ~ && cd "$(find . -type d \
   -not -path "./Development/*" \
   -not -path "*/node_modules/*" \
   -not -path "*/vendor/*" \
-  -not -path "*/.git/*" | fzf)"'
+  -not -path "*/.git/*" | fzf --preview "tree -C {} | head -200" --preview-window=right:60%)"'
 
 alias sdp='cd "$PROGRAMMING_PATH" && cd "$(find . -maxdepth 2 -type d \
   -not -path "*/node_modules/*" \
   -not -path "*/vendor/*" \
-  -not -path "*/.*/*" | fzf)"'
+  -not -path "*/.*/*" | fzf --preview "tree -C {} | head -200" --preview-window=right:60%)"'
 
-alias sad='cd ~ && cd "$(find . -type d | fzf)"'
+alias sad='cd ~ && cd "$(find . -type d | fzf --preview "tree -C {} | head -200" --preview-window=right:60%)"'
 
 # -----------------------
 # Clipboard
@@ -69,7 +69,6 @@ alias ld='lazydocker'
 alias ms='muxspace'
 alias translate='trans en:id -I'
 alias asciiquarium='/usr/local/bin/asciiquarium'
-alias code='codium'
 
 # -----------------------
 # Custom scripts
