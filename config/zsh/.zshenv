@@ -95,9 +95,10 @@ export MASON_PACKAGES_PATH="$HOME/.local/share/nvim/mason/packages"
 [ -d "$MASON_PACKAGES_PATH/phpactor" ] &&
   export PATH="$MASON_PACKAGES_PATH/phpactor:$PATH"
 
-# =======================
+# rust
+[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+
 # Java (guarded)
-# =======================
 if command -v mise >/dev/null 2>&1; then
   JAVA_HOME="$(mise which java 2>/dev/null | xargs dirname | xargs dirname)"
   [ -n "$JAVA_HOME" ] && export JAVA_HOME PATH="$JAVA_HOME/bin:$PATH"
