@@ -1,0 +1,11 @@
+[tools]
+bun = "latest"
+dotnet = "8.0"
+go = "1.24"
+java = "21"
+node = "22"
+pnpm = "10.26.0"
+uv = "0.10"
+yarn = "4"
+
+[env]
