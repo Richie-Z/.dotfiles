@@ -1,10 +1,12 @@
 [tools]
 bun = "latest"
-dotnet = "8.0"
+dotnet = "8"
+gcloud = "latest"
 go = "1.24"
 java = "21"
 node = "22"
 pnpm = "10.26.0"
+terraformer = "latest"
 uv = "0.10"
 yarn = "4"
 
