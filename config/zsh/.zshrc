@@ -21,6 +21,7 @@ plugins=(
   zsh-autosuggestions
   zsh-autocomplete
   zsh-syntax-highlighting
+  gcloud
 )
 
 export ZSH_TMUX_AUTONAME_SESSION=true
@@ -73,3 +74,11 @@ fi
 
 # Fzf
 source <(fzf --zsh)
+
+# Terraform
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
+
+# Kind
+# mkdir $ZSH/completions/
+# kind completion zsh >$ZSH/completions/_kind

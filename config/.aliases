@@ -33,6 +33,11 @@ alias lx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --color=al
 alias lt='eza --tree --level=2 --color=always --group-directories-first --icons'
 
 # -----------------------
+# cat shortcuts
+# -----------------------
+alias cat='bat'
+
+# -----------------------
 # Networking
 # -----------------------
 alias pg='ping google.com'

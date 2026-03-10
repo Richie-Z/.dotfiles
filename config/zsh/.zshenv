@@ -103,3 +103,12 @@ if command -v mise >/dev/null 2>&1; then
   JAVA_HOME="$(mise which java 2>/dev/null | xargs dirname | xargs dirname)"
   [ -n "$JAVA_HOME" ] && export JAVA_HOME PATH="$JAVA_HOME/bin:$PATH"
 fi
+
+# Google Cloud build (gcloud)
+if command -v mise >/dev/null 2>&1; then
+  export CLOUDSDK_HOME="$(mise which gcloud 2>/dev/null | xargs dirname | xargs dirname)"
+fi
+
+if command -v go >/dev/null 2>&1; then
+  export PATH="$(go env GOBIN):$PATH"
+fi
