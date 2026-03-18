@@ -56,7 +56,7 @@ alias sd='cd ~ && cd "$(find . -type d \
 alias sdp='cd "$PROGRAMMING_PATH" && cd "$(find . -maxdepth 2 -type d \
   -not -path "*/node_modules/*" \
   -not -path "*/vendor/*" \
-  -not -path "*/.*/*" | fzf --preview "tree -C {} | head -200" --preview-window=right:60%)"'
+  -not -path "*/.*/*" | fzf --preview "tree -C -d {} | head -200" --preview-window=right:60%)"'
 
 alias sad='cd ~ && cd "$(find . -type d | fzf --preview "tree -C {} | head -200" --preview-window=right:60%)"'
 
