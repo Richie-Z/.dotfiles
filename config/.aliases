@@ -60,6 +60,10 @@ alias sdp='cd "$PROGRAMMING_PATH" && cd "$(find . -maxdepth 2 -type d \
 
 alias sad='cd ~ && cd "$(find . -type d | fzf --preview "tree -C {} | head -200" --preview-window=right:60%)"'
 
+# alias stl='ta "$(tmux list-sessions | fzf | rg -o '[a-z\-\_]+' | head -n 1 )"'
+alias stl='ta "$(tl |  fzf | cut -d: -f1)"'
+
+
 # -----------------------
 # Clipboard
 # -----------------------
