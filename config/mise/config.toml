@@ -1,7 +1,6 @@
 [tools]
 bun = "latest"
 dotnet = "8"
-gcloud = "latest"
 go = "1.24"
 java = "21"
 pnpm = "10.26.0"
