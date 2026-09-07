@@ -11,3 +11,4 @@ PS1='[\u@\h \W]\$ '
 . "$HOME/.cargo/env"
 
 complete -C /usr/bin/terraform terraform
+eval "$(zoxide init bash)"

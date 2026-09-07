@@ -75,16 +75,8 @@ alias ccc='clipboard_copy'
 alias n='nvim'
 alias lg='lazygit'
 alias ld='lazydocker'
-alias ms='muxspace'
 alias translate='trans en:id -I'
 alias asciiquarium='/usr/local/bin/asciiquarium'
-
-# -----------------------
-# Custom scripts
-# -----------------------
-alias cc='$CONNECT_CODER_PATH/connect_coder.sh'
-alias ccn='$CONNECT_CODER_PATH/connect_coder.sh -np'
-alias ccp='$CONNECT_CODER_PATH/connect_coder.sh -p'
 
 # -----------------------
 # Android / Java / PHP
@@ -102,3 +94,17 @@ alias devenv='source ~/.venv/dev/bin/activate'
 # Containers
 # -----------------------
 alias docker='podman'
+
+# -----------------------
+# Vopono
+# -----------------------
+alias ovpn='vopono -v exec --custom ~/Downloads/vpn.ovpn --protocol openvpn '
+
+# -----------------------
+# Work
+# -----------------------
+alias init='curl -sSL https://raw.githubusercontent.com/user85-dev/workenv/refs/heads/master/setup.sh | bash' 
+alias ms='muxspace'
+alias cc='$CONNECT_CODER_PATH/connect_coder.sh'
+alias ccn='$CONNECT_CODER_PATH/connect_coder.sh -np'
+alias ccp='$CONNECT_CODER_PATH/connect_coder.sh -p'

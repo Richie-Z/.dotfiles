@@ -2,6 +2,7 @@
 # Zsh options
 # =======================
 setopt correct
+# echo 'unset HISTFILE' >>|${ZDOTDIR:-~}/.zshrc
 
 # =======================
 # Oh My Zsh
@@ -79,6 +80,8 @@ source <(fzf --zsh)
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 
-# Kind
-# mkdir $ZSH/completions/
-# kind completion zsh >$ZSH/completions/_kind
+unset HISTFILE
+
+if command -v go >/dev/null 2>&1; then
+  export PATH="$(go env GOBIN):$PATH"
+fi

@@ -3,6 +3,7 @@
 # =======================
 export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR="nvim"
+export LIBVIRT_DEFAULT_URI="qemu:///system"
 
 # Base paths
 export PROGRAMMING_PATH="$HOME/Documents/Programming"
@@ -109,6 +110,5 @@ if command -v mise >/dev/null 2>&1; then
   export CLOUDSDK_HOME="$(mise which gcloud 2>/dev/null | xargs dirname | xargs dirname)"
 fi
 
-if command -v go >/dev/null 2>&1; then
-  export PATH="$(go env GOBIN):$PATH"
-fi
+# Kubectl krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
