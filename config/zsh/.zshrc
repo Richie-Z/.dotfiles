@@ -80,7 +80,10 @@ source <(fzf --zsh)
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 
+# Private Shell
 unset HISTFILE
+export HISTSIZE=0
+export SAVEHIST=0
 
 if command -v go >/dev/null 2>&1; then
   export PATH="$(go env GOBIN):$PATH"
