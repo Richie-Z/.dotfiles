@@ -1,0 +1,49 @@
+hl.config({
+	general = {
+		gaps_in = 5,
+		gaps_out = "8,8",
+		border_size = 1,
+		col = {
+			active_border = { colors = { "rgba($mauveAlphaee)", "rgba($blueAlphaee)" }, angle = 90 },
+			inactive_border = "rgba(" .. mantleAlphaaa .. ")",
+		},
+		resize_on_border = true,
+		allow_tearing = false,
+	},
+	group = {
+		col = {
+			border_active = blue,
+		},
+		groupbar = {
+			col = {
+				active = blue,
+			},
+			font_family = "Geist",
+			font_size = 12,
+			indicator_gap = 8,
+		},
+	},
+	decoration = {
+		rounding = 10,
+		active_opacity = 1.0,
+		inactive_opacity = 0.9,
+		fullscreen_opacity = 1.0,
+		dim_inactive = true,
+		dim_strength = 0.2,
+		blur = {
+			enabled = true,
+			size = 5,
+			passes = 1,
+			new_optimizations = true,
+			ignore_opacity = true,
+			xray = true,
+		},
+		shadow = {
+			enabled = true,
+			range = 32,
+			render_power = 2,
+			color = "rgba(" .. surface1Alpha2e .. ")",
+			color_inactive = "rgba(" .. surface0Alpha00 .. ")",
+		},
+	},
+})
