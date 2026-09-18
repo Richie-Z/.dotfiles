@@ -23,6 +23,7 @@ plugins=(
   zsh-autocomplete
   zsh-syntax-highlighting
   gcloud
+  kubectl
 )
 
 export ZSH_TMUX_AUTONAME_SESSION=true
@@ -76,15 +77,26 @@ fi
 # Fzf
 source <(fzf --zsh)
 
+# Crossplane
+if command -v crossplane >/dev/null 2>&1; then
+  source <(crossplane completions)
+fi
+
+# Helm
+if command -v helm >/dev/null 2>&1; then
+  source <(helm completion zsh)
+fi
+
 # Terraform
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 
-# Private Shell
-unset HISTFILE
-export HISTSIZE=0
-export SAVEHIST=0
-
+# GO fix
 if command -v go >/dev/null 2>&1; then
   export PATH="$(go env GOBIN):$PATH"
 fi
+
+# Private Shell
+unset HISTFILE
+# export HISTSIZE=0
+# export SAVEHIST=0
