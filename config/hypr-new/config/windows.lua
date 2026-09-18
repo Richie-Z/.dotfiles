@@ -1,3 +1,5 @@
+require("~/.config/hypr/assets/mocha")
+
 hl.config({
 	general = {
 		gaps_in = 5,

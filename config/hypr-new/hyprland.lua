@@ -1,5 +1,3 @@
-require("assets.mocha")
-
 require("config.startup")
 require("config.settings")
 require("config.windows")

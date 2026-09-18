@@ -1,5 +1,3 @@
-local wallDIR = HOME .. "/Pictures/Wallpapers"
-
 hl.on("hyprland.start", function()
 	-- Startup
 	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
