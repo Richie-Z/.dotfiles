@@ -2,7 +2,7 @@
 bun = "latest"
 dotnet = "8"
 gcloud = "latest"
-go = "1.24"
+go = "1.24.13"
 helm = "latest"
 java = "21"
 node = "24"

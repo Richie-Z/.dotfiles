@@ -24,6 +24,8 @@ plugins=(
   zsh-syntax-highlighting
   gcloud
   kubectl
+  podman
+  docker-compose
 )
 
 export ZSH_TMUX_AUTONAME_SESSION=true
