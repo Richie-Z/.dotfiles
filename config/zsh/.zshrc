@@ -8,6 +8,7 @@ setopt correct
 # Oh My Zsh
 # =======================
 export ZSH="$HOME/.oh-my-zsh"
+source $ZSH/custom/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 ZSH_THEME="" # repo-local, sourced below from $DOTFILES_PATH/omz/themes
 CATPPUCCIN_FLAVOR="mocha"
