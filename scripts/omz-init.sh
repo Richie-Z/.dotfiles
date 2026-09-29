@@ -11,7 +11,12 @@ if [ ! -d "$ZSH/.git" ]; then
 fi
 
 # Plugins oh-my-zsh does not ship. Everything else in .zshrc plugins=() is bundled.
+# The two zsh-users ones are vendored by oh-my-zsh but pinned to an older copy;
+# cloning them into $ZSH_CUSTOM/plugins shadows that copy.
+# See https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
 EXTERNAL_PLUGINS=(
+  "zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions.git"
+  "zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting.git"
   "zsh-autocomplete https://github.com/marlonrichert/zsh-autocomplete.git"
   "catppuccin-zsh-syntax-highlighting https://github.com/catppuccin/zsh-syntax-highlighting.git"
 )
