@@ -1,6 +1,11 @@
 # =======================
 # Core environment
 # =======================
+# Debian/Ubuntu source a global compinit from /etc/zsh/zshrc before ~/.zshrc,
+# which registers completion functions before zsh-autocomplete adds its
+# Completions/ dir to $fpath. Only Debian reads this variable.
+skip_global_compinit=1
+
 export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR="nvim"
 export LIBVIRT_DEFAULT_URI="qemu:///system"
