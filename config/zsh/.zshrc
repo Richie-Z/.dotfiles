@@ -19,13 +19,13 @@ plugins=(
   laravel
   tmux
   vi-mode
-  zsh-autosuggestions
-  zsh-autocomplete
-  zsh-syntax-highlighting
   gcloud
   kubectl
   podman
   docker-compose
+  zsh-autocomplete
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 export ZSH_TMUX_AUTONAME_SESSION=true
