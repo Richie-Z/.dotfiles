@@ -9,7 +9,7 @@ setopt correct
 # =======================
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="catppuccin"
+ZSH_THEME="" # repo-local, sourced below from $DOTFILES_PATH/omz/themes
 CATPPUCCIN_FLAVOR="mocha"
 CATPPUCCIN_SHOW_TIME=true
 
@@ -32,6 +32,12 @@ export ZSH_TMUX_AUTONAME_SESSION=true
 
 if [[ -d "$ZSH" ]]; then
   source "$ZSH/oh-my-zsh.sh"
+fi
+
+if [[ -n "$DOTFILES_PATH" ]]; then
+  source "$DOTFILES_PATH/omz/themes/catppuccin.zsh-theme"
+else
+  echo "[zshrc] DOTFILES_PATH unset, catppuccin theme not loaded" >&2
 fi
 
 . "$ZSH_CUSTOM/plugins/catppuccin-zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
