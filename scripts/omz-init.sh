@@ -30,6 +30,10 @@ for entry in "${EXTERNAL_PLUGINS[@]}"; do
 
   if [ -d "$dest/.git" ]; then
     echo "Present: $name"
+  elif [ -e "$dest" ]; then
+    echo "Replacing $name: $dest is not a git clone, moved to $dest.bak-$(date +%Y%m%d%H%M%S)"
+    mv "$dest" "$dest.bak-$(date +%Y%m%d%H%M%S)"
+    git clone --depth=1 "$url" "$dest"
   else
     echo "Cloning $name -> $dest"
     git clone --depth=1 "$url" "$dest"
