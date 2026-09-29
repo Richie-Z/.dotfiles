@@ -2,10 +2,31 @@
 
 IGNORED_LIST=('zsh' 'tmux' 'bash' 'gtk')
 
+DRY_RUN=false
+ARGS=()
+for arg in "$@"; do
+  case "$arg" in
+    --dry-run) DRY_RUN=true ;;
+    *) ARGS+=("$arg") ;;
+  esac
+done
+EXCLUDE_LIST=("${ARGS[@]}") # config dir names to skip, e.g. ./initialize.sh hypr waybar
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR="$SCRIPT_DIR/../config"
 
-mkdir -p "$HOME/.config"
+if ! $DRY_RUN; then
+  mkdir -p "$HOME/.config"
+fi
+
+link() { # link <source> <target>
+  if $DRY_RUN; then
+    echo "[dry-run] ln -sf $1 $2"
+  else
+    ln -sf "$1" "$2"
+    echo "Linked $1 -> $2"
+  fi
+}
 
 # Helper function to check if an element is in an array
 containsElement() {
@@ -20,14 +41,18 @@ for item in "$CONFIG_DIR"/*; do
   [ -e "$item" ] || continue # skip if no files
   base="$(basename "$item")"
 
+  if containsElement "$base" "${EXCLUDE_LIST[@]}"; then
+    echo "Skipped $base (excluded)"
+    continue
+  fi
+
   if ! containsElement "$base" "${IGNORED_LIST[@]}"; then
     # Not ignored: link directly to ~/.config/
     target="$HOME/.config/$base"
     if [ -e "$target" ] && [ ! -L "$target" ]; then
       echo "Backup needed: $target (already exists and is not a symlink)"
     else
-      ln -sf "$item" "$target"
-      echo "Linked $item -> $target"
+      link "$item" "$target"
     fi
   else
     # Ignored directory: link its contents (including hidden files) to $HOME/
@@ -43,8 +68,7 @@ for item in "$CONFIG_DIR"/*; do
         if [ -e "$target" ] && [ ! -L "$target" ]; then
           echo "Backup needed: $target (already exists and is not a symlink)"
         else
-          ln -sf "$subitem" "$target"
-          echo "Linked $subitem -> $target"
+          link "$subitem" "$target"
         fi
       done
       shopt -u dotglob # restore default behaviour
@@ -54,8 +78,7 @@ for item in "$CONFIG_DIR"/*; do
       if [ -e "$target" ] && [ ! -L "$target" ]; then
         echo "Backup needed: $target (already exists and is not a symlink)"
       else
-        ln -sf "$item" "$target"
-        echo "Linked $item -> $target"
+        link "$item" "$target"
       fi
     fi
   fi
