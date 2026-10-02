@@ -144,6 +144,16 @@ if command -v mise >/dev/null 2>&1; then
   source <(mise completion zsh)
 fi
 
+# kubectl-neat
+if command -v kubectl-neat >/dev/null 2>&1; then
+  source <(kubectl-neat completion zsh)
+fi
+
+# OpenCode
+if command -v opencode >/dev/null 2>&1; then
+  source <(opencode completion zsh)
+fi
+
 # Private Shell
 unset HISTFILE
 # export HISTSIZE=0
