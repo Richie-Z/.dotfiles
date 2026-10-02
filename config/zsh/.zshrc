@@ -31,6 +31,15 @@ plugins=(
 
 export ZSH_TMUX_AUTONAME_SESSION=true
 
+# zsh-completions: do NOT load as an OMZ plugin (redundant .zcompdump churn).
+# Add its src/ to $fpath and run compinit ourselves BEFORE oh-my-zsh. OHMyZsh
+# then reuses this same $ZSH_COMPDUMP with `compinit -C`, skipping the rebuild.
+# See https://github.com/zsh-users/zsh-completions#oh-my-zsh
+if [[ -d "$ZSH/custom/plugins/zsh-completions/src" ]]; then
+  fpath=("$ZSH/custom/plugins/zsh-completions/src" $fpath)
+  autoload -Uz compinit && compinit -d "${ZSH_COMPDUMP:-${ZSH_CACHE_DIR:-$ZSH/cache}/.zcompdump-$(hostname)-${ZSH_VERSION}}"
+fi
+
 if [[ -d "$ZSH" ]]; then
   source "$ZSH/oh-my-zsh.sh"
 fi

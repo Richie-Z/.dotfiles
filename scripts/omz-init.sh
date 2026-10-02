@@ -15,11 +15,16 @@ fi
 # cloning them into $ZSH_CUSTOM/plugins shadows that copy.
 # See https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
 # Optional third field pins a plugin to a commit (fetched by sha, detached HEAD).
+# zsh-completions is intentionally NOT in plugins=(): oh-my-zsh would load it as
+# a plugin and trigger a redundant .zcompdump rebuild. .zshrc adds its src/ to
+# $fpath and runs compinit itself before sourcing oh-my-zsh.
+# See https://github.com/zsh-users/zsh-completions#oh-my-zsh
 EXTERNAL_PLUGINS=(
   "zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions.git"
   "zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting.git"
   "zsh-autocomplete https://github.com/marlonrichert/zsh-autocomplete.git bbba73ebdc7c01323e09d4d518e51e2d6847ccc2"
   "catppuccin-zsh-syntax-highlighting https://github.com/catppuccin/zsh-syntax-highlighting.git"
+  "zsh-completions https://github.com/zsh-users/zsh-completions.git"
 )
 
 mkdir -p "$ZSH_CUSTOM/plugins"
