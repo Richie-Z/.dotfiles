@@ -21,16 +21,16 @@ alias j='z'
 # -----------------------
 # ls shortcuts
 # -----------------------
-alias ls='eza --color=always --group-directories-first --icons'
-alias l='eza -blGF --header --git --color=always --group-directories-first --icons'
+alias ls='eza --color=always --group-directories-first --icons=always'
+alias l='eza -blGF --header --git --color=always --group-directories-first --icons=always'
 
-alias ll='eza -l --icons --octal-permissions --group-directories-first'
-alias la='eza --long --all --icons --group --group-directories-first'
+alias ll='eza -l --icons=always --octal-permissions --group-directories-first'
+alias la='eza --long --all --icons=always --group --group-directories-first'
 
 alias l.="eza -a | grep -E '^\.'"
 
-alias lx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --color=always --group-directories-first --icons'
-alias lt='eza --tree --level=2 --color=always --group-directories-first --icons'
+alias lx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --color=always --group-directories-first --icons=always'
+alias lt='eza --tree --level=2 --color=always --group-directories-first --icons=always'
 
 # -----------------------
 # cat shortcuts
