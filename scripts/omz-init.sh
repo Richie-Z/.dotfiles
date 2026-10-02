@@ -14,18 +14,18 @@ fi
 # The two zsh-users ones are vendored by oh-my-zsh but pinned to an older copy;
 # cloning them into $ZSH_CUSTOM/plugins shadows that copy.
 # See https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
+# Optional third field pins a plugin to a commit (fetched by sha, detached HEAD).
 EXTERNAL_PLUGINS=(
   "zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions.git"
   "zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting.git"
-  "zsh-autocomplete https://github.com/marlonrichert/zsh-autocomplete.git"
+  "zsh-autocomplete https://github.com/marlonrichert/zsh-autocomplete.git bbba73ebdc7c01323e09d4d518e51e2d6847ccc2"
   "catppuccin-zsh-syntax-highlighting https://github.com/catppuccin/zsh-syntax-highlighting.git"
 )
 
 mkdir -p "$ZSH_CUSTOM/plugins"
 
 for entry in "${EXTERNAL_PLUGINS[@]}"; do
-  name="${entry%% *}"
-  url="${entry#* }"
+  read -r name url pin <<<"$entry"
   dest="$ZSH_CUSTOM/plugins/$name"
 
   if [ -d "$dest/.git" ]; then
@@ -37,6 +37,16 @@ for entry in "${EXTERNAL_PLUGINS[@]}"; do
   else
     echo "Cloning $name -> $dest"
     git clone --depth=1 "$url" "$dest"
+  fi
+
+  if [ -n "$pin" ] && [ -d "$dest/.git" ]; then
+    if [ "$(git -C "$dest" rev-parse HEAD)" != "$(git -C "$dest" rev-parse "$pin^{commit}" 2>/dev/null)" ]; then
+      echo "Pinning $name -> $pin"
+      git -C "$dest" fetch --depth=1 origin "$pin"
+      git -C "$dest" checkout --detach "$pin"
+    else
+      echo "Pinned: $name @ $pin"
+    fi
   fi
 done
 
