@@ -104,6 +104,12 @@ export MASON_PACKAGES_PATH="$HOME/.local/share/nvim/mason/packages"
 # rust
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
+# GO (add GOBIN to PATH)
+if command -v go >/dev/null 2>&1; then
+  GOBIN="$(go env GOBIN 2>/dev/null)"
+  [ -n "$GOBIN" ] && export PATH="$GOBIN:$PATH"
+fi
+
 # Java (guarded)
 if command -v mise >/dev/null 2>&1; then
   JAVA_HOME="$(mise which java 2>/dev/null | xargs dirname | xargs dirname)"

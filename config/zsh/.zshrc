@@ -80,9 +80,6 @@ if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init zsh)"
 fi
 
-# rust
-[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
-
 # Fzf
 source <(fzf --zsh)
 
@@ -145,11 +142,6 @@ fi
 # Mise
 if command -v mise >/dev/null 2>&1; then
   source <(mise completion zsh)
-fi
-
-# GO fix
-if command -v go >/dev/null 2>&1; then
-  export PATH="$(go env GOBIN):$PATH"
 fi
 
 # Private Shell
