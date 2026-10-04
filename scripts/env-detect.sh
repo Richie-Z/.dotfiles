@@ -17,3 +17,11 @@ detect_display() {
     echo "none"
   fi
 }
+
+detect_ssh() {
+  if [ -n "$SSH_CONNECTION" ] || [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    echo "ssh"
+  else
+    echo "local"
+  fi
+}
