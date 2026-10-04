@@ -150,7 +150,8 @@ _zsh_gen_completions \
   "rustup rustup completions zsh" \
   "cargo rustup completions zsh cargo" \
   "kubectl-neat kubectl-neat completion zsh" \
-  "opencode opencode completion zsh"
+  "opencode opencode completion zsh" \
+  "mise completion zsh"
 
 if [[ -d "$ZSH_COMPLETIONS_DIR" ]]; then
   fpath=("$ZSH_COMPLETIONS_DIR" $fpath)
@@ -161,7 +162,7 @@ if [[ -d "$ZSH_COMPLETIONS_DIR" ]]; then
 fi
 
 # docker is the podman-docker shim: reuse podman's completion for `docker`.
-if (( $+functions[_podman] )); then
+if (($+functions[_podman])); then
   compdef _podman docker 2>/dev/null
 fi
 
