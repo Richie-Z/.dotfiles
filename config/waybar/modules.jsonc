@@ -61,7 +61,7 @@
     }
   },
   "network": {
-    "format-wifi": "<span foreground='#74c7ec'>󰤯</span> {signalStrength}%",
+    "format-wifi": "<span foreground='#74c7ec'>󰤨</span> {signalStrength}%",
     "format-ethernet": "<span foreground='#74c7ec'>󰈀</span> {ipaddr}/{cidr}",
     "tooltip-format": "{ifname} via {gwaddr} 󰈀",
     "format-linked": "<span foreground='#f9e2af'>󰈀</span> {ifname} (No IP)",
