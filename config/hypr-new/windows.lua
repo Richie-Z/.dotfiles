@@ -31,6 +31,7 @@ hl.config({
 	},
 	decoration = {
 		rounding = 10,
+		rounding_power = 2,
 		active_opacity = 1.0,
 		inactive_opacity = 0.9,
 		fullscreen_opacity = 1.0,
@@ -51,4 +52,21 @@ hl.config({
 			color_inactive = rgba(c.surface0, "00"),
 		},
 	},
+})
+
+-- Smart gaps: a single tiled window fills the workspace.
+hl.workspace_rule({
+	workspace = "w[tv1]",
+	gaps_out  = 0,
+	gaps_in   = 0,
+})
+
+-- Picture-in-picture floats, pins and keeps a sane size.
+hl.window_rule({
+	name   = "picture-in-picture",
+	match  = { title = "Picture-in-Picture" },
+	float  = true,
+	pin    = true,
+	size   = { 480, 270 },
+	center = true,
 })
