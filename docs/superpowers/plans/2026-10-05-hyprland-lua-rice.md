@@ -666,9 +666,15 @@ A bad login trips emergency mode, leaving `SUPER + Q` bound to a terminal. Beyon
 ```bash
 rm -f ~/.config/hypr
 ln -s "$HOME/Documents/Programming/Projects/dotfiles/obsolete/hypr-conf" ~/.config/hypr
+hyprctl reload full-reset
 ```
 
-Do **not** re-run `scripts/initialize.sh` afterwards; it would relink `~/.config/hypr` back to the Lua tree.
+The `full-reset` matters: a plain `hyprctl reload` keeps the cached entry path from the session's original config, so the relink does not take effect until the reset (or the next login). Use `hyprctl reload full-reset`, not `hyprctl reload`.
+
+Two things about verifying this path that look like failures and are not:
+
+- `Hyprland --verify-config -c obsolete/hypr-conf/hyprland.conf` prints seven `globbing error: found no match` lines while `~/.config/hypr` still points at the Lua tree, because that file's `source = ~/.config/hypr/config/*.conf` resolves through the symlink. It is expected to fail by path; it prints `config ok` only once the symlink has been relinked to the retired tree.
+- Do **not** re-run `scripts/initialize.sh` after a rollback; it would relink `~/.config/hypr` back to the Lua tree.
 
 ## Spec deviations recorded during probing
 
