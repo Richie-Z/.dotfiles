@@ -1,6 +1,3 @@
-require("~/.config/hypr/monitors")
-require("~/.config/hypr/workspaces")
-
 hl.gesture({
 	fingers = 3,
 	direction = "horizontal",
