@@ -80,7 +80,7 @@ local ZOOM_MIN, ZOOM_MAX, ZOOM_STEP = 1.0, 3.0, 0.5
 
 local function applyZoom(delta)
 	zoom = math.max(ZOOM_MIN, math.min(ZOOM_MAX, zoom + delta))
-	hl.dispatch(dsp.exec_cmd(string.format("hyprctl keyword cursor:zoom_factor %.1f", zoom)))
+	hl.dispatch(dsp.exec_cmd(string.format("hyprctl eval 'hl.config({cursor={zoom_factor=%.1f}})'", zoom)))
 	hl.notification.create({
 		text     = string.format("Zoom %.1fx", zoom),
 		duration = 1200,
@@ -93,12 +93,12 @@ bind(mainMod .. " + SHIFT + mouse_down", function() applyZoom(ZOOM_STEP) end)
 bind(mainMod .. " + SHIFT + mouse_up", function() applyZoom(-ZOOM_STEP) end)
 bind(mainMod .. " + SHIFT + Z", function()
 	zoom = 1.0
-	hl.dispatch(dsp.exec_cmd("hyprctl keyword cursor:zoom_factor 1"))
+	hl.dispatch(dsp.exec_cmd("hyprctl eval 'hl.config({cursor={zoom_factor=1.0}})'"))
 end)
 
 -- cursor:zoom_factor is a runtime keyword; reload resets it to the config value
 hl.on("config.reloaded", function()
-	hl.dispatch(dsp.exec_cmd(string.format("hyprctl keyword cursor:zoom_factor %.1f", zoom)))
+	hl.dispatch(dsp.exec_cmd(string.format("hyprctl eval 'hl.config({cursor={zoom_factor=%.1f}})'", zoom)))
 end)
 
 -- Launchers and scripts
