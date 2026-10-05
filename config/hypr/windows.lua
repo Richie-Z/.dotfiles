@@ -7,7 +7,7 @@ end
 hl.config({
 	general = {
 		gaps_in = 6,
-		gaps_out = { top = 10, right = 10, bottom = 10, left = 10 },
+		gaps_out = { top = 10, right = 18, bottom = 10, left = 18 },
 		border_size = 2,
 		col = {
 			-- rosewater -> mauve -> blue, diagonal. Catppuccin Mocha only.
@@ -31,11 +31,15 @@ hl.config({
 				inactive = { colors = { rgba(c.surface0, "cc"), rgba(c.mantle, "cc") }, angle = 90 },
 				locked_active = rgba(c.peach, "ff"),
 			},
-			text_color = rgba(c.subtext0),
+			text_color = rgba(c.text),
+			text_color_inactive = rgba(c.subtext1),
+			text_color_locked_active = rgba(c.crust),
 			font_family = "Geist",
-			font_size = 13,
-			height = 16,
-			rounding = 5,
+			font_size = 11,
+			height = 5,
+			rounding = 10,
+			gaps_in = 3,
+			gaps_out = 4,
 			indicator_gap = 6,
 		},
 	},
@@ -49,7 +53,7 @@ hl.config({
 		dim_strength = 0.2,
 		blur = {
 			enabled = true,
-			size = 7,
+			size = 5,
 			passes = 2,
 			ignore_opacity = true,
 			xray = true,
@@ -58,12 +62,12 @@ hl.config({
 		},
 		shadow = {
 			enabled = true,
-			range = 45,
-			render_power = 3,
-			offset = { 0, 6 },
+			range = 5,
+			render_power = 2,
+			offset = { 0, 4 },
 			scale = 1.0,
-			color = rgba(c.mauve, "33"),
-			color_inactive = rgba(c.blue, "1a"),
+			color = rgba(c.mauve, "22"),
+			color_inactive = rgba(c.blue, "12"),
 		},
 	},
 })
@@ -71,16 +75,16 @@ hl.config({
 -- Smart gaps: a single tiled window fills the workspace.
 hl.workspace_rule({
 	workspace = "w[tv1]",
-	gaps_out  = 0,
-	gaps_in   = 0,
+	gaps_out = 0,
+	gaps_in = 0,
 })
 
 -- Picture-in-picture floats, pins and keeps a sane size.
 hl.window_rule({
-	name   = "picture-in-picture",
-	match  = { title = "Picture-in-Picture" },
-	float  = true,
-	pin    = true,
-	size   = { 480, 270 },
+	name = "picture-in-picture",
+	match = { title = "Picture-in-Picture" },
+	float = true,
+	pin = true,
+	size = { 480, 270 },
 	center = true,
 })
