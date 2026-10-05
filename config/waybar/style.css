@@ -63,7 +63,7 @@ window#waybar {
     color: @subtext0;
     border: none;
     border-radius: 999px;
-    padding: 2px 15px;
+    padding: 2px 12px;
     font-weight: 600;
 }
 
