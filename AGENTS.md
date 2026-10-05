@@ -25,6 +25,16 @@ Idempotent `ln -sf`. Never clobbers real files: an existing non-symlink target p
 - `config/hypr/` — **live** (`~/.config/hypr` symlink), classic `.conf` files sourced from `hyprland.conf`.
 - `config/hypr-new/` — experimental `.lua` rewrite, **not deployed** (no `~/.config/hypr-new` exists). Editing it has zero effect on the running desktop. Keep the two in sync intentionally; don't delete either.
 
+## Waybar
+
+- Live: `~/.config/waybar` symlink. Layout is a single centered "dynamic island": every module lives in `modules-center` (`config.jsonc`), module defs in `modules.jsonc`, styles in `style.css` + `mocha.css` (catppuccin mocha `@define-color` vars).
+- Hot reload: `pkill -SIGUSR2 waybar` (same PID afterwards = reload ok). Super+Shift+B runs `launch.sh`, which only *kills* a running waybar — second press starts it again.
+- Icons are Nerd Font MDI literal chars, resolved via the `"Symbols Nerd Font"` fallback in the font stack. Per-icon accent colors use pango `<span foreground='#hex'>` in format strings (CSS `@vars` don't work inside spans); state colors (battery `.warning`/`.critical`, `#idle_inhibitor.activated`) are CSS classes on the module.
+- `custom/media` = playerctl (spotify), the island's middle spacer. Empty script output hides the module; click = play-pause, scroll = next/prev.
+- Visual verify loop (never ship rice blind): `grim` full-screen capture — `grim -g <geom>` is broken against the 3-monitor bounding box, always capture full and crop — then crop/zoom with `uv run --no-project --with pillow python`, then Read the PNG. Measure height/width/gaps by scanning pixel runs, don't eyeball.
+- Glyph gotcha: MDI codepoint names lie (U+F0954 = filled clock blob, U+F034B is a magnifier, not music). Verify coverage with `fc-list ':charset=0xXXXX'` and render candidate glyphs at ~96px with PIL to Read before committing to one.
+- The `ricer` subagent (`.opencode/agents/ricer.md`) encapsulates this loop.
+
 ## Gotchas
 
 - `~/.zshrc` ends with `unset HISTFILE` ("Private Shell") — intentional, not a bug to fix.
