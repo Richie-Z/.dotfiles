@@ -32,7 +32,7 @@ end
 
 -- Window control
 bind(mainMod .. " + Q", dsp.window.close())
-bind(mainMod .. " + SHIFT + Q", dsp.exec_cmd("hyprctl activewindow | grep pid | tr -d 'pid:' | xargs kill"))
+bind(mainMod .. " + SHIFT + Q", dsp.window.kill())
 bind(mainMod .. " + F", dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 bind(mainMod .. " + M", dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 bind(mainMod .. " + T", dsp.window.float({ action = "toggle" }))
@@ -74,10 +74,32 @@ bind(mainMod .. " + CTRL + down", dsp.focus({ workspace = "empty" }))
 bind(mainMod .. " + SHIFT + U", dsp.window.move({ workspace = "special" }))
 bind(mainMod .. " + U", dsp.workspace.toggle_special(""))
 
--- Zoom (behaviour replaced in Task 5; kept verbatim here so this task is a pure restructure)
-bind(mainMod .. " + SHIFT + mouse_down", dsp.exec_cmd("hyprctl keyword cursor:zoom_factor $(awk \"BEGIN {print $(hyprctl getoption cursor:zoom_factor | grep 'float:' | awk '{print $2}') + 0.5}\")"))
-bind(mainMod .. " + SHIFT + mouse_up", dsp.exec_cmd("hyprctl keyword cursor:zoom_factor $(awk \"BEGIN {print $(hyprctl getoption cursor:zoom_factor | grep 'float:' | awk '{print $2}') - 0.5}\")"))
-bind(mainMod .. " + SHIFT + Z", dsp.exec_cmd("hyprctl keyword cursor:zoom_factor 1"))
+-- Cursor zoom. State lives in Lua so the arithmetic never leaves this file.
+local zoom = 1.0
+local ZOOM_MIN, ZOOM_MAX, ZOOM_STEP = 1.0, 3.0, 0.5
+
+local function applyZoom(delta)
+	zoom = math.max(ZOOM_MIN, math.min(ZOOM_MAX, zoom + delta))
+	hl.dispatch(dsp.exec_cmd(string.format("hyprctl keyword cursor:zoom_factor %.1f", zoom)))
+	hl.notification.create({
+		text     = string.format("Zoom %.1fx", zoom),
+		duration = 1200,
+		color    = "rgba(" .. require("assets.mocha").blue .. "ee)",
+		font_size = 13,
+	})
+end
+
+bind(mainMod .. " + SHIFT + mouse_down", function() applyZoom(ZOOM_STEP) end)
+bind(mainMod .. " + SHIFT + mouse_up", function() applyZoom(-ZOOM_STEP) end)
+bind(mainMod .. " + SHIFT + Z", function()
+	zoom = 1.0
+	hl.dispatch(dsp.exec_cmd("hyprctl keyword cursor:zoom_factor 1"))
+end)
+
+-- cursor:zoom_factor is a runtime keyword; reload resets it to the config value
+hl.on("config.reloaded", function()
+	hl.dispatch(dsp.exec_cmd(string.format("hyprctl keyword cursor:zoom_factor %.1f", zoom)))
+end)
 
 -- Launchers and scripts
 bind(mainMod .. " + RETURN", dsp.exec_cmd(terminal))
