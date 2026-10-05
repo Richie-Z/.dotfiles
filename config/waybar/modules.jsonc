@@ -8,38 +8,42 @@
     "disable-scroll": true,
     "all-outputs": true,
     "warp-on-scroll": false,
-    "format": "{name}",
-    "format-icons": {
-      "urgent": "",
-      "active": "",
-      "default": ""
-    }
+    "format": "{name}"
+  },
+  "custom/media": {
+    "exec": "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null | cut -c 1-44",
+    "interval": 2,
+    "format": "<span foreground='#f5c2e7'>󰎌</span> {}",
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"
   },
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
-      "activated": "",
-      "deactivated": ""
+      "activated": "󰛐",
+      "deactivated": "󰛓"
     }
   },
   "pulseaudio": {
-    "format": "{icon}  {volume}%",
-    "format-bluetooth": "{icon} {volume}%  {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
-    "format-source": " {volume}%",
-    "format-source-muted": "",
+    "format": "<span foreground='#94e2d5'>{icon}</span> {volume}%",
+    "format-bluetooth": "<span foreground='#94e2d5'>{icon}</span> {volume}%",
+    "format-bluetooth-muted": "<span foreground='#6c7086'>{icon}</span>",
+    "format-muted": "<span foreground='#6c7086'>󰖁</span>",
+    "format-source": "󰍬 {volume}%",
+    "format-source-muted": "󰍭",
     "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
+      "headphone": "󰋋",
+      "hands-free": "󰋎",
+      "headset": "󰋎",
+      "phone": "󰹞",
+      "portable": "󰹞",
+      "car": "󰄝",
+      "bluetooth": "󰂯",
       "default": [
-        "",
-        "",
-        ""
+        "󰕿",
+        "󰖀",
+        "󰕾"
       ]
     },
     "on-click": "pwvucontrol",
@@ -57,12 +61,11 @@
     }
   },
   "network": {
-    // "format-wifi": "   {essid} ({signalStrength}%)",
-    "format-wifi": "    {signalStrength}%",
-    "format-ethernet": "{ipaddr}/{cidr} ",
-    "tooltip-format": "{ifname} via {gwaddr} ",
-    "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "Disconnected ⚠",
+    "format-wifi": "<span foreground='#74c7ec'>󰖩</span> {signalStrength}%",
+    "format-ethernet": "<span foreground='#74c7ec'>󰈀</span> {ipaddr}/{cidr}",
+    "tooltip-format": "{ifname} via {gwaddr} 󰈀",
+    "format-linked": "<span foreground='#f9e2af'>󰈀</span> {ifname} (No IP)",
+    "format-disconnected": "<span foreground='#f38ba8'>󰤭</span>",
     "on-click": "sh ~/scripts/rofi-wifi-menu/rofi-wifi-menu.sh"
   },
   "battery": {
@@ -70,26 +73,31 @@
       "warning": 20,
       "critical": 15
     },
-    "format": "{icon}  {capacity}%",
-    "format-full": "{icon}  {capacity}%",
-    "format-charging": "  {capacity}%",
-    "format-plugged": "  {capacity}%",
-    "format-alt": "{time}  {icon}",
+    "format": "{icon} {capacity}%",
+    "format-full": "{icon} {capacity}%",
+    "format-charging": "󰂉 {capacity}%",
+    "format-plugged": "󰚆 {capacity}%",
+    "format-alt": "{time} {icon}",
     "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
     ]
   },
   "clock": {
-    "format": " {:%H:%M}",
-    "format-alt": " {:%d-%m-%Y}",
+    "format": "<span foreground='#cba6f7'>󰅐</span> {:%H:%M}",
+    "format-alt": "<span foreground='#cba6f7'>󰃭</span> {:%d-%m-%Y}",
     "tooltip-format": "<big>{:%A, %d %B %Y}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "custom/power": {
-    "format": "⏻ ",
+    "format": "󰐥",
     "on-click": "wlogout",
     "interval": 86400,
     "tooltip": false

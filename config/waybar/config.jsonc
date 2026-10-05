@@ -1,12 +1,11 @@
 {
     "layer": "top",
     "position": "top",
-    "spacing": 4,
-    "modules-left": [
+    "spacing": 0,
+    "modules-center": [
         "custom/arch",
-        "hyprland/workspaces"
-    ],
-    "modules-right": [
+        "hyprland/workspaces",
+        "custom/media",
         "idle_inhibitor",
         "pulseaudio",
         "network",
