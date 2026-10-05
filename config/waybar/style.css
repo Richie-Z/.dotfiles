@@ -3,7 +3,7 @@
 * {
     font-family: "Geist", "Symbols Nerd Font", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;
-    transition: background-color .3s ease-out, color .3s ease-out;
+    transition: background-color .1s ease-out, color .1s ease-out;
 }
 
 window#waybar {
@@ -46,6 +46,7 @@ window#waybar {
     padding: 2px 16px;
     border-radius: 999px;
     color: @subtext1;
+    min-width: 180px;
 }
 
 #custom-media:hover {
@@ -113,7 +114,7 @@ window#waybar {
 #custom-arch {
     font-size: 16px;
     padding: 0 10px;
-    transition: color .3s;
+    transition: color .1s;
 }
 
 #custom-arch:hover {
@@ -124,7 +125,7 @@ window#waybar {
     font-size: 14px;
     padding: 2px 10px;
     border-radius: 999px;
-    transition: color .3s, background-color .3s ease-out;
+    transition: color .1s, background-color .1s ease-out;
 }
 
 #custom-power:hover {

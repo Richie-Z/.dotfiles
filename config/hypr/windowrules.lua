@@ -36,4 +36,5 @@ hl.window_rule({
 		class = "^(com.saivert.pwvucontrol)$",
 	},
 	float = true,
+	center = true,
 })
