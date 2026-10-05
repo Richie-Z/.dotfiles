@@ -1,70 +1,35 @@
-/* Config and colors ----------------------------------------------- */
-
 @import "default.rasi"
 
 configuration {
-    modi:                        "drun";
-    show-icons:                  true;
-  	drun-display-format:         "{name}";
-    hover-select:                true;
-    font:                        "GeistMono Nerd Font 10";
+    modi:                "drun";
+    show-icons:          true;
+    hover-select:        true;
+    drun-display-format: "{name}";
+    font:                "Geist 13";
 }
 
-/* Main Window ------------------------------------------------ */
 window {
-    width:                       100%;
-    height:                      100%;
-    margin:                      0px;
-    padding:                     0px;
+    width: 960px;
 }
 
-/* Main Box --------------------------------------------------- */
 mainbox {
-    children:                    [ "listview" ];
-    background-color:            transparent;
-
-    spacing:                     24px;
-    margin:                      0px;
-    padding:                     64px;
+    children: [ "listview" ];
 }
 
-/* ---- List ---- */
 listview {
-    columns:                     4;
-    lines:                       4;
-    cycle:                       true;
-    dynamic:                     true;
-    scrollbar:                   false;
-    layout:                      vertical;
-    reverse:                     false;
-    fixed-height:                true;
-    fixed-columns:               true;
-
-    background-color:           transparent;
-    text-color:                 @foreground;
-
-    spacing:                     0px;
-    margin:                      0px;
-    padding:                     0px;
+    columns:      4;
+    lines:        4;
+    fixed-columns: true;
+    spacing:      8px;
 }
 
-/* Elements --------------------------------------------------- */
 element {
-    cursor:                      pointer;
-    border-radius:               36px;
-    background-color:            transparent;
-    text-color:                  @foreground;
-    orientation:                 vertical;
-
-    spacing:                     0px;
-    margin:                      0px;
-    padding:                     0px;
+    padding:       0;
+    border-radius: 12px;
+    orientation:   vertical;
+    spacing:       6px;
 }
 
 element-icon {
-    expand:                      false;
-    background-color:            transparent;
-    text-color:                  inherit;
-    size:                        26%;
-    cursor:                      inherit;
+    size: 160px;
 }

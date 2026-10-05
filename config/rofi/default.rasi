@@ -1,124 +1,131 @@
 @import "catppuccin-mocha"
 
 * {
-  selected-active-foreground:  @background;
-  lightfg:                     @text;
-  separatorcolor:              @foreground;
-  urgent-foreground:           @red;
-  alternate-urgent-background: @lightbg;
-  lightbg:                     @mantle;
-  background-color:            transparent;
-  border-color:                @foreground;
-  normal-background:           @background;
-  selected-urgent-background:  @red;
-  alternate-active-background: @lightbg;
-  spacing:                     2;
-  alternate-normal-foreground: @foreground;
-  urgent-background:           @background;
-  selected-normal-foreground:  @lightbg;
-  active-foreground:           @blue;
-  background:                  @base;
-  selected-active-background:  @blue;
-  active-background:           @background;
-  selected-normal-background:  @lightfg;
-  alternate-normal-background: @lightbg;
-  foreground:                  @text;
-  selected-urgent-foreground:  @background;
-  normal-foreground:           @foreground;
-  alternate-urgent-foreground: @red;
-  alternate-active-foreground: @blue;
+    background-color: transparent;
+    text-color:       @text;
+    shade-bg:         white / 12%;
+    shade-shadow:     white / 6%;
 
-  selected:                    @selected-normal-background; // Button selected
-  shade-shadow:                white / 6%;
-  shade-bg:                    white / 12%;
-  shade-border:                white / 24%;
-
+    /* alpha variants — rofi can't do "@var / 92%", hex8 only */
+    win-bg:     #1e1e2ee6; /* base      @ 0.90 */
+    surf:       #31324499; /* surface0  @ 0.60 */
+    surf-sel:   #313244bf; /* surface0  @ 0.75 */
+    line:       #6c708673; /* overlay0  @ 0.45 */
+    accent-line: #cba6f78c; /* mauve    @ 0.55 */
 }
 
+/* Floating centered window — chrome matches waybar/wlogout */
 window {
-    background-color: black / 60%;
-    fullscreen: true;
-    transparency: "real";
-    cursor: "default";
-    border: 0px;
-    border-color: @selected-normal-background;
+    width:           640px;
+    padding:         12px;
+    border:          1px solid;
+    border-color:    @line;
+    border-radius:   16px;
+    background-color: @win-bg;
+    transparency:    "real";
+    cursor:          "default";
 }
 
-element {
-    padding: 1px ;
-    cursor:  pointer;
-    spacing: 5px ;
-    border:  0;
-}
-element normal.normal,
-element alternate.normal 
-{
-    background-color: transparent;
-    text-color:       @normal-foreground;
-}
-element selected.normal {
-    background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
-    border:           1px solid;
-    border:           @selected-normal-background;
-}
-element-text {
-    background-color: transparent;
-    cursor:           inherit;
-    highlight:        inherit;
-    text-color:       inherit;
-    vertical-align:              0.5;
-    horizontal-align:            0.5;
-}
-
-listview {
-    border: 0px;
-}
-
-message {
-    background-color: white / 12%;
-    padding:      24px ;
-    border-color: transparent;
-    border-radius: 12px;
-    border:       1px solid;
-}
-error-message {
-    padding:                     100px;
-    border:                      0px solid;
-    border-radius:               0px;
-    background-color:            black / 10%;
-    text-color:                  @normal-foreground;
-}
-textbox {
-    background-color:            transparent;
-    text-color:                  @normal-foreground;
-    vertical-align:              0.5;
-    horizontal-align:            0.5;
-    highlight:                   none;
-}
-
-scrollbar {
-    margin: 0px 4px;
-    handle-width: 8px;
-    handle-color: white;
-    border-radius: 4px;
-    handle-color: @normal-foreground;
-}
-
-button {
-    cursor:     pointer;
-    spacing:    0;
-    text-color: @normal-foreground;
-}
-
-button selected {
-    background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
+mainbox {
+    spacing: 12px;
+    padding: 4px;
 }
 
 inputbar {
-    padding:    1px ;
-    spacing:    0px ;
-    text-color: @normal-foreground;
-    children:   [ "prompt","textbox-prompt-colon","entry","num-filtered-rows","textbox-num-sep","num-rows","case-indicator" ];
+    children:        [ "prompt", "entry" ];
+    spacing:         10px;
+    padding:         10px 16px;
+    border:          1px solid;
+    border-color:    @line;
+    border-radius:   999px;
+    background-color: @surf;
+    text-color:      @subtext1;
+}
+
+prompt {
+    background-color: transparent;
+    text-color:       inherit;
+}
+
+entry {
+    background-color:  transparent;
+    text-color:        inherit;
+    cursor:            inherit;
+    placeholder:       "Search";
+    placeholder-color: @overlay0;
+}
+
+listview {
+    lines:        6;
+    columns:      1;
+    spacing:      4px;
+    dynamic:      true;
+    scrollbar:    false;
+    fixed-height: false;
+    text-color:   @subtext1;
+}
+
+element {
+    padding:       8px 12px;
+    spacing:       10px;
+    border-radius: 10px;
+    cursor:        pointer;
+    text-color:    @subtext1;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color: transparent;
+    text-color:       @subtext1;
+}
+
+element selected.normal {
+    background-color: @surf-sel;
+    border:          1px solid;
+    border-color:    @accent-line;
+    text-color:      @text;
+}
+
+element-icon {
+    size:            24px;
+    background-color: transparent;
+    cursor:          inherit;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    vertical-align:   0.5;
+    horizontal-align: 0;
+}
+
+mode-switcher {
+    spacing: 8px;
+}
+
+button {
+    padding:          8px 14px;
+    border-radius:    999px;
+    background-color: @surf;
+    text-color:       @subtext0;
+    cursor:           pointer;
+}
+
+button selected {
+    background-color: @surface0;
+    border:          1px solid;
+    border-color:    @accent-line;
+    text-color:      @text;
+}
+
+message {
+    padding:          12px 16px;
+    border-radius:    10px;
+    background-color: @surf;
+}
+
+textbox {
+    background-color: transparent;
+    text-color:       @subtext1;
+    highlight:        none;
 }
