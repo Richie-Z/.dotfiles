@@ -15,6 +15,8 @@ hl.curve("easeOutCirc", { type = "bezier", points = { { 0, 0.55 }, { 0.45, 1 } }
 hl.curve("easeOutExpo", { type = "bezier", points = { { 0.16, 1 }, { 0.3, 1 } } })
 hl.curve("softAcDecel", { type = "bezier", points = { { 0.26, 0.26 }, { 0.15, 1 } } })
 hl.curve("md2", { type = "bezier", points = { { 0.4, 0 }, { 0.2, 1 } } })
+hl.curve("easy", { type = "spring", mass = 1, stiffness = 238.1191, dampening = 24.21279333 })
+hl.curve("quick", { type = "bezier", points = { { 0.15, 0 }, { 0.1, 1 } } })
 hl.animation({
 	leaf = "windows",
 	enabled = true,
@@ -77,8 +79,8 @@ hl.animation({
 	leaf = "workspaces",
 	enabled = true,
 	speed = 7,
-	bezier = "menu_decel",
-	style = "slide",
+	spring = "easy",
+	style = "slidefade 15%",
 })
 hl.animation({
 	leaf = "specialWorkspace",
@@ -87,6 +89,8 @@ hl.animation({
 	bezier = "md3_decel",
 	style = "slidevert",
 })
+hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
+hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
 hl.config({
 	animations = {
 		enabled = true,
