@@ -1,92 +1,108 @@
+/* Catppuccin Mocha — keep in sync with waybar/mocha.css + hypr/assets/mocha.conf */
+@define-color text #cdd6f4;
+@define-color subtext1 #bac2de;
+@define-color subtext0 #a6adc8;
+@define-color overlay0 #6c7086;
+@define-color surface0 #313244;
+@define-color base #1e1e2e;
+@define-color mantle #181825;
+@define-color crust #11111b;
+@define-color red #f38ba8;
+@define-color mauve #cba6f7;
+
 * {
-  font-family: "Geist", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+	font-family: "Geist", "Symbols Nerd Font", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+	font-size: 13px;
+	font-weight: 600;
 	background-image: none;
-	transition: 20ms;
+	transition: all 0.15s ease-out;
 	box-shadow: none;
 }
+
 window {
-  background-color: rgba(17, 17, 27, 0.4);
+	background-color: alpha(@crust, 0.72);
 }
+
 button {
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: 20%;
-	animation: gradient_f 20s ease-in infinite;
-	border-radius: 80px; 
-	border:0px;
-	transition: all 0.3s cubic-bezier(.55, 0.0, .28, 1.682), box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
-	color: #cdd6f4;
-	background-color: rgba(137, 180, 250, 0.2);
-	margin: 10px; 
-  min-width: 150px;
-  min-height: 150px;	
+	background-size: 26%;
+	background-color: alpha(@base, 0.85);
+	border: 1px solid alpha(@overlay0, 0.45);
+	border-radius: 24px;
+	color: @subtext1;
+	margin: 12px;
+	min-width: 160px;
+	min-height: 160px;
+	box-shadow: 0 4px 14px alpha(@crust, 0.45);
 }
 
+button:hover,
 button:focus {
-	background-color: rgba(137, 180, 250, 0.5);
-  background-size: 25%;
-	border: 0px;
+	background-color: alpha(@surface0, 0.75);
+	background-size: 30%;
+	border-color: alpha(@mauve, 0.55);
+	color: @text;
+	box-shadow: 0 4px 18px alpha(@mauve, 0.18);
+	outline: none;
 }
 
-button:hover {
-	  background-color: rgba(137, 180, 250, 0.9);
-	  opacity: 0.8;
-    color: #bac2de;
-    background-size: 30%;
-    margin: 30px;
-    border-radius: 80px;
-    box-shadow: 0 0 50px #11111b;
+#shutdown:hover,
+#shutdown:focus {
+	background-color: alpha(@red, 0.18);
+	border-color: alpha(@red, 0.55);
+	color: @red;
+	box-shadow: 0 4px 18px alpha(@red, 0.18);
 }
 
-/* Adjust the size of the icon or content inside the button */
 button span {
-    font-size: 1.2em; /* Increase the font size */
+	font-size: 1.1em;
 }
 
 #lock {
-  background-image: image(
-    url("./icons/lock.svg"),
-    url("/usr/share/wlogout/icons/lock.png"),
-    url("/usr/local/share/wlogout/icons/lock.png")
-  );
+	background-image: image(
+		url("./icons/lock.svg"),
+		url("/usr/share/wlogout/icons/lock.png"),
+		url("/usr/local/share/wlogout/icons/lock.png")
+	);
 }
 
 #logout {
-  background-image: image(
-    url("./icons/logout.svg"),
-    url("/usr/share/wlogout/icons/logout.png"),
-    url("/usr/local/share/wlogout/icons/logout.png")
-  );
+	background-image: image(
+		url("./icons/logout.svg"),
+		url("/usr/share/wlogout/icons/logout.png"),
+		url("/usr/local/share/wlogout/icons/logout.png")
+	);
 }
 
 #suspend {
-  background-image: image(
-    url("./icons/suspend.svg"),
-    url("/usr/share/wlogout/icons/suspend.png"),
-    url("/usr/local/share/wlogout/icons/suspend.png")
-  );
+	background-image: image(
+		url("./icons/suspend.svg"),
+		url("/usr/share/wlogout/icons/suspend.png"),
+		url("/usr/local/share/wlogout/icons/suspend.png")
+	);
 }
 
 #hibernate {
-  background-image: image(
-    url("./icons/hibernate.svg"),
-    url("/usr/share/wlogout/icons/hibernate.png"),
-    url("/usr/local/share/wlogout/icons/hibernate.png")
-  );
+	background-image: image(
+		url("./icons/hibernate.svg"),
+		url("/usr/share/wlogout/icons/hibernate.png"),
+		url("/usr/local/share/wlogout/icons/hibernate.png")
+	);
 }
 
 #shutdown {
-  background-image: image(
-    url("./icons/shutdown.svg"),
-    url("/usr/share/wlogout/icons/shutdown.png"),
-    url("/usr/local/share/wlogout/icons/shutdown.png")
-  );
+	background-image: image(
+		url("./icons/shutdown.svg"),
+		url("/usr/share/wlogout/icons/shutdown.png"),
+		url("/usr/local/share/wlogout/icons/shutdown.png")
+	);
 }
 
 #reboot {
-  background-image: image(
-    url("./icons/reboot.svg"),
-    url("/usr/share/wlogout/icons/reboot.png"),
-    url("/usr/local/share/wlogout/icons/reboot.png")
-  );
+	background-image: image(
+		url("./icons/reboot.svg"),
+		url("/usr/share/wlogout/icons/reboot.png"),
+		url("/usr/local/share/wlogout/icons/reboot.png")
+	);
 }
