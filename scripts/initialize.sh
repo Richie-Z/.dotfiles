@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 IGNORED_LIST=('zsh' 'tmux' 'bash' 'gtk')
+SKIP_LIST=('refind') # not linkable, ESP deploy via scripts/deploy-refind.sh
 
 DRY_RUN=false
 ARGS=()
@@ -43,6 +44,11 @@ for item in "$CONFIG_DIR"/*; do
 
   if containsElement "$base" "${EXCLUDE_LIST[@]}"; then
     echo "Skipped $base (excluded)"
+    continue
+  fi
+
+  if containsElement "$base" "${SKIP_LIST[@]}"; then
+    echo "Skipped $base (use scripts/deploy-refind.sh)"
     continue
   fi
 

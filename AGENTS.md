@@ -7,6 +7,7 @@ Personal dotfiles for an Arch Linux (Hyprland/Wayland) + macOS setup. No build, 
 - `config/<name>/` → deployed as `~/.config/<name>` (kitty, waybar, rofi, yazi, tmux-ish tools, hypr, mise, KDE rc files at `config/` top level like `dolphinrc`).
 - `config/zsh`, `config/bash`, `config/tmux`, `config/gtk` are special: their *contents* (dotfiles) link into `$HOME/` directly (e.g. `config/zsh/.zshrc` → `~/.zshrc`). This exception list is `IGNORED_LIST` in `scripts/initialize.sh` — update both places when adding a new `$HOME`-level dotfile dir.
 - `config/.aliases` is NOT symlinked; `.zshrc` sources it in-place via `$DOTFILES_PATH`.
+- `config/refind/` — rEFInd rice (conf, icons, catppuccin theme), NOT symlinked: ESP (`/boot`, vfat) can't symlink. Deploy with `scripts/deploy-refind.sh` (sudo rsync to `/boot/EFI/refind/`, plus `refind_linux.conf` to `/boot/`; `--dry-run` supported). Excludes `refind_x64.efi`/`BOOT.CSV` (pacman-owned). `initialize.sh` skips it via `SKIP_LIST`.
 - `scripts/` — also sourced in-place at runtime (`env-detect.sh`, `clipboard.sh` via `.aliases`). `omz-init.sh` is a broken stub (bad shebang, empty body).
 - `omz/themes/` — custom oh-my-zsh catppuccin theme (`ZSH_THEME="catppuccin"` in `.zshrc`). Not deployed by `initialize.sh`; must be installed into `$ZSH_CUSTOM/themes` manually.
 - `packages/` — dated pacman dumps (`pacman -Qen` official / `-Qem` AUR). Regenerate with `scripts/dump-pkg.sh`, then commit the new dated files.
