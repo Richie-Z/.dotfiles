@@ -66,7 +66,7 @@
     "tooltip-format": "{ifname} via {gwaddr} 󰈀",
     "format-linked": "<span foreground='#f9e2af'>󰈀</span> {ifname} (No IP)",
     "format-disconnected": "<span foreground='#f38ba8'>󰤭</span>",
-    "on-click": "sh ~/scripts/rofi-wifi-menu/rofi-wifi-menu.sh"
+    "on-click": "kitty --class impala -e impala"
   },
   "battery": {
     "states": {

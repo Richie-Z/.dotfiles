@@ -38,3 +38,11 @@ hl.window_rule({
 	float = true,
 	center = true,
 })
+
+hl.window_rule({
+	match = {
+		class = "^(impala)$",
+	},
+	float = true,
+	center = true,
+})
