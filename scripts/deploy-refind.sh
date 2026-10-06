@@ -4,6 +4,8 @@
 # Not a symlink: ESP is vfat. refind_x64.efi + BOOT.CSV stay pacman-owned, vars/ is machine state.
 # ponytail: no --delete; stale files linger. Add `--delete --exclude refind_x64.efi --exclude BOOT.CSV` only if that starts to matter.
 
+set -euo pipefail
+
 DRY_RUN=false
 for arg in "$@"; do
   case "$arg" in
@@ -21,12 +23,13 @@ if [ ! -d "$DST" ]; then
 fi
 
 # refind_linux.conf lives next to the kernel (/boot), rEFInd reads it from kernel dir, not the refind dir.
+# --no-owner --no-group: ESP is vfat, chown always fails there and aborts the transfer.
 if $DRY_RUN; then
-  rsync -ain --exclude 'refind_linux.conf' "$SRC" "$DST"
-  rsync -ain "$SRC/refind_linux.conf" /boot/
+  rsync -ain --no-owner --no-group --exclude 'refind_linux.conf' "$SRC" "$DST"
+  rsync -ain --no-owner --no-group "$SRC/refind_linux.conf" /boot/
 else
-  sudo rsync -a --exclude 'refind_linux.conf' "$SRC" "$DST"
-  sudo rsync -a "$SRC/refind_linux.conf" /boot/
+  sudo rsync -a --no-owner --no-group --exclude 'refind_linux.conf' "$SRC" "$DST"
+  sudo rsync -a --no-owner --no-group "$SRC/refind_linux.conf" /boot/
   echo "Deployed $SRC -> $DST and /boot/refind_linux.conf"
 fi
 
@@ -35,6 +38,7 @@ fi
 ARCH_ICON="$DST/themes/catppuccin/assets/mocha/icons/os_arch.png"
 for k in /boot/vmlinuz-*; do
   [ -f "$k" ] || continue
+  case "$k" in *.png) continue ;; esac # skip icons from previous runs
   if $DRY_RUN; then
     echo "would install Arch icon: $k.png"
   else
@@ -49,7 +53,10 @@ BANNER="$DST/themes/catppuccin/assets/mocha/background.png"
 if $DRY_RUN; then
   echo "would regenerate banner: $BANNER from $HOME/.current_wallpaper"
 elif [ -f "$HOME/.current_wallpaper" ]; then
-  uv run --no-project --with pillow python - "$HOME/.current_wallpaper" "$BANNER" <<'PYEOF'
+  # Generate as user into /tmp (ESP not writable without root), then sudo cp.
+  TMP_BANNER="$(mktemp --suffix=.png)"
+  trap 'rm -f "$TMP_BANNER"' EXIT
+  uv run --no-project --with pillow python - "$HOME/.current_wallpaper" "$TMP_BANNER" <<'PYEOF'
 import sys
 from PIL import Image, ImageEnhance, ImageFilter
 
@@ -64,8 +71,10 @@ im = ImageEnhance.Contrast(im).enhance(1.3)
 im = ImageEnhance.Brightness(im).enhance(0.55)
 im = Image.blend(im, Image.new("RGB", im.size, (0x1E, 0x1E, 0x2E)), 0.5)
 im.save(dst)
-print(f"Banner written: {dst}")
+print(f"Banner generated: {dst}")
 PYEOF
+  sudo cp "$TMP_BANNER" "$BANNER"
+  echo "Banner installed: $BANNER"
 else
   echo "No wallpaper at $HOME/.current_wallpaper, keeping flat mocha banner"
 fi
