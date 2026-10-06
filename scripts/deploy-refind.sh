@@ -29,3 +29,43 @@ else
   sudo rsync -a "$SRC/refind_linux.conf" /boot/
   echo "Deployed $SRC -> $DST and /boot/refind_linux.conf"
 fi
+
+# Arch logo for auto-detected kernels: rEFInd checks for <kernel>.png next to the vmlinuz first.
+# No os-release on the ESP, so auto-detect never picks Arch on its own.
+ARCH_ICON="$DST/themes/catppuccin/assets/mocha/icons/os_arch.png"
+for k in /boot/vmlinuz-*; do
+  [ -f "$k" ] || continue
+  if $DRY_RUN; then
+    echo "would install Arch icon: $k.png"
+  else
+    sudo cp "$ARCH_ICON" "$k.png"
+  fi
+done
+
+# Banner: blur the current wallpaper (matches hyprlock) and write it to the ESP.
+# ESP-only on purpose: wallpaper is machine-local, not in the repo. Runs after rsync so rsync's flat background.png copy gets overwritten.
+# No wallpaper -> keep the flat mocha base from rsync.
+BANNER="$DST/themes/catppuccin/assets/mocha/background.png"
+if $DRY_RUN; then
+  echo "would regenerate banner: $BANNER from $HOME/.current_wallpaper"
+elif [ -f "$HOME/.current_wallpaper" ]; then
+  uv run --no-project --with pillow python - "$HOME/.current_wallpaper" "$BANNER" <<'PYEOF'
+import sys
+from PIL import Image, ImageEnhance, ImageFilter
+
+src, dst = sys.argv[1], sys.argv[2]
+im = Image.open(src).convert("RGB")
+scale = max(1920 / im.width, 1080 / im.height)
+im = im.resize((round(im.width * scale), round(im.height * scale)), Image.LANCZOS)
+left, top = (im.width - 1920) // 2, (im.height - 1080) // 2
+im = im.crop((left, top, left + 1920, top + 1080))
+im = im.filter(ImageFilter.GaussianBlur(9))
+im = ImageEnhance.Contrast(im).enhance(1.3)
+im = ImageEnhance.Brightness(im).enhance(0.55)
+im = Image.blend(im, Image.new("RGB", im.size, (0x1E, 0x1E, 0x2E)), 0.5)
+im.save(dst)
+print(f"Banner written: {dst}")
+PYEOF
+else
+  echo "No wallpaper at $HOME/.current_wallpaper, keeping flat mocha banner"
+fi
