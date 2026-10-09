@@ -1,29 +1,34 @@
 sort=-time
 layer=overlay
-width=300
-height=110
-margin=5
-padding=10,5
+width=340
+height=140
+margin=12
+padding=16
+font=Geist 11
 
-border-size=1
+border-size=2
+border-radius=16
 
-background-color=#1e1e2e
+background-color=#1e1e2eCC
 text-color=#cdd6f4
 border-color=#cba6f7
-progress-color=over #313244
-
-border-radius=10
+progress-color=over #89b4fa
 
 icons=1
-max-icon-size=64
+max-icon-size=48
+format=<b>%s</b>\n%b
 default-timeout=5000
 ignore-timeout=1
 
+[urgency=low]
+text-color=#a6adc8
+background-color=#1e1e2eAA
+
 [urgency=high]
 border-color=#fab387
+background-color=#1e1e2eE6
+progress-color=over #fab387
 default-timeout=0
 
 [summary~="log-.*"]
-border-color=#a3be8c
-
 invisible=1

@@ -46,3 +46,12 @@ hl.window_rule({
 	float = true,
 	center = true,
 })
+
+hl.layer_rule({
+	name = "mako-blur",
+	match = {
+		namespace = "notifications",
+	},
+	blur = true,
+	ignore_alpha = 0.5,
+})
