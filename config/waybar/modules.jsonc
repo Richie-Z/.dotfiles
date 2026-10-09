@@ -14,6 +14,7 @@
     "exec": "playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null | cut -c 1-44 | { grep . || printf '—'; }",
     "interval": 2,
     "format": "<span foreground='#f5c2e7'>󰎌</span> {}",
+    "align": 0.5,
     "on-click": "playerctl play-pause",
     "on-scroll-up": "playerctl next",
     "on-scroll-down": "playerctl previous"

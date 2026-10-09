@@ -46,6 +46,9 @@ window#waybar {
     padding: 2px 16px;
     border-radius: 999px;
     color: @subtext1;
+}
+
+#custom-media label {
     min-width: 180px;
 }
 
