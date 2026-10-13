@@ -32,3 +32,12 @@ default-timeout=0
 
 [summary~="log-.*"]
 invisible=1
+
+# Screenshot previews: bigger thumbnail, honor the 6s timeout (the global
+# ignore-timeout=1 would otherwise pin the toast open forever).
+[app-name="Screenshot"]
+width=420
+height=280
+max-icon-size=200
+default-timeout=6000
+ignore-timeout=0

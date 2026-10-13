@@ -109,10 +109,10 @@ bind("ALT + SPACE", dsp.exec_cmd("pkill rofi || rofi -show drun -modi drun,fileb
 bind(mainMod .. " + W", dsp.exec_cmd(scripts .. "/wallpaperSelect.sh"))
 bind(mainMod .. " + SHIFT + V", dsp.exec_cmd(scripts .. "/clipManager.sh"))
 
--- Screenshots
-bind("ALT + SHIFT + 5", dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
-bind("CTRL + ALT + SHIFT + 5", dsp.exec_cmd("grim"))
-bind("Print", dsp.exec_cmd("grim"))
+-- Screenshots (capture + preview notification; see scripts/screenshot.sh)
+bind("ALT + SHIFT + 5", dsp.exec_cmd(scripts .. "/screenshot.sh region"))
+bind("CTRL + ALT + SHIFT + 5", dsp.exec_cmd(scripts .. "/screenshot.sh full"))
+bind("Print", dsp.exec_cmd(scripts .. "/screenshot.sh full"))
 
 -- Brightness
 bind("XF86MonBrightnessUp", dsp.exec_cmd('brightnessctl -q s +5% && notify-send -t 1000 -h string:x-canonical-private-synchronous:brightness "Brightness" "$(brightnessctl -m | awk -F, \'{print $4}\' )"'))
