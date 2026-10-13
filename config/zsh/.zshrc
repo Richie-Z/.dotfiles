@@ -106,6 +106,16 @@ fi
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 
+# Herdr
+if command -v herdr >/dev/null 2>&1; then
+  source <(herdr completion zsh)
+fi
+
+# k3s
+if command -v k3s >/dev/null 2>&1; then
+  source <(k3s completion zsh)
+fi
+
 # =======================
 # Shell completions
 # =======================
