@@ -154,7 +154,7 @@ _zsh_gen_completions() {
 _zsh_gen_completions \
   "podman podman completion zsh" \
   "kubectl kubectl completion zsh" \
-  "gh gh completion -s zsh" \
+  "gh completion -s zsh" \
   "uv uv generate-shell-completion zsh" \
   "bun bun completions" \
   "rustup rustup completions zsh" \
