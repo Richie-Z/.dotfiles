@@ -93,6 +93,10 @@ case ":$PATH:" in
 *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
+# mise shims (interactive shells get these from `mise activate` in .zshrc;
+# non-interactive shells — opencode's tool shell, editor tasks — get none)
+[ -d "$HOME/.local/share/mise/shims" ] && export PATH="$HOME/.local/share/mise/shims:$PATH"
+
 # uv / local bins
 [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 
