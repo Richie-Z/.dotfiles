@@ -4,6 +4,19 @@
 setopt correct
 # echo 'unset HISTFILE' >>|${ZDOTDIR:-~}/.zshrc
 
+# Homebrew zsh completions (macOS): formulae install `_<cmd>` files into
+# <prefix>/share/zsh/site-functions (e.g. `zsh-completions`). Added before any
+# compinit run so the dump picks them up. .zprofile only loads brew in login
+# shells, so use the known prefixes plus `brew --prefix` when available.
+if [[ "$(detect_os)" = "mac" ]]; then
+  BREW_PREFIXES=(/opt/homebrew /usr/local)
+  command -v brew >/dev/null 2>&1 && BREW_PREFIXES+=("$(brew --prefix)")
+  for prefix in $BREW_PREFIXES; do
+    [[ -d "$prefix/share/zsh/site-functions" ]] &&
+      fpath=("$prefix/share/zsh/site-functions" $fpath)
+  done
+fi
+
 # =======================
 # Oh My Zsh
 # =======================
