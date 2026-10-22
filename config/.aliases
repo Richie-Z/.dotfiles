@@ -35,7 +35,13 @@ alias lt='eza --tree --level=2 --color=always --group-directories-first --icons=
 # -----------------------
 # cat shortcuts
 # -----------------------
-alias cat='bat'
+# Debian packages the binary as batcat, Arch/macOS as bat. Check the binary
+# rather than the distro: headless Debian has no display server to infer from.
+if command -v batcat >/dev/null 2>&1; then
+  alias cat='batcat'
+elif command -v bat >/dev/null 2>&1; then
+  alias cat='bat'
+fi
 
 # -----------------------
 # Networking
