@@ -20,7 +20,7 @@ Personal dotfiles for an Arch Linux (Hyprland/Wayland) + macOS setup. No build, 
 bash scripts/initialize.sh
 ```
 
-Idempotent `ln -sf`. Skips a config dir when its app is missing (`REQUIREMENTS` table at the top: `<dir>:<command>:<os>`) or the OS does not match; `--all` links everything anyway. Never clobbers real files: an existing non-symlink target prints `Backup needed: <path>` and is skipped — if deployment "did nothing" for a path, that's why. `$DOTFILES_PATH` is hardcoded in `config/zsh/.zshenv` as `$HOME/Documents/Programming/Projects/dotfiles`; runtime-sourced scripts break if the repo moves.
+Idempotent `ln -sf`. Skips a config dir when its app is missing (`REQUIREMENTS` table at the top: `<dir>:<command>:<os>`) or the OS does not match, and removes that dir's previously deployed symlink (only if it points into the repo); `--all` links everything anyway. Never clobbers real files: an existing non-symlink target prints `Backup needed: <path>` and is skipped — if deployment "did nothing" for a path, that's why. `$DOTFILES_PATH` is hardcoded in `config/zsh/.zshenv` as `$HOME/Documents/Programming/Projects/dotfiles`; runtime-sourced scripts break if the repo moves.
 
 ## Hyprland: two parallel configs
 

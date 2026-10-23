@@ -40,7 +40,7 @@ done
 EXCLUDE_LIST=("${ARGS[@]}") # config dir names to skip, e.g. ./initialize.sh hypr waybar
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CONFIG_DIR="$SCRIPT_DIR/../config"
+CONFIG_DIR="$(cd "$SCRIPT_DIR/../config" && pwd)"
 
 # shellcheck source=env-detect.sh
 . "$SCRIPT_DIR/env-detect.sh"
@@ -57,6 +57,23 @@ link() { # link <source> <target>
     ln -sf "$1" "$2"
     echo "Linked $1 -> $2"
   fi
+}
+
+# Remove the deployed symlink for a skipped config, only when it points into
+# this repo. Real files and foreign symlinks are never touched.
+unlink_if_ours() { # unlink_if_ours <target>
+  local target="$1"
+  [ -L "$target" ] || return 0
+  case "$(readlink -f "$target")" in
+    "$CONFIG_DIR"/*)
+      if $DRY_RUN; then
+        echo "[dry-run] rm -f $target"
+      else
+        rm -f "$target"
+        echo "Removed $target"
+      fi
+      ;;
+  esac
 }
 
 # Helper function to check if an element is in an array
@@ -102,6 +119,7 @@ for item in "$CONFIG_DIR"/*; do
 
   if ! $FORCE && reason="$(skip_reason "$base")"; then
     echo "Skipped $base ($reason)"
+    unlink_if_ours "$HOME/.config/$base"
     continue
   fi
 
