@@ -52,9 +52,11 @@ fi
 
 link() { # link <source> <target>
   if $DRY_RUN; then
-    echo "[dry-run] ln -sf $1 $2"
+    echo "[dry-run] ln -sfn $1 $2"
   else
-    ln -sf "$1" "$2"
+    # -n: replace a symlink that points at a directory instead of nesting a
+    # link inside it (ln -sf src existing-dirlink creates dirlink/<base>).
+    ln -sfn "$1" "$2"
     echo "Linked $1 -> $2"
   fi
 }
