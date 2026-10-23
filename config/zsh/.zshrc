@@ -18,52 +18,58 @@ if [[ "$(detect_os)" = "mac" ]]; then
 fi
 
 # =======================
-# Oh My Zsh
+# Oh My Zsh (lazy-loaded)
 # =======================
 export ZSH="$HOME/.oh-my-zsh"
-source $ZSH/custom/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
-ZSH_THEME="" # repo-local, sourced below from $DOTFILES_PATH/omz/themes
-CATPPUCCIN_FLAVOR="mocha"
-CATPPUCCIN_SHOW_TIME=true
+# Lazy-load OMZ and plugins on first prompt
+_zsh_lazy_load_omz() {
+  unfunction _zsh_lazy_load_omz
+  ZSH_THEME="" # repo-local, sourced below from $DOTFILES_PATH/omz/themes
+  CATPPUCCIN_FLAVOR="mocha"
+  CATPPUCCIN_SHOW_TIME=true
 
-plugins=(
-  git
-  flutter
-  laravel
-  tmux
-  vi-mode
-  gcloud
-  kubectl
-  podman
-  docker-compose
-  zsh-autocomplete
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-)
+  plugins=(
+    git
+    flutter
+    laravel
+    tmux
+    vi-mode
+    gcloud
+    kubectl
+    podman
+    docker-compose
+    zsh-autocomplete
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+  )
 
-export ZSH_TMUX_AUTONAME_SESSION=true
+  export ZSH_TMUX_AUTONAME_SESSION=true
 
-# zsh-completions: do NOT load as an OMZ plugin (redundant .zcompdump churn).
-# Add its src/ to $fpath and run compinit ourselves BEFORE oh-my-zsh. OHMyZsh
-# then reuses this same $ZSH_COMPDUMP with `compinit -C`, skipping the rebuild.
-# See https://github.com/zsh-users/zsh-completions#oh-my-zsh
-if [[ -d "$ZSH/custom/plugins/zsh-completions/src" ]]; then
-  fpath=("$ZSH/custom/plugins/zsh-completions/src" $fpath)
-  autoload -Uz compinit && compinit -d "${ZSH_COMPDUMP:-${ZSH_CACHE_DIR:-$ZSH/cache}/.zcompdump-$(hostname)-${ZSH_VERSION}}"
-fi
+  # zsh-completions: add to fpath before compinit
+  if [[ -d "$ZSH/custom/plugins/zsh-completions/src" ]]; then
+    fpath=("$ZSH/custom/plugins/zsh-completions/src" $fpath)
+  fi
 
-if [[ -d "$ZSH" ]]; then
-  source "$ZSH/oh-my-zsh.sh"
-fi
+  if [[ -d "$ZSH" ]]; then
+    source "$ZSH/oh-my-zsh.sh"
+  fi
 
-if [[ -n "$DOTFILES_PATH" ]]; then
-  source "$DOTFILES_PATH/omz/themes/catppuccin.zsh-theme"
-else
-  echo "[zshrc] DOTFILES_PATH unset, catppuccin theme not loaded" >&2
-fi
+  if [[ -n "$DOTFILES_PATH" ]]; then
+    source "$DOTFILES_PATH/omz/themes/catppuccin.zsh-theme"
+  else
+    echo "[zshrc] DOTFILES_PATH unset, catppuccin theme not loaded" >&2
+  fi
 
-. "$ZSH_CUSTOM/plugins/catppuccin-zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
+  . "$ZSH_CUSTOM/plugins/catppuccin-zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
+
+  # Load zsh-autocomplete AFTER OMZ (was loading before, causing slowdown)
+  source "$ZSH/custom/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+}
+
+# Trigger lazy load on first prompt
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _zsh_lazy_load_omz
 
 # =======================
 # Load aliases
@@ -89,48 +95,86 @@ y() {
 }
 
 # =======================
-# Tool integrations
+# Tool integrations (lazy-loaded)
 # =======================
 
-# Mise
-if command -v mise >/dev/null 2>&1; then
+# Mise - lazy load on first command
+_mise_lazy_load() {
+  unfunction mise
+  unfunction _mise_lazy_load
   eval "$(mise activate zsh)"
-fi
+  mise "$@"
+}
+mise() { _mise_lazy_load "$@"; }
 
-# Jump
-if command -v zoxide >/dev/null 2>&1; then
+# Zoxide - lazy load on first command
+_zoxide_lazy_load() {
+  unfunction z
+  unfunction zi
+  unfunction _zoxide_lazy_load
   eval "$(zoxide init zsh)"
-fi
+  z "$@"
+}
+z() { _zoxide_lazy_load "$@"; }
+zi() { _zoxide_lazy_load "$@"; }
 
-# Fzf
-source <(fzf --zsh)
+# Fzf - lazy load on first use
+_fzf_lazy_load() {
+  unfunction fzf
+  unfunction _fzf_lazy_load
+  source <(fzf --zsh)
+  fzf "$@"
+}
+fzf() { _fzf_lazy_load "$@"; }
 
-# Crossplane
-if command -v crossplane >/dev/null 2>&1; then
+# Crossplane - lazy load
+_crossplane_lazy_load() {
+  unfunction crossplane
+  unfunction _crossplane_lazy_load
   source <(crossplane completions)
-fi
+  crossplane "$@"
+}
+crossplane() { _crossplane_lazy_load "$@"; }
 
-# Helm
-if command -v helm >/dev/null 2>&1; then
+# Helm - lazy load
+_helm_lazy_load() {
+  unfunction helm
+  unfunction _helm_lazy_load
   source <(helm completion zsh)
-fi
+  helm "$@"
+}
+helm() { _helm_lazy_load "$@"; }
 
-# Terraform
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/terraform terraform
-
-# Herdr
-if command -v herdr >/dev/null 2>&1; then
+# Herdr - lazy load
+_herdr_lazy_load() {
+  unfunction herdr
+  unfunction _herdr_lazy_load
   source <(herdr completion zsh)
-fi
+  herdr "$@"
+}
+herdr() { _herdr_lazy_load "$@"; }
 
-# k3s
-if command -v k3s >/dev/null 2>&1; then
+# k3s - lazy load
+_k3s_lazy_load() {
+  unfunction k3s
+  unfunction _k3s_lazy_load
   source <(k3s completion zsh)
-fi
+  k3s "$@"
+}
+k3s() { _k3s_lazy_load "$@"; }
+
+# Terraform - static completion (fast, keep eager) - load after compinit
+_terraform_lazy_load() {
+  unfunction terraform
+  unfunction _terraform_lazy_load
+  autoload -U +X bashcompinit && bashcompinit
+  complete -o nospace -C /usr/bin/terraform terraform
+  terraform "$@"
+}
+terraform() { _terraform_lazy_load "$@"; }
 
 # =======================
-# Shell completions
+# Shell completions (cached daily)
 # =======================
 # Static completions from /usr/share/zsh/site-functions (pacman, yay, yazi,
 # zoxide, eza, fd, rg, bat, ...) are already autoloaded via $fpath.
@@ -146,6 +190,15 @@ ZSH_COMPLETIONS_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/completions"
 if [[ ! -d "$ZSH_COMPLETIONS_DIR" ]]; then
   mkdir -p "$ZSH_COMPLETIONS_DIR"
 fi
+
+# Regenerate completions at most once per day (cache timestamp file)
+_zsh_completions_cache_file="$ZSH_COMPLETIONS_DIR/.last_regen"
+_zsh_should_regen_completions() {
+  [[ ! -f "$_zsh_completions_cache_file" ]] && return 0
+  local last_regen="$(cat "$_zsh_completions_cache_file" 2>/dev/null)"
+  local today="$(date +%s)"
+  (( today - last_regen > 86400 ))
+}
 
 # Regenerate a completion file when missing or older than its generator binary
 # (so completions follow tool upgrades). Each entry is: <file-name> <command>.
@@ -164,17 +217,20 @@ _zsh_gen_completions() {
   done
 }
 
-_zsh_gen_completions \
-  "podman podman completion zsh" \
-  "kubectl kubectl completion zsh" \
-  "gh completion -s zsh" \
-  "uv uv generate-shell-completion zsh" \
-  "bun bun completions" \
-  "rustup rustup completions zsh" \
-  "cargo rustup completions zsh cargo" \
-  "kubectl-neat kubectl-neat completion zsh" \
-  "opencode opencode completion zsh" \
-  "mise completion zsh"
+if _zsh_should_regen_completions; then
+  _zsh_gen_completions \
+    "podman podman completion zsh" \
+    "kubectl kubectl completion zsh" \
+    "gh completion -s zsh" \
+    "uv uv generate-shell-completion zsh" \
+    "bun bun completions" \
+    "rustup rustup completions zsh" \
+    "cargo rustup completions zsh cargo" \
+    "kubectl-neat kubectl-neat completion zsh" \
+    "opencode opencode completion zsh" \
+    "mise completion zsh"
+  date +%s >"$_zsh_completions_cache_file"
+fi
 
 if [[ -d "$ZSH_COMPLETIONS_DIR" ]]; then
   fpath=("$ZSH_COMPLETIONS_DIR" $fpath)
@@ -190,6 +246,10 @@ if (($+functions[_podman])); then
 fi
 
 # Private Shell
-unset HISTFILE
+# unset HISTFILE
 # export HISTSIZE=0
 # export SAVEHIST=0
+
+# agentmemory plugin (OpenCode auto-capture)
+export AGENTMEMORY_URL="https://agentmemory.dreadwrym.my.id"
+export AGENTMEMORY_SECRET="$(cat "$HOME/.agentmemory/secret")"

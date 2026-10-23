@@ -105,8 +105,16 @@ export MASON_PACKAGES_PATH="$HOME/.local/share/nvim/mason/packages"
 [ -d "$MASON_PACKAGES_PATH/phpactor" ] &&
   export PATH="$MASON_PACKAGES_PATH/phpactor:$PATH"
 
-# rust
-[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+# rust - lazy load cargo env on first cargo/rustc call
+_cargo_lazy_load() {
+  unfunction cargo
+  unfunction rustc
+  unfunction _cargo_lazy_load
+  [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+  cargo "$@"
+}
+cargo() { _cargo_lazy_load "$@"; }
+rustc() { _cargo_lazy_load "$@"; }
 
 # GO (add GOBIN to PATH)
 if command -v go >/dev/null 2>&1; then
@@ -114,16 +122,27 @@ if command -v go >/dev/null 2>&1; then
   [ -n "$GOBIN" ] && export PATH="$GOBIN:$PATH"
 fi
 
-# Java (guarded)
-if command -v mise >/dev/null 2>&1; then
-  JAVA_HOME="$(mise which java 2>/dev/null | xargs -r dirname | xargs -r dirname)"
-  [ -n "$JAVA_HOME" ] && export JAVA_HOME PATH="$JAVA_HOME/bin:$PATH"
-fi
+# Java & gcloud - defer mise which calls to first use
+_mise_java_lazy_load() {
+  unfunction java
+  unfunction _mise_java_lazy_load
+  if command -v mise >/dev/null 2>&1; then
+    JAVA_HOME="$(mise which java 2>/dev/null | xargs -r dirname | xargs -r dirname)"
+    [ -n "$JAVA_HOME" ] && export JAVA_HOME PATH="$JAVA_HOME/bin:$PATH"
+  fi
+  java "$@"
+}
+java() { _mise_java_lazy_load "$@"; }
 
-# Google Cloud build (gcloud)
-if command -v mise >/dev/null 2>&1; then
-  export CLOUDSDK_HOME="$(mise which gcloud 2>/dev/null | xargs -r dirname | xargs -r dirname)"
-fi
+_mise_gcloud_lazy_load() {
+  unfunction gcloud
+  unfunction _mise_gcloud_lazy_load
+  if command -v mise >/dev/null 2>&1; then
+    export CLOUDSDK_HOME="$(mise which gcloud 2>/dev/null | xargs -r dirname | xargs -r dirname)"
+  fi
+  gcloud "$@"
+}
+gcloud() { _mise_gcloud_lazy_load "$@"; }
 
 # Kubectl krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
