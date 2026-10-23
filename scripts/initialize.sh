@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 IGNORED_LIST=('zsh' 'tmux' 'bash' 'gtk')
+# Directories whose *contents* link into ~/.config/ individually, for apps that
+# read plain files there (KDE: dolphinrc, kiorc, ...) instead of a dir.
+FLAT_LIST=('dolphin')
 SKIP_LIST=('refind') # not linkable, ESP deploy via scripts/deploy-refind.sh
 
 # "<config dir>:<required command>:<os>" — empty command = any, empty os = any.
@@ -59,6 +62,26 @@ link() { # link <source> <target>
     ln -sfn "$1" "$2"
     echo "Linked $1 -> $2"
   fi
+}
+
+# Link every entry of a directory into a destination dir (dotfiles included)
+link_contents() { # link_contents <source dir> <dest dir>
+  local src="$1" dest="$2" subitem target
+  if [ ! -d "$src" ]; then
+    link "$src" "$dest/$(basename "$src")"
+    return
+  fi
+  shopt -s dotglob
+  for subitem in "$src"/*; do
+    [[ -e "$subitem" ]] || continue
+    target="$dest/$(basename "$subitem")"
+    if [ -e "$target" ] && [ ! -L "$target" ]; then
+      echo "Backup needed: $target (already exists and is not a symlink)"
+    else
+      link "$subitem" "$target"
+    fi
+  done
+  shopt -u dotglob # restore default behaviour
 }
 
 # Remove the deployed symlink for a skipped config, only when it points into
@@ -125,40 +148,19 @@ for item in "$CONFIG_DIR"/*; do
     continue
   fi
 
-  if ! containsElement "$base" "${IGNORED_LIST[@]}"; then
+  if containsElement "$base" "${IGNORED_LIST[@]}"; then
+    # Contents link into $HOME/ (e.g. config/zsh/.zshrc -> ~/.zshrc)
+    link_contents "$item" "$HOME"
+  elif containsElement "$base" "${FLAT_LIST[@]}"; then
+    # Contents link into ~/.config/ (e.g. config/dolphin/dolphinrc)
+    link_contents "$item" "$HOME/.config"
+  else
     # Not ignored: link directly to ~/.config/
     target="$HOME/.config/$base"
     if [ -e "$target" ] && [ ! -L "$target" ]; then
       echo "Backup needed: $target (already exists and is not a symlink)"
     else
       link "$item" "$target"
-    fi
-  else
-    # Ignored directory: link its contents (including hidden files) to $HOME/
-    if [ -d "$item" ]; then
-      # Enable matching of dotfiles
-      shopt -s dotglob
-      for subitem in "$item"/*; do
-        # After enabling dotglob, we need to skip . and .. explicitly
-        [[ -e "$subitem" ]] || continue
-        subbase="$(basename "$subitem")"
-        target="$HOME/$subbase"
-
-        if [ -e "$target" ] && [ ! -L "$target" ]; then
-          echo "Backup needed: $target (already exists and is not a symlink)"
-        else
-          link "$subitem" "$target"
-        fi
-      done
-      shopt -u dotglob # restore default behaviour
-    else
-      # If the ignored item itself is a file (unexpected), fall back to normal linking
-      target="$HOME/.config/$base"
-      if [ -e "$target" ] && [ ! -L "$target" ]; then
-        echo "Backup needed: $target (already exists and is not a symlink)"
-      else
-        link "$item" "$target"
-      fi
     fi
   fi
 done
