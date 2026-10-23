@@ -11,8 +11,11 @@ SKIP_LIST=('refind') # not linkable, ESP deploy via scripts/deploy-refind.sh
 # A config is skipped when its command is missing or the OS does not match.
 # A config dir with no entry here is always linked.
 REQUIREMENTS=(
+  'Moonlight Game Streaming Project:moonlight|/Applications/Moonlight.app:'
   'btop:btop:'
+  'dolphin:dolphin:linux'
   'fastfetch:fastfetch:'
+  'gtk:gtk-launch|gtk4-launch:'
   'hypr:Hyprland:linux'
   'jamesdsp:jamesdsp:linux'
   'k9s:k9s:'

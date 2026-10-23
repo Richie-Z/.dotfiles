@@ -28,7 +28,8 @@ export HOME
 bash "$SCRIPT_DIR/initialize.sh" --dry-run >/dev/null
 check "dry-run leaves .config empty" test ! -e "$HOME/.config/btop"
 
-bash "$SCRIPT_DIR/initialize.sh" >/dev/null
+# --all: link every config regardless of which apps this machine has
+bash "$SCRIPT_DIR/initialize.sh" --all >/dev/null
 check "dir config linked" test -L "$HOME/.config/btop"
 check "HOME-level dotfile linked" test -L "$HOME/.zshrc"
 check "flat config linked into .config" test -L "$HOME/.config/dolphinrc"
