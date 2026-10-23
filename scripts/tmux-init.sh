@@ -21,14 +21,17 @@ else
 fi
 
 # tpm reads TMUX_PLUGIN_MANAGER_PATH, which the tpm script normally sets when a
-# tmux server starts. Do it here so the CLI installer works on a fresh machine.
+# tmux server starts. Set it only when unset: a running server may already carry
+# a custom path from .tmux.conf and we must not overwrite it.
 # tmux is not required to be running for this; stop our own server on exit.
 if ! tmux list-sessions >/dev/null 2>&1; then
   tmux start-server
   trap 'tmux kill-server >/dev/null 2>&1 || true' EXIT
 fi
 
-tmux set-environment -g TMUX_PLUGIN_MANAGER_PATH "$PLUGIN_DIR/"
+if ! tmux show-environment -g TMUX_PLUGIN_MANAGER_PATH >/dev/null 2>&1; then
+  tmux set-environment -g TMUX_PLUGIN_MANAGER_PATH "$PLUGIN_DIR/"
+fi
 
 # Plugins come from @plugin lines in ~/.tmux.conf; install them all.
 "$TPM_DIR/bin/install_plugins"

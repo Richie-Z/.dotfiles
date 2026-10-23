@@ -47,7 +47,9 @@ for entry in "${EXTERNAL_PLUGINS[@]}"; do
   if [ -n "$pin" ] && [ -d "$dest/.git" ]; then
     if [ "$(git -C "$dest" rev-parse HEAD)" != "$(git -C "$dest" rev-parse "$pin^{commit}" 2>/dev/null)" ]; then
       echo "Pinning $name -> $pin"
-      git -C "$dest" fetch --depth=1 origin "$pin"
+      # Full fetch: --depth=1 of a bare sha fails on servers that reject
+      # unadvertised objects, aborting the bootstrap mid-way.
+      git -C "$dest" fetch origin "$pin"
       git -C "$dest" checkout --detach "$pin"
     else
       echo "Pinned: $name @ $pin"

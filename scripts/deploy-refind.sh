@@ -36,6 +36,10 @@ fi
 # Arch logo for auto-detected kernels: rEFInd checks for <kernel>.png next to the vmlinuz first.
 # No os-release on the ESP, so auto-detect never picks Arch on its own.
 ARCH_ICON="$DST/themes/catppuccin/assets/mocha/icons/os_arch.png"
+if [ ! -f "$ARCH_ICON" ]; then
+  echo "Missing icon: $ARCH_ICON" >&2
+  exit 1
+fi
 for k in /boot/vmlinuz-*; do
   [ -f "$k" ] || continue
   case "$k" in *.png) continue ;; esac # skip icons from previous runs

@@ -13,38 +13,8 @@ done
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR="$(cd "$SCRIPT_DIR/../config" && pwd)"
 
-# Remove target only if it is a symlink pointing into our config dir.
-# Real files are never touched.
-unlink_if_ours() {
-  local target="$1"
-  if [ ! -e "$target" ] && [ ! -L "$target" ]; then
-    return 0
-  fi
-  if [ ! -L "$target" ]; then
-    echo "Kept $target (not a symlink)"
-    return 0
-  fi
-  case "$(readlink -f "$target")" in
-    "$CONFIG_DIR"/*)
-      if $DRY_RUN; then
-        echo "[dry-run] rm -f $target"
-      else
-        rm -f "$target"
-        echo "Removed $target"
-      fi
-      ;;
-  *)
-    echo "Kept $target (points outside $CONFIG_DIR)"
-    ;;
-  esac
-}
-
-containsElement() {
-  local e match="$1"
-  shift
-  for e; do [[ "$e" == "$match" ]] && return 0; done
-  return 1
-}
+# shellcheck source=lib.sh
+. "$SCRIPT_DIR/lib.sh"
 
 for item in "$CONFIG_DIR"/*; do
   [ -e "$item" ] || continue

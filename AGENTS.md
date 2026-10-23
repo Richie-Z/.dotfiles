@@ -10,7 +10,7 @@ Personal dotfiles for an Arch Linux (Hyprland/Wayland) + macOS setup. No build, 
 - `config/.aliases` is NOT symlinked; `.zshrc` sources it in-place via `$DOTFILES_PATH`. Alias `cat` picks `batcat` (Debian package name) or `bat` by checking which binary exists — never by distro.
 - `config/zsh/.zprofile` is login-shell only: loads `brew shellenv zsh` when `detect_os` says `mac`. `.zshenv` runs first, so `detect_os` is already defined.
 - `config/refind/` — rEFInd rice (conf, icons, catppuccin theme), NOT symlinked: ESP (`/boot`, vfat) can't symlink. Deploy with `scripts/deploy-refind.sh` (sudo rsync to `/boot/EFI/refind/`, plus `refind_linux.conf` to `/boot/`; `--dry-run` supported). Excludes `refind_x64.efi`/`BOOT.CSV` (pacman-owned). `initialize.sh` skips it via `SKIP_LIST`.
-- `scripts/` — also sourced in-place at runtime (`env-detect.sh`, `clipboard.sh` via `.aliases`). `omz-init.sh` bootstraps oh-my-zsh + external plugins, `tmux-init.sh` clones tpm and installs the plugins listed in `.tmux.conf` (needs `tmux` and `git`; exits 0 silently when missing).
+- `scripts/` — also sourced in-place at runtime (`env-detect.sh`, `clipboard.sh` via `.aliases`). `lib.sh` holds `containsElement` / `unlink_if_ours`, shared by both deploy scripts. `omz-init.sh` bootstraps oh-my-zsh + external plugins, `tmux-init.sh` clones tpm and installs the plugins listed in `.tmux.conf` (needs `tmux` and `git`; exits 0 silently when missing). `test-deploy.sh` smoke-tests link/unlink against a temp `$HOME`.
 - `omz/themes/` — custom oh-my-zsh catppuccin theme (`ZSH_THEME="catppuccin"` in `.zshrc`). Not deployed by `initialize.sh`; must be installed into `$ZSH_CUSTOM/themes` manually.
 - `packages/` — dated pacman dumps (`pacman -Qen` official / `-Qem` AUR). Regenerate with `scripts/dump-pkg.sh`, then commit the new dated files.
 - `obsolete/` — dead configs and multi-MB tmux logs, still git-tracked. Ignore; don't resurrect or "clean up" without asking.
@@ -21,7 +21,7 @@ Personal dotfiles for an Arch Linux (Hyprland/Wayland) + macOS setup. No build, 
 bash scripts/initialize.sh
 ```
 
-Idempotent `ln -sf`. Skips a config dir when its app is missing (`REQUIREMENTS` table at the top: `<dir>:<command>:<os>`) or the OS does not match, and removes that dir's previously deployed symlink (only if it points into the repo); `--all` links everything anyway. Never clobbers real files: an existing non-symlink target prints `Backup needed: <path>` and is skipped — if deployment "did nothing" for a path, that's why. `$DOTFILES_PATH` is hardcoded in `config/zsh/.zshenv` as `$HOME/Documents/Programming/Projects/dotfiles`; runtime-sourced scripts break if the repo moves.
+Idempotent `ln -sf`. Skips a config dir when its app is missing (`REQUIREMENTS` table at the top: `<dir>:<command>:<os>`, command may list `|` alternatives) or the OS does not match, and prunes that dir's previously deployed links (only ones pointing into the repo) — `--no-prune` keeps them, `--all` links everything anyway. Exit code is 1 if any link failed. Never clobbers real files: an existing non-symlink target prints `Backup needed: <path>` and is skipped — if deployment "did nothing" for a path, that's why. `$DOTFILES_PATH` is hardcoded in `config/zsh/.zshenv` as `$HOME/Documents/Programming/Projects/dotfiles`; runtime-sourced scripts break if the repo moves.
 
 ## Hyprland: two parallel configs
 

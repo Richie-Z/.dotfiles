@@ -7,6 +7,7 @@ FLAT_LIST=('dolphin')
 SKIP_LIST=('refind') # not linkable, ESP deploy via scripts/deploy-refind.sh
 
 # "<config dir>:<required command>:<os>" — empty command = any, empty os = any.
+# A command may list alternatives separated by | (binary or path).
 # A config is skipped when its command is missing or the OS does not match.
 # A config dir with no entry here is always linked.
 REQUIREMENTS=(
@@ -15,7 +16,7 @@ REQUIREMENTS=(
   'hypr:Hyprland:linux'
   'jamesdsp:jamesdsp:linux'
   'k9s:k9s:'
-  'kitty:kitty:'
+  'kitty:kitty|/Applications/kitty.app:'
   'lazydocker:lazydocker:'
   'lazygit:lazygit:'
   'mako:mako:linux'
@@ -31,11 +32,15 @@ REQUIREMENTS=(
 
 DRY_RUN=false
 FORCE=false
+PRUNE=true
+FAILED=false
 ARGS=()
 for arg in "$@"; do
   case "$arg" in
     --dry-run) DRY_RUN=true ;;
     --all) FORCE=true ;;
+    --no-prune) PRUNE=false ;;
+    --*) echo "Unknown flag: $arg" >&2; exit 2 ;;
     *) ARGS+=("$arg") ;;
   esac
 done
@@ -47,6 +52,8 @@ CONFIG_DIR="$(cd "$SCRIPT_DIR/../config" && pwd)"
 
 # shellcheck source=env-detect.sh
 . "$SCRIPT_DIR/env-detect.sh"
+# shellcheck source=lib.sh
+. "$SCRIPT_DIR/lib.sh"
 OS="$(detect_os)"
 
 if ! $DRY_RUN; then
@@ -55,12 +62,14 @@ fi
 
 link() { # link <source> <target>
   if $DRY_RUN; then
-    echo "[dry-run] ln -sfn $1 $2"
-  else
-    # -n: replace a symlink that points at a directory instead of nesting a
-    # link inside it (ln -sf src existing-dirlink creates dirlink/<base>).
-    ln -sfn "$1" "$2"
+    echo "[dry-run] ln -sf $1 $2"
+  elif rm -f "$2" && ln -s "$1" "$2"; then
+    # rm first: `ln -sf src existing-dirlink` nests a link inside the dir
+    # instead of replacing it, and -n/-h differ between GNU and BSD ln.
     echo "Linked $1 -> $2"
+  else
+    echo "Failed: $2" >&2
+    FAILED=true
   fi
 }
 
@@ -84,34 +93,33 @@ link_contents() { # link_contents <source dir> <dest dir>
   shopt -u dotglob # restore default behaviour
 }
 
-# Remove the deployed symlink for a skipped config, only when it points into
-# this repo. Real files and foreign symlinks are never touched.
-unlink_if_ours() { # unlink_if_ours <target>
-  local target="$1"
-  [ -L "$target" ] || return 0
-  case "$(readlink -f "$target")" in
-    "$CONFIG_DIR"/*)
-      if $DRY_RUN; then
-        echo "[dry-run] rm -f $target"
-      else
-        rm -f "$target"
-        echo "Removed $target"
-      fi
-      ;;
-  esac
-}
-
-# Helper function to check if an element is in an array
-containsElement() {
-  local e match="$1"
-  shift
-  for e; do [[ "$e" == "$match" ]] && return 0; done
-  return 1
+# Remove every deployed link for a config dir, using the same targets as the
+# link step (dir link, or per-file links for IGNORED_LIST / FLAT_LIST).
+prune() { # prune <config dir> <source path>
+  local base="$1" src="$2" dest subitem
+  if containsElement "$base" "${IGNORED_LIST[@]}"; then
+    dest="$HOME"
+  elif containsElement "$base" "${FLAT_LIST[@]}"; then
+    dest="$HOME/.config"
+  else
+    unlink_if_ours "$HOME/.config/$base"
+    return
+  fi
+  if [ ! -d "$src" ]; then
+    unlink_if_ours "$HOME/.config/$base"
+    return
+  fi
+  shopt -s dotglob
+  for subitem in "$src"/*; do
+    [[ -e "$subitem" ]] || continue
+    unlink_if_ours "$dest/$(basename "$subitem")"
+  done
+  shopt -u dotglob
 }
 
 # Print skip reason for a config dir, or return 1 when it can be linked
 skip_reason() { # skip_reason <config dir>
-  local req dir cmd os
+  local req dir cmd os found c
   for req in "${REQUIREMENTS[@]}"; do
     IFS=: read -r dir cmd os <<<"$req"
     [ "$dir" = "$1" ] || continue
@@ -119,9 +127,19 @@ skip_reason() { # skip_reason <config dir>
       echo "needs $os, running $OS"
       return 0
     fi
-    if [ -n "$cmd" ] && ! command -v "$cmd" >/dev/null 2>&1; then
-      echo "$cmd not installed"
-      return 0
+    if [ -n "$cmd" ]; then
+      found=false
+      local IFS='|'
+      for c in $cmd; do
+        command -v "$c" >/dev/null 2>&1 || [ -e "$c" ] && {
+          found=true
+          break
+        }
+      done
+      $found || {
+        echo "$cmd not installed"
+        return 0
+      }
     fi
   done
   return 1
@@ -144,7 +162,7 @@ for item in "$CONFIG_DIR"/*; do
 
   if ! $FORCE && reason="$(skip_reason "$base")"; then
     echo "Skipped $base ($reason)"
-    unlink_if_ours "$HOME/.config/$base"
+    $PRUNE && prune "$base" "$item"
     continue
   fi
 
@@ -165,4 +183,8 @@ for item in "$CONFIG_DIR"/*; do
   fi
 done
 
+if $FAILED; then
+  echo "Finished with errors." >&2
+  exit 1
+fi
 echo "Done."

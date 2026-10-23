@@ -6,6 +6,7 @@
 # inside an SSH session lands on the machine you are sitting at, since the
 # remote box has no access to your local clipboard manager.
 osc52_copy() {
+  local payload
   if command -v base64 >/dev/null 2>&1; then
     payload="$(base64 | tr -d '\n')"
   else
@@ -17,7 +18,14 @@ osc52_copy() {
     printf '\033]52;c;%s\a' "$payload"
 }
 
+need() { # need <command>
+  command -v "$1" >/dev/null 2>&1 && return 0
+  echo "clipboard_copy: $1 not installed" >&2
+  return 1
+}
+
 clipboard_copy() {
+  local os display ssh
   os="$(detect_os)"
   display="$(detect_display)"
   ssh="$(detect_ssh)"
@@ -31,13 +39,13 @@ clipboard_copy() {
 
   case "$os:$display" in
   mac:*)
-    pbcopy
+    need pbcopy && pbcopy
     ;;
   linux:wayland)
-    wl-copy
+    need wl-copy && wl-copy
     ;;
   linux:xorg)
-    xclip -selection clipboard
+    need xclip && xclip -selection clipboard
     ;;
   *)
     echo "clipboard_copy: unsupported environment" >&2
