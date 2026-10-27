@@ -203,21 +203,27 @@ _zsh_should_regen_completions() {
 # Regenerate a completion file when missing or older than its generator binary
 # (so completions follow tool upgrades). Each entry is: <file-name> <command>.
 _zsh_gen_completions() {
-  local spec fname cmd bin out
+  local spec fname cmd bin bin_path out
   for spec in "$@"; do
     fname="${spec%% *}"
     cmd="${spec#* }"
     bin="${cmd%% *}"
-    command -v "$bin" >/dev/null 2>&1 || continue
+    # Path-only lookup: lazy-load wrapper functions defined earlier in
+    # .zshrc shadow the binaries, and eval-ing through one corrupts its
+    # internal `"$@"` with this function's specs.
+    bin_path="$(whence -p "$bin" 2>/dev/null)"
+    [[ -z "$bin_path" ]] && continue
     out="$ZSH_COMPLETIONS_DIR/_$fname"
-    if [[ -f "$out" && "$out" -nt "$(command -v "$bin")" ]]; then
+    if [[ -f "$out" && "$out" -nt "$bin_path" ]]; then
       continue
     fi
-    eval "$cmd" >"$out" 2>/dev/null
+    eval "command $cmd" >"$out" 2>/dev/null
   done
 }
 
 if _zsh_should_regen_completions; then
+  # opencode: v2.1.4 dropped the `completion zsh` subcommand (prints help
+  # text). Re-add only if the subcommand returns.
   _zsh_gen_completions \
     "podman podman completion zsh" \
     "kubectl kubectl completion zsh" \
@@ -227,10 +233,10 @@ if _zsh_should_regen_completions; then
     "rustup rustup completions zsh" \
     "cargo rustup completions zsh cargo" \
     "kubectl-neat kubectl-neat completion zsh" \
-    # opencode: v2.1.4 dropped the `completion zsh` subcommand (prints help
-    # text). Re-add only if the subcommand returns.
-    # "opencode opencode completion zsh" \
-    "mise completion zsh"
+    "mise mise completion zsh" \
+    "helm helm completion zsh" \
+    "herdr herdr completion zsh" \
+    "k3s k3s completion zsh"
   date +%s >"$_zsh_completions_cache_file"
   # compinit -C reads an existing dump blindly, so freshly generated files stay
   # unresolvable forever. Drop the dump; compinit below rebuilds it.
