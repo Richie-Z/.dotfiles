@@ -227,9 +227,14 @@ if _zsh_should_regen_completions; then
     "rustup rustup completions zsh" \
     "cargo rustup completions zsh cargo" \
     "kubectl-neat kubectl-neat completion zsh" \
-    "opencode opencode completion zsh" \
+    # opencode: v2.1.4 dropped the `completion zsh` subcommand (prints help
+    # text). Re-add only if the subcommand returns.
+    # "opencode opencode completion zsh" \
     "mise completion zsh"
   date +%s >"$_zsh_completions_cache_file"
+  # compinit -C reads an existing dump blindly, so freshly generated files stay
+  # unresolvable forever. Drop the dump; compinit below rebuilds it.
+  rm -f "$ZSH_COMPLETIONS_DIR/.zcompdump"
 fi
 
 if [[ -d "$ZSH_COMPLETIONS_DIR" ]]; then
