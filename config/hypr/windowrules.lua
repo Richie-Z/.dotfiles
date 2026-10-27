@@ -55,3 +55,21 @@ hl.layer_rule({
 	blur = true,
 	ignore_alpha = 0.5,
 })
+
+hl.window_rule({
+	name = "Spicy Lyrics Pinned",
+	match = {
+		class = "^(Chromium-browser)$",
+		initial_class = "^(Chromium-browser)$",
+		xwayland = true,
+	},
+	pin = true,
+	float = true,
+
+	size = "380 231",
+	max_size = "380 231",
+
+	no_shadow = true,
+	no_dim = true,
+	decorate = false,
+})
