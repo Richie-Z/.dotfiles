@@ -138,7 +138,6 @@ crossplane() { _crossplane_lazy_load "$@"; }
 
 # Helm - lazy load
 _helm_lazy_load() {
-  # completion covered by the generated ~.cache/zsh/completions/_helm file
   unfunction helm
   unfunction _helm_lazy_load
   helm "$@"
@@ -147,7 +146,6 @@ helm() { _helm_lazy_load "$@"; }
 
 # Herdr - lazy load
 _herdr_lazy_load() {
-  # completion covered by the generated ~.cache/zsh/completions/_herdr file
   unfunction herdr
   unfunction _herdr_lazy_load
   herdr "$@"
@@ -156,7 +154,6 @@ herdr() { _herdr_lazy_load "$@"; }
 
 # k3s - lazy load
 _k3s_lazy_load() {
-  # completion covered by the generated ~.cache/zsh/completions/_k3s file
   unfunction k3s
   unfunction _k3s_lazy_load
   k3s "$@"
@@ -176,52 +173,40 @@ terraform() { _terraform_lazy_load "$@"; }
 # =======================
 # Shell completions (cached daily)
 # =======================
-# Static completions from /usr/share/zsh/site-functions (pacman, yay, yazi,
-# zoxide, eza, fd, rg, bat, ...) are already autoloaded via $fpath.
-#
-# Tools whose completions are *generated* are handled below by writing the
-# generated file into $ZSH_COMPLETIONS_DIR and adding that dir to $fpath, so
-# compinit autoloads them as _<cmd>. Do NOT `source <(cmd completion zsh)`:
-# these generated files use a `funcstack[1]`/`compdef` self-registration guard
-# meant for autoloading, which misfires when sourced under oh-my-zsh +
-# zsh-autocomplete (`_arguments: can only be called from completion function`).
+# Generated completions are written as _<cmd> files below and autoloaded via
+# $fpath. Never `source <(cmd completion zsh)` instead: those files self-register
+# and misfire under zsh-autocomplete.
 
 ZSH_COMPLETIONS_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/completions"
-if [[ ! -d "$ZSH_COMPLETIONS_DIR" ]]; then
-  mkdir -p "$ZSH_COMPLETIONS_DIR"
-fi
+mkdir -p "$ZSH_COMPLETIONS_DIR"
 
-# Regenerate completions at most once per day (cache timestamp file)
+# Regenerate at most once per day (timestamp file)
 _zsh_completions_cache_file="$ZSH_COMPLETIONS_DIR/.last_regen"
 _zsh_should_regen_completions() {
   [[ ! -f "$_zsh_completions_cache_file" ]] && return 0
   local last_regen="$(cat "$_zsh_completions_cache_file" 2>/dev/null)"
   local today="$(date +%s)"
-  (( today - last_regen > 86400 ))
+  (( today - last_regen > 86400 )) # 24h
 }
 
-# Regenerate a completion file when missing or older than its generator binary
-# (so completions follow tool upgrades). Each entry is: <file-name> <command>.
+# Each entry: <file-name> <command>. Regenerate when missing or older than its
+# binary, so completions follow tool upgrades.
 _zsh_gen_completions() {
   local spec fname cmd bin bin_path out
   for spec in "$@"; do
     fname="${spec%% *}"
     cmd="${spec#* }"
     bin="${cmd%% *}"
-    # Path-only lookup: lazy-load wrapper functions defined earlier in
-    # .zshrc shadow the binaries, and eval-ing through one corrupts its
-    # internal `"$@"` with this function's specs.
+    # whence -p: lazy-load functions defined above shadow the binaries
     bin_path="$(whence -p "$bin" 2>/dev/null)"
     [[ -z "$bin_path" ]] && continue
     out="$ZSH_COMPLETIONS_DIR/_$fname"
     if [[ -f "$out" && "$out" -nt "$bin_path" ]]; then
       continue
     fi
-    # Atomic publish: write to a temp file and mv only on success. A Ctrl-C
-    # mid-write would otherwise leave a truncated file newer than the binary,
-    # which then skips every future regen (dead completions until tool
-    # upgrade). The `#compdef` guard keeps a failing generator that prints
-    # help on stdout (opencode v2.1.4 style) from publishing junk.
+    # tmp+mv: a Ctrl-C mid-write must not leave a truncated file that is newer
+    # than the binary and so skips every future regen. #compdef guard: reject a
+    # broken generator printing help text (opencode v2.1.4).
     eval "command $cmd" >"$out.tmp" 2>/dev/null &&
       [[ "$(head -n1 "$out.tmp")" == '#compdef'* ]] &&
       mv -f "$out.tmp" "$out" &&
@@ -232,8 +217,7 @@ _zsh_gen_completions() {
 
 if _zsh_should_regen_completions; then
   _zsh_regened=false
-  # opencode: v2.1.4 dropped the `completion zsh` subcommand (prints help
-  # text). Re-add only if the subcommand returns.
+  # opencode v2.1.4: `completion zsh` prints help text; re-add when fixed
   _zsh_gen_completions \
     "podman podman completion zsh" \
     "kubectl kubectl completion zsh" \
@@ -248,21 +232,15 @@ if _zsh_should_regen_completions; then
     "herdr herdr completion zsh" \
     "k3s k3s completion zsh"
   date +%s >"$_zsh_completions_cache_file"
-  # compinit -C reads an existing dump blindly. Drop it only when a file was
-  # (re)generated, so tool upgrades picked up by a mid-day regen apply
-  # immediately; a no-op regen keeps the dump.
+  # compinit -C trusts an existing dump; drop it when files changed
   if [[ "$_zsh_regened" = true ]]; then
     rm -f "$ZSH_COMPLETIONS_DIR/.zcompdump"
   fi
 fi
 
-if [[ -d "$ZSH_COMPLETIONS_DIR" ]]; then
-  fpath=("$ZSH_COMPLETIONS_DIR" $fpath)
-  # Use a dedicated dump file: OMZ's own $ZSH_COMPDUMP is built before this dir
-  # is added to $fpath, so reusing it with `compinit -C` would keep the new
-  # completions unresolved.
-  autoload -Uz compinit && compinit -C -d "$ZSH_COMPLETIONS_DIR/.zcompdump"
-fi
+# Dedicated dump: OMZ builds its own $ZSH_COMPDUMP before this dir joins $fpath
+fpath=("$ZSH_COMPLETIONS_DIR" $fpath)
+autoload -Uz compinit && compinit -C -d "$ZSH_COMPLETIONS_DIR/.zcompdump"
 
 # docker is the podman-docker shim: reuse podman's completion for `docker`.
 if (($+functions[_podman])); then
