@@ -138,27 +138,27 @@ crossplane() { _crossplane_lazy_load "$@"; }
 
 # Helm - lazy load
 _helm_lazy_load() {
+  # completion covered by the generated ~.cache/zsh/completions/_helm file
   unfunction helm
   unfunction _helm_lazy_load
-  source <(helm completion zsh)
   helm "$@"
 }
 helm() { _helm_lazy_load "$@"; }
 
 # Herdr - lazy load
 _herdr_lazy_load() {
+  # completion covered by the generated ~.cache/zsh/completions/_herdr file
   unfunction herdr
   unfunction _herdr_lazy_load
-  source <(herdr completion zsh)
   herdr "$@"
 }
 herdr() { _herdr_lazy_load "$@"; }
 
 # k3s - lazy load
 _k3s_lazy_load() {
+  # completion covered by the generated ~.cache/zsh/completions/_k3s file
   unfunction k3s
   unfunction _k3s_lazy_load
-  source <(k3s completion zsh)
   k3s "$@"
 }
 k3s() { _k3s_lazy_load "$@"; }
@@ -217,11 +217,21 @@ _zsh_gen_completions() {
     if [[ -f "$out" && "$out" -nt "$bin_path" ]]; then
       continue
     fi
-    eval "command $cmd" >"$out" 2>/dev/null
+    # Atomic publish: write to a temp file and mv only on success. A Ctrl-C
+    # mid-write would otherwise leave a truncated file newer than the binary,
+    # which then skips every future regen (dead completions until tool
+    # upgrade). The `#compdef` guard keeps a failing generator that prints
+    # help on stdout (opencode v2.1.4 style) from publishing junk.
+    eval "command $cmd" >"$out.tmp" 2>/dev/null &&
+      [[ "$(head -n1 "$out.tmp")" == '#compdef'* ]] &&
+      mv -f "$out.tmp" "$out" &&
+      _zsh_regened=true
+    rm -f "$out.tmp"
   done
 }
 
 if _zsh_should_regen_completions; then
+  _zsh_regened=false
   # opencode: v2.1.4 dropped the `completion zsh` subcommand (prints help
   # text). Re-add only if the subcommand returns.
   _zsh_gen_completions \
@@ -238,9 +248,12 @@ if _zsh_should_regen_completions; then
     "herdr herdr completion zsh" \
     "k3s k3s completion zsh"
   date +%s >"$_zsh_completions_cache_file"
-  # compinit -C reads an existing dump blindly, so freshly generated files stay
-  # unresolvable forever. Drop the dump; compinit below rebuilds it.
-  rm -f "$ZSH_COMPLETIONS_DIR/.zcompdump"
+  # compinit -C reads an existing dump blindly. Drop it only when a file was
+  # (re)generated, so tool upgrades picked up by a mid-day regen apply
+  # immediately; a no-op regen keeps the dump.
+  if [[ "$_zsh_regened" = true ]]; then
+    rm -f "$ZSH_COMPLETIONS_DIR/.zcompdump"
+  fi
 fi
 
 if [[ -d "$ZSH_COMPLETIONS_DIR" ]]; then
