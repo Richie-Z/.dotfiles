@@ -186,7 +186,7 @@ _zsh_should_regen_completions() {
   [[ ! -f "$_zsh_completions_cache_file" ]] && return 0
   local last_regen="$(cat "$_zsh_completions_cache_file" 2>/dev/null)"
   local today="$(date +%s)"
-  (( today - last_regen > 86400 )) # 24h
+  ((today - last_regen > 86400)) # 24h
 }
 
 # Each entry: <file-name> <command>. Regenerate when missing or older than its
@@ -215,22 +215,27 @@ _zsh_gen_completions() {
   done
 }
 
+# Add a new tool here: "<file-name> <command that prints the zsh script>".
+# opencode v2.1.4: `completion zsh` prints help text; re-add when fixed
+_zsh_completion_specs=(
+  "podman podman completion zsh"
+  "kubectl kubectl completion zsh"
+  "gh gh completion -s zsh"
+  "uv uv generate-shell-completion zsh"
+  "bun bun completions"
+  "rustup rustup completions zsh"
+  "cargo rustup completions zsh cargo"
+  "kubectl-neat kubectl-neat completion zsh"
+  "mise mise completion zsh"
+  "helm helm completion zsh"
+  "herdr herdr completion zsh"
+  "k3s k3s completion zsh"
+  "gaal gaal completion zsh"
+)
+
 if _zsh_should_regen_completions; then
   _zsh_regened=false
-  # opencode v2.1.4: `completion zsh` prints help text; re-add when fixed
-  _zsh_gen_completions \
-    "podman podman completion zsh" \
-    "kubectl kubectl completion zsh" \
-    "gh completion -s zsh" \
-    "uv uv generate-shell-completion zsh" \
-    "bun bun completions" \
-    "rustup rustup completions zsh" \
-    "cargo rustup completions zsh cargo" \
-    "kubectl-neat kubectl-neat completion zsh" \
-    "mise mise completion zsh" \
-    "helm helm completion zsh" \
-    "herdr herdr completion zsh" \
-    "k3s k3s completion zsh"
+  _zsh_gen_completions "${_zsh_completion_specs[@]}"
   date +%s >"$_zsh_completions_cache_file"
   # compinit -C trusts an existing dump; drop it when files changed
   if [[ "$_zsh_regened" = true ]]; then
@@ -246,6 +251,18 @@ autoload -Uz compinit && compinit -C -d "$ZSH_COMPLETIONS_DIR/.zcompdump"
 if (($+functions[_podman])); then
   compdef _podman docker 2>/dev/null
 fi
+
+# Force a full completion regen now (new tool installed, spec list edited) and
+# reload the shell. Wipes each generated file so the mtime-vs-binary skip cannot
+# hide a changed spec, and drops the dump because `compinit -C` trusts it.
+completion-regen() {
+  local spec
+  for spec in "${_zsh_completion_specs[@]}"; do
+    rm -f "$ZSH_COMPLETIONS_DIR/_${spec%% *}"
+  done
+  rm -f "$_zsh_completions_cache_file" "$ZSH_COMPLETIONS_DIR/.zcompdump"
+  exec zsh
+}
 
 # Private Shell
 # unset HISTFILE
