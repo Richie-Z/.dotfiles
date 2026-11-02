@@ -1,7 +1,1 @@
 config/btop/btop.log
-
-# APM runtime state (config/apm is ~/.apm, deployed as a whole-dir symlink)
-config/apm/apm.lock.yaml
-config/apm/apm_modules/
-config/apm/deployment-receipts/
-config/apm/logs/

@@ -4,8 +4,8 @@ IGNORED_LIST=('zsh' 'tmux' 'bash' 'gtk')
 # Directories whose *contents* link into ~/.config/ individually, for apps that
 # read plain files there (KDE: dolphinrc, kiorc, ...) instead of a dir.
 FLAT_LIST=('dolphin')
-# Config dirs that link as a whole dir into ~/.<name>/ instead of ~/.config/.
-HOME_DIR_LIST=('apm')
+# Directories whose *contents* link into ~/.<name>/ (app-owned config dirs).
+FLAT_HOME_LIST=('apm')
 SKIP_LIST=('refind') # not linkable, ESP deploy via scripts/deploy-refind.sh
 
 # "<config dir>:<required command>:<os>" — empty command = any, empty os = any.
@@ -90,6 +90,7 @@ link_contents() { # link_contents <source dir> <dest dir>
     return
   fi
   shopt -s dotglob
+  $DRY_RUN || mkdir -p "$dest"
   for subitem in "$src"/*; do
     [[ -e "$subitem" ]] || continue
     target="$dest/$(basename "$subitem")"
@@ -108,9 +109,8 @@ prune() { # prune <config dir> <source path>
   local base="$1" src="$2" dest subitem
   if containsElement "$base" "${IGNORED_LIST[@]}"; then
     dest="$HOME"
-  elif containsElement "$base" "${HOME_DIR_LIST[@]}"; then
-    unlink_if_ours "$HOME/.$base"
-    return
+  elif containsElement "$base" "${FLAT_HOME_LIST[@]}"; then
+    dest="$HOME/.$base"
   elif containsElement "$base" "${FLAT_LIST[@]}"; then
     dest="$HOME/.config"
   else
@@ -184,14 +184,9 @@ for item in "$CONFIG_DIR"/*; do
   elif containsElement "$base" "${FLAT_LIST[@]}"; then
     # Contents link into ~/.config/ (e.g. config/dolphin/dolphinrc)
     link_contents "$item" "$HOME/.config"
-  elif containsElement "$base" "${HOME_DIR_LIST[@]}"; then
-    # Link the whole dir to ~/.<name>/ (e.g. config/apm -> ~/.apm)
-    target="$HOME/.$base"
-    if [ -e "$target" ] && [ ! -L "$target" ]; then
-      echo "Backup needed: $target (already exists and is not a symlink)"
-    else
-      link "$item" "$target"
-    fi
+  elif containsElement "$base" "${FLAT_HOME_LIST[@]}"; then
+    # Contents link into ~/.<app>/ (e.g. config/apm/apm.yml -> ~/.apm/apm.yml)
+    link_contents "$item" "$HOME/.$base"
   else
     # Not ignored: link directly to ~/.config/
     target="$HOME/.config/$base"
