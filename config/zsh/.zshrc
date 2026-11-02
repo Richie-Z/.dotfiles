@@ -28,6 +28,7 @@ _zsh_lazy_load_omz() {
   ZSH_THEME="" # repo-local, sourced below from $DOTFILES_PATH/omz/themes
   CATPPUCCIN_FLAVOR="mocha"
   CATPPUCCIN_SHOW_TIME=true
+  CATPPUCCIN_SHOW_HOSTNAME="always" # never | ssh | always
 
   plugins=(
     git
