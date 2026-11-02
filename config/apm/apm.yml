@@ -1,6 +1,6 @@
 name: richie-opencode-agent-config
 version: 1.0.0
-description: Global OpenCode skills, AgentMemory MCP, and shared agent 
+description: Global OpenCode skills, AgentMemory MCP, and shared agent
   instructions.
 targets:
   - opencode
@@ -12,34 +12,7 @@ dependencies:
     - JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646 # have plugin
     - DietrichGebert/ponytail # have plugin
     - rohitg00/agentmemory # have plugin
-    # One ref per skill: the repo root is a portable agent plugin (plugin.json
-    # with the agent-plugins $schema), which APM only registers for Copilot.
-    # Subdirectory refs make each skill a deployable bundle for OpenCode.
-    - addyosmani/agent-skills/skills/api-and-interface-design
-    - addyosmani/agent-skills/skills/browser-testing-with-devtools
-    - addyosmani/agent-skills/skills/ci-cd-and-automation
-    - addyosmani/agent-skills/skills/code-review-and-quality
-    - addyosmani/agent-skills/skills/code-simplification
-    - addyosmani/agent-skills/skills/constraint-driven-development
-    - addyosmani/agent-skills/skills/context-engineering
-    - addyosmani/agent-skills/skills/debugging-and-error-recovery
-    - addyosmani/agent-skills/skills/deprecation-and-migration
-    - addyosmani/agent-skills/skills/documentation-and-adrs
-    - addyosmani/agent-skills/skills/doubt-driven-development
-    - addyosmani/agent-skills/skills/frontend-ui-engineering
-    - addyosmani/agent-skills/skills/git-workflow-and-versioning
-    - addyosmani/agent-skills/skills/idea-refine
-    - addyosmani/agent-skills/skills/incremental-implementation
-    - addyosmani/agent-skills/skills/interview-me
-    - addyosmani/agent-skills/skills/observability-and-instrumentation
-    - addyosmani/agent-skills/skills/performance-optimization
-    - addyosmani/agent-skills/skills/planning-and-task-breakdown
-    - addyosmani/agent-skills/skills/security-and-hardening
-    - addyosmani/agent-skills/skills/shipping-and-launch
-    - addyosmani/agent-skills/skills/source-driven-development
-    - addyosmani/agent-skills/skills/spec-driven-development
-    - addyosmani/agent-skills/skills/test-driven-development
-    - addyosmani/agent-skills/skills/using-agent-skills
+    - obra/superpowers # OpenCode plugin with superpowers skills
 
   mcp:
     - name: agentmemory
@@ -60,7 +33,8 @@ lifecycle:
       description: Install Caveman for OpenCode
       # --force: APM may deploy the same skills/agents before this hook. The
       # installer takes ownership and backs the APM copies up for uninstall.
-      bash: "mise exec -- npx -y github:JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646
+      bash:
+        "mise exec -- npx -y github:JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646
         -- --only opencode --minimal --force"
       timeoutSec: 180
 
@@ -73,7 +47,8 @@ lifecycle:
       description: Install AgentMemory OpenCode plugin
       # APM deploys the skills + MCP only; copy the capture plugin and its two
       # commands from the pinned APM checkout so hooks match the deployed version.
-      bash: 'mkdir -p "$HOME/.config/opencode/plugins" "$HOME/.config/opencode/commands"
+      bash:
+        'mkdir -p "$HOME/.config/opencode/plugins" "$HOME/.config/opencode/commands"
         && cp "$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/agentmemory-capture.ts"
         "$HOME/.config/opencode/plugins/" && cp "$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/commands/"*.md
         "$HOME/.config/opencode/commands/"'
@@ -88,7 +63,8 @@ lifecycle:
     - type: command
       description: Update Caveman for OpenCode
       # Same reason as post-install: apm update may re-copy its primitives first.
-      bash: "mise exec -- npx -y github:JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646
+      bash:
+        "mise exec -- npx -y github:JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646
         -- --only opencode --minimal --force"
       timeoutSec: 180
 
@@ -100,7 +76,8 @@ lifecycle:
     - type: command
       description: Update AgentMemory OpenCode plugin
       # Same copy as post-install; apm update refreshes apm_modules first.
-      bash: 'cp "$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/agentmemory-capture.ts"
+      bash:
+        'cp "$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/agentmemory-capture.ts"
         "$HOME/.config/opencode/plugins/" && cp "$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/commands/"*.md
         "$HOME/.config/opencode/commands/"'
       timeoutSec: 30
@@ -115,13 +92,15 @@ lifecycle:
     # agent integration it owns, then APM prunes its own deployed primitives.
     - type: command
       description: Remove Caveman OpenCode plugin
-      bash: "mise exec -- npx -y github:JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646
+      bash:
+        "mise exec -- npx -y github:JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646
         -- --uninstall --non-interactive"
       timeoutSec: 120
 
     - type: command
       description: Remove AgentMemory OpenCode plugin
-      bash: 'rm -f "$HOME/.config/opencode/plugins/agentmemory-capture.ts" "$HOME/.config/opencode/commands/recall.md"
+      bash:
+        'rm -f "$HOME/.config/opencode/plugins/agentmemory-capture.ts" "$HOME/.config/opencode/commands/recall.md"
         "$HOME/.config/opencode/commands/remember.md"'
       timeoutSec: 30
 
