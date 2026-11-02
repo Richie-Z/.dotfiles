@@ -269,7 +269,3 @@ completion-regen() {
 # unset HISTFILE
 # export HISTSIZE=0
 # export SAVEHIST=0
-
-# agentmemory plugin (OpenCode auto-capture)
-export AGENTMEMORY_URL="https://agentmemory.dreadwrym.my.id"
-export AGENTMEMORY_SECRET="$(cat "$HOME/.agentmemory/secret")"
