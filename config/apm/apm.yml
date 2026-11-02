@@ -40,6 +40,13 @@ lifecycle:
       timeoutSec: 120
 
     - type: command
+      description: Install AgentMemory OpenCode plugin
+      # APM deploys the skills + MCP only; copy the capture plugin and its two
+      # commands from the pinned APM checkout so hooks match the deployed version.
+      bash: "mkdir -p \"$HOME/.config/opencode/plugins\" \"$HOME/.config/opencode/commands\" && cp \"$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/agentmemory-capture.ts\" \"$HOME/.config/opencode/plugins/\" && cp \"$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/commands/\"*.md \"$HOME/.config/opencode/commands/\""
+      timeoutSec: 30
+
+    - type: command
       description: Initialize RTK OpenCode plugin
       bash: "mise exec -- rtk init --global --opencode"
       timeoutSec: 30
@@ -57,6 +64,12 @@ lifecycle:
       timeoutSec: 120
 
     - type: command
+      description: Update AgentMemory OpenCode plugin
+      # Same copy as post-install; apm update refreshes apm_modules first.
+      bash: "cp \"$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/agentmemory-capture.ts\" \"$HOME/.config/opencode/plugins/\" && cp \"$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/commands/\"*.md \"$HOME/.config/opencode/commands/\""
+      timeoutSec: 30
+
+    - type: command
       description: Refresh RTK OpenCode plugin
       bash: "mise exec -- rtk init --global --opencode"
       timeoutSec: 30
@@ -68,6 +81,11 @@ lifecycle:
       description: Remove Caveman OpenCode plugin
       bash: "mise exec -- npx -y github:JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646 -- --uninstall --non-interactive"
       timeoutSec: 120
+
+    - type: command
+      description: Remove AgentMemory OpenCode plugin
+      bash: "rm -f \"$HOME/.config/opencode/plugins/agentmemory-capture.ts\" \"$HOME/.config/opencode/commands/recall.md\" \"$HOME/.config/opencode/commands/remember.md\""
+      timeoutSec: 30
 
     - type: command
       description: Remove Ponytail OpenCode plugin
