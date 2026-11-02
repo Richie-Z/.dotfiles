@@ -40,11 +40,14 @@ FAILED=false
 ARGS=()
 for arg in "$@"; do
   case "$arg" in
-    --dry-run) DRY_RUN=true ;;
-    --all) FORCE=true ;;
-    --no-prune) PRUNE=false ;;
-    --*) echo "Unknown flag: $arg" >&2; exit 2 ;;
-    *) ARGS+=("$arg") ;;
+  --dry-run) DRY_RUN=true ;;
+  --all) FORCE=true ;;
+  --no-prune) PRUNE=false ;;
+  --*)
+    echo "Unknown flag: $arg" >&2
+    exit 2
+    ;;
+  *) ARGS+=("$arg") ;;
   esac
 done
 
