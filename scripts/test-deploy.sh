@@ -34,7 +34,7 @@ check "dir config linked" test -L "$HOME/.config/btop"
 check "HOME-level dotfile linked" test -L "$HOME/.zshrc"
 check "flat config linked into .config" test -L "$HOME/.config/dolphinrc"
 check "no dolphin dir link" test ! -e "$HOME/.config/dolphin"
-check "home-owned config dir linked" test -L "$HOME/.apm/apm.yml"
+check "home-owned dir linked" test -L "$HOME/.apm"
 
 # Foreign symlink and real file must survive uninitialize
 mkdir -p "$TMP/elsewhere"
@@ -43,7 +43,7 @@ printf 'keep\n' >"$HOME/.config/real-file"
 
 bash "$SCRIPT_DIR/uninitialize.sh" >/dev/null
 check "our link removed" test ! -e "$HOME/.zshrc"
-check "home-owned config link removed" test ! -e "$HOME/.apm/apm.yml"
+check "home-owned dir link removed" test ! -e "$HOME/.apm"
 check "foreign symlink kept" test -L "$HOME/.config/foreign"
 check "real file kept" test -f "$HOME/.config/real-file"
 

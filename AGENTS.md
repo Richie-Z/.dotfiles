@@ -6,7 +6,7 @@ Personal dotfiles for an Arch Linux (Hyprland/Wayland) + macOS setup. No build, 
 
 - `config/<name>/` → deployed as `~/.config/<name>` (kitty, waybar, rofi, yazi, tmux-ish tools, hypr, mise).
 - `config/dolphin/` — KDE/Dolphin rc files (`dolphinrc`, `kiorc`, `filetypesrc`, `trashrc`, `baloofileinformationrc`). Their *contents* link individually into `~/.config/`, not `~/.config/dolphin/`, because KDE reads them there. `FLAT_LIST` in `initialize.sh` / `uninitialize.sh`.
-- `config/apm/` — global APM config (`apm.yml`, `config.json`, `marketplaces.json`, `.apm/instructions/global.instructions.md`). Contents link into `~/.apm/` (`FLAT_HOME_LIST`). Generated state (`apm.lock.yaml`, `apm_modules/`, `deployment-receipts/`, `logs/`) stays machine-local and uncommitted.
+- `config/apm/` — global APM config (`apm.yml`, `config.json`, `marketplaces.json`, `.apm/instructions/global.instructions.md`). The whole dir links to `~/.apm` (`HOME_DIR_LIST`); `apm.lock.yaml`, `apm_modules/`, `deployment-receipts/`, `logs/` are gitignored runtime state inside it.
 - `config/zsh`, `config/bash`, `config/tmux`, `config/gtk` are special: their *contents* (dotfiles) link into `$HOME/` directly (e.g. `config/zsh/.zshrc` → `~/.zshrc`). This exception list is `IGNORED_LIST` in `scripts/initialize.sh` — update both places when adding a new `$HOME`-level dotfile dir.
 - `config/.aliases` is NOT symlinked; `.zshrc` sources it in-place via `$DOTFILES_PATH`. Alias `cat` picks `batcat` (Debian package name) or `bat` by checking which binary exists — never by distro.
 - `config/zsh/.zprofile` is login-shell only: loads `brew shellenv zsh` when `detect_os` says `mac`. `.zshenv` runs first, so `detect_os` is already defined.

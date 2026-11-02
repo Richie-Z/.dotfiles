@@ -2,7 +2,7 @@
 
 IGNORED_LIST=('zsh' 'tmux' 'bash' 'gtk')
 FLAT_LIST=('dolphin') # contents link into ~/.config/, not the directory itself
-FLAT_HOME_LIST=('apm') # contents link into ~/.<name>/ (e.g. ~/.apm/apm.yml)
+HOME_DIR_LIST=('apm') # whole dir links into ~/.<name> (e.g. ~/.apm)
 
 DRY_RUN=false
 for arg in "$@"; do
@@ -21,14 +21,13 @@ for item in "$CONFIG_DIR"/*; do
   [ -e "$item" ] || continue
   base="$(basename "$item")"
 
-  if ! containsElement "$base" "${IGNORED_LIST[@]}" &&
-    ! containsElement "$base" "${FLAT_LIST[@]}" &&
-    ! containsElement "$base" "${FLAT_HOME_LIST[@]}"; then
+  if containsElement "$base" "${HOME_DIR_LIST[@]}"; then
+    unlink_if_ours "$HOME/.$base"
+  elif ! containsElement "$base" "${IGNORED_LIST[@]}" && ! containsElement "$base" "${FLAT_LIST[@]}"; then
     unlink_if_ours "$HOME/.config/$base"
   elif [ -d "$item" ]; then
     dest="$HOME"
     containsElement "$base" "${FLAT_LIST[@]}" && dest="$HOME/.config"
-    containsElement "$base" "${FLAT_HOME_LIST[@]}" && dest="$HOME/.$base"
     shopt -s dotglob
     for subitem in "$item"/*; do
       [[ -e "$subitem" ]] || continue
