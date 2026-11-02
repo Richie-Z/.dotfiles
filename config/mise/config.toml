@@ -1,13 +1,10 @@
 [tools]
-bun = "latest"
-dotnet = "8"
-gcloud = "latest"
-go = "1.24.13"
+apm = "latest"
 helm = "latest"
-java = "21"
-node = "24"
-pnpm = "10.26.0"
-terraformer = "latest"
-yarn = "4"
+node = "26"
+opencode = { version = "latest", allow_builds = ["@opencode/cli"] }
+rtk = "latest"
+terraform = "latest"
+uv = "latest"
 
 [env]
