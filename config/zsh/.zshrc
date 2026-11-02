@@ -232,6 +232,7 @@ _zsh_completion_specs=(
   "herdr herdr completion zsh"
   "k3s k3s completion zsh"
   "gaal gaal completion zsh"
+  "immich-go immich-go completion zsh"
 )
 
 if _zsh_should_regen_completions; then
