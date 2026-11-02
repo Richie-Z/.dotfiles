@@ -192,17 +192,11 @@ _zsh_should_regen_completions() {
 # Each entry: <file-name> <command>. Regenerate when missing or older than its
 # binary, so completions follow tool upgrades.
 _zsh_gen_completions() {
-  local spec fname cmd bin bin_path out w
+  local spec fname cmd bin bin_path out
   for spec in "$@"; do
     fname="${spec%% *}"
     cmd="${spec#* }"
-    # first word that is not a VAR=value prefix (e.g. _APM_COMPLETE=zsh_source apm)
-    for w in ${=cmd}; do
-      [[ "$w" == *=* ]] || {
-        bin="$w"
-        break
-      }
-    done
+    bin="${cmd%% *}"
     # whence -p: lazy-load functions defined above shadow the binaries
     bin_path="$(whence -p "$bin" 2>/dev/null)"
     [[ -z "$bin_path" ]] && continue
@@ -213,11 +207,7 @@ _zsh_gen_completions() {
     # tmp+mv: a Ctrl-C mid-write must not leave a truncated file that is newer
     # than the binary and so skips every future regen. #compdef guard: reject a
     # broken generator printing help text (opencode v2.1.4).
-    # An env-var prefix (e.g. _APM_COMPLETE=...) needs plain eval: `command`
-    # would take the assignment as an argument.
-    {
-      [[ "$cmd" == *=* ]] && eval "$cmd" || eval "command $cmd"
-    } >"$out.tmp" 2>/dev/null &&
+    eval "command $cmd" >"$out.tmp" 2>/dev/null &&
       [[ "$(head -n1 "$out.tmp")" == '#compdef'* ]] &&
       mv -f "$out.tmp" "$out" &&
       _zsh_regened=true
@@ -241,7 +231,6 @@ _zsh_completion_specs=(
   "herdr herdr completion zsh"
   "k3s k3s completion zsh"
   "gaal gaal completion zsh"
-  "apm _APM_COMPLETE=zsh_source apm"
 )
 
 if _zsh_should_regen_completions; then
