@@ -6,7 +6,9 @@ targets:
 
 dependencies:
   apm:
-    - JuliusBrussee/caveman # have plugin
+    # Pinned to the commit the installer hook below uses, so APM skills and the
+    # plugin never drift apart.
+    - JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646 # have plugin
     - DietrichGebert/ponytail # have plugin
     - rohitg00/agentmemory # have plugin
 
@@ -26,10 +28,10 @@ dependencies:
 lifecycle:
   post-install:
     - type: command
-      description: Install Caveman OpenCode plugin
-      # --force: APM already deploys the same 9 skills + 3 agents, so the
-      # installer must reclaim them (backs the APM copies up first).
-      bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --only opencode --minimal --force"
+      description: Install Caveman for OpenCode
+      # --force: APM may deploy the same skills/agents before this hook. The
+      # installer takes ownership and backs the APM copies up for uninstall.
+      bash: "mise exec -- npx -y github:JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646 -- --only opencode --minimal --force"
       timeoutSec: 180
 
     - type: command
@@ -44,9 +46,9 @@ lifecycle:
 
   post-update:
     - type: command
-      description: Update Caveman OpenCode plugin
-      # Same reason as post-install: apm update re-copies its primitives first.
-      bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --only opencode --minimal --force"
+      description: Update Caveman for OpenCode
+      # Same reason as post-install: apm update may re-copy its primitives first.
+      bash: "mise exec -- npx -y github:JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646 -- --only opencode --minimal --force"
       timeoutSec: 180
 
     - type: command
@@ -60,6 +62,13 @@ lifecycle:
       timeoutSec: 30
 
   pre-uninstall:
+    # --uninstall cannot be scoped with --only: it removes caveman from every
+    # agent integration it owns, then APM prunes its own deployed primitives.
+    - type: command
+      description: Remove Caveman OpenCode plugin
+      bash: "mise exec -- npx -y github:JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646 -- --uninstall --non-interactive"
+      timeoutSec: 120
+
     - type: command
       description: Remove Ponytail OpenCode plugin
       bash: "mise exec -- opencode plugin remove @dietrichgebert/ponytail"

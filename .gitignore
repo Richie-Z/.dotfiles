@@ -5,5 +5,5 @@ config/apm/.agents/
 config/apm/.opencode/
 config/apm/.apm-local/
 config/apm/apm_modules/
-config/apm/apm.lock.yaml
 config/apm/opencode.json
+config/apm/.gitignore

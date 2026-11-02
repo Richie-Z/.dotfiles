@@ -1,0 +1,1710 @@
+lockfile_version: '1'
+apm_version: 0.35.0
+dependencies:
+- repo_url: dietrichgebert/ponytail
+  materialization_repo_url: DietrichGebert/ponytail
+  name: ponytail
+  host: github.com
+  resolved_commit: 96608e078b2d5ea607c5c3b8b5a54d1c1fba6846
+  version: 96608e0
+  package_type: skill_bundle
+  deployed_files:
+  - .config/opencode/skills/ponytail
+  - .config/opencode/skills/ponytail-audit
+  - .config/opencode/skills/ponytail-audit/SKILL.md
+  - .config/opencode/skills/ponytail-debt
+  - .config/opencode/skills/ponytail-debt/SKILL.md
+  - .config/opencode/skills/ponytail-gain
+  - .config/opencode/skills/ponytail-gain/SKILL.md
+  - .config/opencode/skills/ponytail-help
+  - .config/opencode/skills/ponytail-help/SKILL.md
+  - .config/opencode/skills/ponytail-review
+  - .config/opencode/skills/ponytail-review/SKILL.md
+  - .config/opencode/skills/ponytail/SKILL.md
+  deployed_file_hashes:
+    .config/opencode/skills/ponytail-audit/SKILL.md: sha256:2b3223a02c386d1263e1b08343cb8eb3a53e444cdafb1d79e26c8ec2a8fcad28
+    .config/opencode/skills/ponytail-debt/SKILL.md: sha256:b5ec2762f6ba8c4af9ea7173aa6c9f91b88655a25e43f9de0264f6ce8722b25f
+    .config/opencode/skills/ponytail-gain/SKILL.md: sha256:231034a896d6762e4b5c8468287083422c56b499119976ec9f76821f7d083090
+    .config/opencode/skills/ponytail-help/SKILL.md: sha256:86ab0ce0af70cbeeeef499d5c884873b393f87f86401dcc45553662ce2c1eff9
+    .config/opencode/skills/ponytail-review/SKILL.md: sha256:33fe4ebe22a460924e5d4a261e223df22e409cc94ab76182bee9fb91a3ef022e
+    .config/opencode/skills/ponytail/SKILL.md: sha256:9badd22a32e19cb884e46dfa8d3aae82bb81dfa5484105b8b4f0262df823a509
+  content_hash: sha256:b995a71ddd28e617eb0e7968c7ec7a0cc8229b3af20065432ce5ecb1da2d92bc
+- repo_url: juliusbrussee/caveman
+  materialization_repo_url: JuliusBrussee/caveman
+  name: caveman
+  host: github.com
+  resolved_commit: 2e068f735253cce28256744804785f01887d9646
+  version: 4.0.1
+  package_type: skill_bundle
+  deployed_files:
+  - .config/opencode/agents/cavecrew-builder.md
+  - .config/opencode/agents/cavecrew-investigator.md
+  - .config/opencode/agents/cavecrew-reviewer.md
+  - .config/opencode/commands/caveman-init.md
+  - .config/opencode/skills/cavecrew
+  - .config/opencode/skills/cavecrew/README.md
+  - .config/opencode/skills/cavecrew/SKILL.md
+  - .config/opencode/skills/caveman
+  - .config/opencode/skills/caveman-commit
+  - .config/opencode/skills/caveman-commit/README.md
+  - .config/opencode/skills/caveman-commit/SKILL.md
+  - .config/opencode/skills/caveman-compress
+  - .config/opencode/skills/caveman-compress/README.md
+  - .config/opencode/skills/caveman-compress/SECURITY.md
+  - .config/opencode/skills/caveman-compress/SKILL.md
+  - .config/opencode/skills/caveman-compress/scripts/__init__.py
+  - .config/opencode/skills/caveman-compress/scripts/__main__.py
+  - .config/opencode/skills/caveman-compress/scripts/benchmark.py
+  - .config/opencode/skills/caveman-compress/scripts/cli.py
+  - .config/opencode/skills/caveman-compress/scripts/compress.py
+  - .config/opencode/skills/caveman-compress/scripts/detect.py
+  - .config/opencode/skills/caveman-compress/scripts/validate.py
+  - .config/opencode/skills/caveman-discover
+  - .config/opencode/skills/caveman-discover/SKILL.md
+  - .config/opencode/skills/caveman-evidence-review
+  - .config/opencode/skills/caveman-evidence-review/SKILL.md
+  - .config/opencode/skills/caveman-explore
+  - .config/opencode/skills/caveman-explore/SKILL.md
+  - .config/opencode/skills/caveman-explore/package.json
+  - .config/opencode/skills/caveman-explore/tests/skill-file.test.mjs
+  - .config/opencode/skills/caveman-help
+  - .config/opencode/skills/caveman-help/README.md
+  - .config/opencode/skills/caveman-help/SKILL.md
+  - .config/opencode/skills/caveman-learn
+  - .config/opencode/skills/caveman-learn/CLAUDE.md
+  - .config/opencode/skills/caveman-learn/README.md
+  - .config/opencode/skills/caveman-learn/SKILL.md
+  - .config/opencode/skills/caveman-learn/package.json
+  - .config/opencode/skills/caveman-learn/tests/index.js
+  - .config/opencode/skills/caveman-learn/tests/skill-file.test.mjs
+  - .config/opencode/skills/caveman-manage
+  - .config/opencode/skills/caveman-manage/SKILL.md
+  - .config/opencode/skills/caveman-optimize
+  - .config/opencode/skills/caveman-optimize/SKILL.md
+  - .config/opencode/skills/caveman-review
+  - .config/opencode/skills/caveman-review/README.md
+  - .config/opencode/skills/caveman-review/SKILL.md
+  - .config/opencode/skills/caveman-setup
+  - .config/opencode/skills/caveman-setup/SKILL.md
+  - .config/opencode/skills/caveman-stats
+  - .config/opencode/skills/caveman-stats/README.md
+  - .config/opencode/skills/caveman-stats/SKILL.md
+  - .config/opencode/skills/caveman/README.md
+  - .config/opencode/skills/caveman/SKILL.md
+  - .config/opencode/skills/investigate-first
+  - .config/opencode/skills/investigate-first/SKILL.md
+  - .config/opencode/skills/investigate-first/agents/openai.yaml
+  - .config/opencode/skills/lean-build
+  - .config/opencode/skills/lean-build/SKILL.md
+  - .config/opencode/skills/lean-build/agents/openai.yaml
+  - .config/opencode/skills/megacave
+  - .config/opencode/skills/megacave/README.md
+  - .config/opencode/skills/megacave/SKILL.md
+  - .config/opencode/skills/migration
+  - .config/opencode/skills/migration/SKILL.md
+  - .config/opencode/skills/migration/agents/openai.yaml
+  - .config/opencode/skills/safe-refactor
+  - .config/opencode/skills/safe-refactor/SKILL.md
+  - .config/opencode/skills/safe-refactor/agents/openai.yaml
+  - .config/opencode/skills/surgical-patch
+  - .config/opencode/skills/surgical-patch/SKILL.md
+  - .config/opencode/skills/surgical-patch/agents/openai.yaml
+  - .config/opencode/skills/ultracave
+  - .config/opencode/skills/ultracave/README.md
+  - .config/opencode/skills/ultracave/SKILL.md
+  - .config/opencode/skills/verify-and-stop
+  - .config/opencode/skills/verify-and-stop/SKILL.md
+  - .config/opencode/skills/verify-and-stop/agents/openai.yaml
+  deployed_file_hashes:
+    .config/opencode/agents/cavecrew-builder.md: sha256:7b7c8e6bfd23b2306356820fd1fde42228fb092bd9e50b272616bb70ca356de4
+    .config/opencode/agents/cavecrew-investigator.md: sha256:e457b1c5c32decd315cf196821c1f3935df4f12029cd3e1398a35f1b4148af17
+    .config/opencode/agents/cavecrew-reviewer.md: sha256:85d737e5a08409c1fd7a35be0ceb6411c447ef58be3ef0d341a12c09cb2aac04
+    .config/opencode/commands/caveman-init.md: sha256:f1eedd94054eaffde55bc239b20a5cd58815e114659f8e120d397b137727c02f
+    .config/opencode/skills/cavecrew/README.md: sha256:75808dedf30b8bab25e381e27eb260e6506c101118cf0cdeda9d28d14ba99a5b
+    .config/opencode/skills/cavecrew/SKILL.md: sha256:534c0a70d4c7728815214a11e80e66cecbd2104f905f96414e6e32504381c002
+    .config/opencode/skills/caveman-commit/README.md: sha256:5ceae3f651b8e1f0663e08e43cd15939dbe8dff284b33803b8292a27f5db8237
+    .config/opencode/skills/caveman-commit/SKILL.md: sha256:c788a282fc75b981b421dfdad5d84ea7f83f946c126daa39cfc7d3f97845e193
+    .config/opencode/skills/caveman-compress/README.md: sha256:896a03bc3f2c3220aecab1892a611ec5edefaab047e8a39c498ce8c0197efa8e
+    .config/opencode/skills/caveman-compress/SECURITY.md: sha256:baf2ecebde151969757dfd627bcc3f9d5e89ee5051188b73c476a040e118c7a0
+    .config/opencode/skills/caveman-compress/SKILL.md: sha256:dd5388f085316f9f6a8b34ad906441023033596f8ac1d63b81fb20e8d3f50283
+    .config/opencode/skills/caveman-compress/scripts/__init__.py: sha256:429c3e1c5cc5b9705f28d77f303c728304ae68693913ad3d5ce9b5a44c8ee40f
+    .config/opencode/skills/caveman-compress/scripts/__main__.py: sha256:6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279
+    .config/opencode/skills/caveman-compress/scripts/benchmark.py: sha256:6ff5098db623154161503595e3ef513516d1d47bed7c264c7e0378581945767b
+    .config/opencode/skills/caveman-compress/scripts/cli.py: sha256:da00e6e790232ff470761ab88749f42f753b42630c9b46360e3c56166c5355e9
+    .config/opencode/skills/caveman-compress/scripts/compress.py: sha256:c150739658059f532262e1e1fd428e6e862de1b464ac8474a4d5e02b076fd70e
+    .config/opencode/skills/caveman-compress/scripts/detect.py: sha256:8dbdce1df5b6ccb049cd2c84b16f3409ac5551abb9fbc07ddd1616393b78b8f5
+    .config/opencode/skills/caveman-compress/scripts/validate.py: sha256:c80a080825b2f65da13704e605892fd29f4b635e84f3b136b4702d0a03ed1eea
+    .config/opencode/skills/caveman-discover/SKILL.md: sha256:0483d17fce14ca5bbfcf1e085c180412dc20a672f5e8e4171fd0bbbb6f42b81a
+    .config/opencode/skills/caveman-evidence-review/SKILL.md: sha256:05bd896c76a41918fe7b87113dabe852117727a579a7e445891aa41391ed57c2
+    .config/opencode/skills/caveman-explore/SKILL.md: sha256:908f504ce45f5f8517ac7b64dc89fef57c4519d26f92b0b1843febf4b6fe2ac8
+    .config/opencode/skills/caveman-explore/package.json: sha256:ab6c6186b9b87d4a68183625d23ef422e05e99aeab9228cac2924fc5391dc7a6
+    .config/opencode/skills/caveman-explore/tests/skill-file.test.mjs: sha256:dad62b37f948351424438b3ae272e8b4c8462a78b5ace86ded9f0f7d136edb5c
+    .config/opencode/skills/caveman-help/README.md: sha256:71c5cdb3d6c2a46bb342592bbce681a03f014ac4d5448b6de05871ca5effcdd7
+    .config/opencode/skills/caveman-help/SKILL.md: sha256:0bf9ee3fc8a9258b2d5f6b8bf24ac21f0bf2e4b9b4641dbc426b74f18186f81d
+    .config/opencode/skills/caveman-learn/CLAUDE.md: sha256:d954541f8cd9805a5ffaa3b0e078109f355067795b129e7c01071a94fd7ca700
+    .config/opencode/skills/caveman-learn/README.md: sha256:ddfc56c25014003ef38de2e15fb712872183ab16c05db47aa342e775b13d3fe4
+    .config/opencode/skills/caveman-learn/SKILL.md: sha256:05e803e8024786b4abf78cb89ccbd6aa3834a042f398fc84a69f5652368b2d0a
+    .config/opencode/skills/caveman-learn/package.json: sha256:8a6b98d06c1b12a7b0378a33f16d12432095bc80526338b7d0bb42f3ccd734f9
+    .config/opencode/skills/caveman-learn/tests/index.js: sha256:93e0e2e9f6f2ec9ebf0c1ef494ecc0a083f82317aca074e20a1b0b2e50da2e05
+    .config/opencode/skills/caveman-learn/tests/skill-file.test.mjs: sha256:9b6ea9cebe98cb24ce29e0f2a55f0af9cd272655a26c482967dc8fb4fff0cbfe
+    .config/opencode/skills/caveman-manage/SKILL.md: sha256:3404a3c8651d63b6a7c02ccda17fcb4fca2489e931bb814580979a9ff548a48e
+    .config/opencode/skills/caveman-optimize/SKILL.md: sha256:93f391beb93198b5bf9c0c21bc8b7b194e57cb7855fbf05384a4a5d6dd8c06cb
+    .config/opencode/skills/caveman-review/README.md: sha256:0e356f599e2e4438cead3e694cff2ab610477ef569d376bdb0afadf7e4164bb9
+    .config/opencode/skills/caveman-review/SKILL.md: sha256:599330563f19b5c59c3efddffcd7e8d9098b74c29817ab422ccd3253b103fcb8
+    .config/opencode/skills/caveman-setup/SKILL.md: sha256:42c8b8eeba19c6d4ffd3c421be60a7e8b5c0e5108fd4496f0be3c7ced90bfd5f
+    .config/opencode/skills/caveman-stats/README.md: sha256:25143ad335c798095c5e6d67a744d3176ddbd705c0498a80d416fd8b750b15d6
+    .config/opencode/skills/caveman-stats/SKILL.md: sha256:4632f1611a56483df7851a0dabcc1e0c1952393cd8f5d08ddeda17f81a4e1e50
+    .config/opencode/skills/caveman/README.md: sha256:718adbbc0c565979325b848667a2b2b286f66b5b2efac4817d1478c1722edcc5
+    .config/opencode/skills/caveman/SKILL.md: sha256:415d43518f2b1a9498c15a445d4657117b129ee5e81b19454ce348439cc6672b
+    .config/opencode/skills/investigate-first/SKILL.md: sha256:7cc19dd2fc457eb20d65c44dee4d1b72dcdfcd1617182f5bff666700f2a055d8
+    .config/opencode/skills/investigate-first/agents/openai.yaml: sha256:9836c3e7e71564810abb1eeb66341e8ef180c457d4e121fe772cbf53e41a9268
+    .config/opencode/skills/lean-build/SKILL.md: sha256:4d498073c6312858b220e9a04b7456c2485c734edb077f6bb17d88a7ed96ad7a
+    .config/opencode/skills/lean-build/agents/openai.yaml: sha256:8eb3226d28dae6e1d301bee89919e1309574e41b871761155547b1b510500335
+    .config/opencode/skills/megacave/README.md: sha256:d5c2e0616e4b1fae610fe4d46d23393c64b43da760b456eb515c6e5926d7a1a4
+    .config/opencode/skills/megacave/SKILL.md: sha256:139105296c0686c1ee24610caca1db293ab84162beb0d94aa7a9ad7cbc3352bf
+    .config/opencode/skills/migration/SKILL.md: sha256:fe7cf96a58b0521130fbb886dab2a326869d6ed0001e0306fd244014ba7a9662
+    .config/opencode/skills/migration/agents/openai.yaml: sha256:ca7090ae9c9465fb7075eb650d530757bd73530437a02ae1ed22e41e3bf0ba79
+    .config/opencode/skills/safe-refactor/SKILL.md: sha256:cd52867aba26aafb53379d43068cef9b2feca3a3fff850f877a99f710ccd02c0
+    .config/opencode/skills/safe-refactor/agents/openai.yaml: sha256:df608465dc32de1926bfc91ea0beabe9bc61198c121ff1eef0d2e6d74dd67ac1
+    .config/opencode/skills/surgical-patch/SKILL.md: sha256:81ea9f7b51409970099e04b98875dd65806cd35472f9a774b847030328187387
+    .config/opencode/skills/surgical-patch/agents/openai.yaml: sha256:269d7ea7ce5a40499236f7b70d711727f5650a94686283b657076e3cbd56d92f
+    .config/opencode/skills/ultracave/README.md: sha256:8305b34b6d2f6f61bfebc78d2ddf5652e385caf3956467cbae090731c4da723e
+    .config/opencode/skills/ultracave/SKILL.md: sha256:a8da5b0b3501b853e1b98f2ae09fe8dc9c0edf481b1d3fa9529f8557011c1ef8
+    .config/opencode/skills/verify-and-stop/SKILL.md: sha256:3d5599f49771b864eba94f27f456fda295c48c1a37fa6ba2f65fdcb13cc32acb
+    .config/opencode/skills/verify-and-stop/agents/openai.yaml: sha256:9efaaae6ffe812827c1c70af326ebc58b75455f99512f11dc3afccd0298cb45d
+  content_hash: sha256:d6402e813fae722fa71326a7af7277be0a743f5ec9b9b6ce3d407cd2af5cf90e
+- repo_url: rohitg00/agentmemory
+  name: agentmemory
+  host: github.com
+  resolved_commit: c6c476d2905926727fa5848a134d7a3b38a7fa98
+  version: 0.9.31
+  package_type: apm_package
+  deployed_files:
+  - .config/opencode/skills/agentmemory-agents
+  - .config/opencode/skills/agentmemory-agents/REFERENCE.md
+  - .config/opencode/skills/agentmemory-agents/SKILL.md
+  - .config/opencode/skills/agentmemory-agents/TROUBLESHOOTING.md
+  - .config/opencode/skills/agentmemory-architecture
+  - .config/opencode/skills/agentmemory-architecture/SKILL.md
+  - .config/opencode/skills/agentmemory-architecture/TROUBLESHOOTING.md
+  - .config/opencode/skills/agentmemory-config
+  - .config/opencode/skills/agentmemory-config/REFERENCE.md
+  - .config/opencode/skills/agentmemory-config/SKILL.md
+  - .config/opencode/skills/agentmemory-config/TROUBLESHOOTING.md
+  - .config/opencode/skills/agentmemory-hooks
+  - .config/opencode/skills/agentmemory-hooks/REFERENCE.md
+  - .config/opencode/skills/agentmemory-hooks/SKILL.md
+  - .config/opencode/skills/agentmemory-hooks/TROUBLESHOOTING.md
+  - .config/opencode/skills/agentmemory-mcp-tools
+  - .config/opencode/skills/agentmemory-mcp-tools/REFERENCE.md
+  - .config/opencode/skills/agentmemory-mcp-tools/SKILL.md
+  - .config/opencode/skills/agentmemory-mcp-tools/TROUBLESHOOTING.md
+  - .config/opencode/skills/agentmemory-rest-api
+  - .config/opencode/skills/agentmemory-rest-api/REFERENCE.md
+  - .config/opencode/skills/agentmemory-rest-api/SKILL.md
+  - .config/opencode/skills/agentmemory-rest-api/TROUBLESHOOTING.md
+  - .config/opencode/skills/commit-context
+  - .config/opencode/skills/commit-context/EXAMPLES.md
+  - .config/opencode/skills/commit-context/SKILL.md
+  - .config/opencode/skills/commit-context/TROUBLESHOOTING.md
+  - .config/opencode/skills/commit-history
+  - .config/opencode/skills/commit-history/EXAMPLES.md
+  - .config/opencode/skills/commit-history/SKILL.md
+  - .config/opencode/skills/commit-history/TROUBLESHOOTING.md
+  - .config/opencode/skills/forget
+  - .config/opencode/skills/forget/EXAMPLES.md
+  - .config/opencode/skills/forget/SKILL.md
+  - .config/opencode/skills/forget/TROUBLESHOOTING.md
+  - .config/opencode/skills/handoff
+  - .config/opencode/skills/handoff/EXAMPLES.md
+  - .config/opencode/skills/handoff/SKILL.md
+  - .config/opencode/skills/handoff/TROUBLESHOOTING.md
+  - .config/opencode/skills/lesson
+  - .config/opencode/skills/lesson/SKILL.md
+  - .config/opencode/skills/lesson/TROUBLESHOOTING.md
+  - .config/opencode/skills/memory-discipline
+  - .config/opencode/skills/memory-discipline/SKILL.md
+  - .config/opencode/skills/memory-discipline/TROUBLESHOOTING.md
+  - .config/opencode/skills/recall
+  - .config/opencode/skills/recall/EXAMPLES.md
+  - .config/opencode/skills/recall/SKILL.md
+  - .config/opencode/skills/recall/TROUBLESHOOTING.md
+  - .config/opencode/skills/recap
+  - .config/opencode/skills/recap/EXAMPLES.md
+  - .config/opencode/skills/recap/SKILL.md
+  - .config/opencode/skills/recap/TROUBLESHOOTING.md
+  - .config/opencode/skills/remember
+  - .config/opencode/skills/remember/EXAMPLES.md
+  - .config/opencode/skills/remember/SKILL.md
+  - .config/opencode/skills/remember/TROUBLESHOOTING.md
+  - .config/opencode/skills/session-history
+  - .config/opencode/skills/session-history/EXAMPLES.md
+  - .config/opencode/skills/session-history/SKILL.md
+  - .config/opencode/skills/session-history/TROUBLESHOOTING.md
+  - .config/opencode/skills/write-agentmemory-skill
+  - .config/opencode/skills/write-agentmemory-skill/SKILL.md
+  - .config/opencode/skills/write-agentmemory-skill/TROUBLESHOOTING.md
+  deployed_file_hashes:
+    .config/opencode/skills/agentmemory-agents/REFERENCE.md: sha256:f53b83f821cae6b1a4e9671e19e4458209d8d9d643fd46844a983a580013e0a1
+    .config/opencode/skills/agentmemory-agents/SKILL.md: sha256:d478c3898a8f78ef1f0138b7aac245fd1c6a98639731cc394d1fada5319ae89c
+    .config/opencode/skills/agentmemory-agents/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/agentmemory-architecture/SKILL.md: sha256:9c4b3b09a8ce8a6bfd8ad2d1413fa3ff4cc6847baeb379439a7d61b2df1a0993
+    .config/opencode/skills/agentmemory-architecture/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/agentmemory-config/REFERENCE.md: sha256:7995246a764598d28862dd0581ca71dca87b9ce934047f14c52a490f57747c65
+    .config/opencode/skills/agentmemory-config/SKILL.md: sha256:e0a0464aa6e58a6b53b8a532fd68baa8108ce1d96dcb58fdd0f01632eccf5e56
+    .config/opencode/skills/agentmemory-config/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/agentmemory-hooks/REFERENCE.md: sha256:8366b9f3910e5fc3f649e8d60f9109147cf40bbdaff4b20dbfdf2b582c6673ec
+    .config/opencode/skills/agentmemory-hooks/SKILL.md: sha256:6eee1fcf97aa6971e7cfea29d933c2fda0d80b820f2551253d34f9629be93926
+    .config/opencode/skills/agentmemory-hooks/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/agentmemory-mcp-tools/REFERENCE.md: sha256:71d76d2e2c06ebfa4018148ed0e57603679cf6358225769196869061de8b682a
+    .config/opencode/skills/agentmemory-mcp-tools/SKILL.md: sha256:b16fceaddcac2e38392f6fac88dca6dde21b5ff5faa1a0590f514614725c9e6c
+    .config/opencode/skills/agentmemory-mcp-tools/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/agentmemory-rest-api/REFERENCE.md: sha256:790d3e7d00436f68af9bff02481fc34af1dc858a1a32512125e044834abf3c7f
+    .config/opencode/skills/agentmemory-rest-api/SKILL.md: sha256:69b4a6efbd39a53e2e4b9f3d7ea896c2e8fd7dcb8a65810411d0137274ac2b53
+    .config/opencode/skills/agentmemory-rest-api/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/commit-context/EXAMPLES.md: sha256:370fecafbad5a7b467499da038863b383cdd740037c2f29758e43f56c6f064d2
+    .config/opencode/skills/commit-context/SKILL.md: sha256:4cc492b975babd4b0c2dcd269d04f3198912d1e6b485820c64a284b9562393fb
+    .config/opencode/skills/commit-context/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/commit-history/EXAMPLES.md: sha256:ebbc149695a107663966f1d0aa8e53a8eee93b98b0b81977f398277e7da40576
+    .config/opencode/skills/commit-history/SKILL.md: sha256:233d70368cc8da1245e4fb8767534b720ee7eeba910ba92102433f95587547ed
+    .config/opencode/skills/commit-history/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/forget/EXAMPLES.md: sha256:c29ed84d3c391de78e95580d86870e2b10f35841edecb858387b54b8d7679709
+    .config/opencode/skills/forget/SKILL.md: sha256:10f1c346c66963b88fe2beca876a414fb2e1b65e755c39547818097fbcb82a34
+    .config/opencode/skills/forget/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/handoff/EXAMPLES.md: sha256:be825f9c57e26657f8ac0c9854a1ef23f46bec0b20f8aa20bf7424314d1df7b8
+    .config/opencode/skills/handoff/SKILL.md: sha256:e4ec7862811a6f83b769dad900c19915cc939c79afd0753651a6888670b2cd7a
+    .config/opencode/skills/handoff/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/lesson/SKILL.md: sha256:c3159ff0ebf42f878597bdad27fd111c39cec65233be3b8289d7013c62c28bce
+    .config/opencode/skills/lesson/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/memory-discipline/SKILL.md: sha256:259cc7e97ee148b25169d94926642db5c8e305a50d329bb375b629743257732c
+    .config/opencode/skills/memory-discipline/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/recall/EXAMPLES.md: sha256:67f2d639bd4fde728b121fea7f8bc362fca13ded706216141feca8e61613cc29
+    .config/opencode/skills/recall/SKILL.md: sha256:ba014b66f0ebb90539ff44affed7c1dd9a6f9ce8e5efabbff3ceeefdfb627ef4
+    .config/opencode/skills/recall/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/recap/EXAMPLES.md: sha256:94708ca3197b6136e088bb7d881729ac7023713f744481bf671b0306755910a7
+    .config/opencode/skills/recap/SKILL.md: sha256:2efb893396cecc1bc8d086a4aa537b25110d4ab7d4afdf6f4f1722ca126bc78f
+    .config/opencode/skills/recap/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/remember/EXAMPLES.md: sha256:13813337e16485717bead89359375fed1df56090a44c354a4fa4f68beb030cd8
+    .config/opencode/skills/remember/SKILL.md: sha256:78fb0b4c239a22e2675087e411dc5b5f32a913ddf749a3869d614f478140b4eb
+    .config/opencode/skills/remember/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/session-history/EXAMPLES.md: sha256:abef6a646291fab5852eb0df6b2750780d140e4c72edaa54fcb7a2c2c1b16071
+    .config/opencode/skills/session-history/SKILL.md: sha256:70d6cd48245bbc0abaf559daa4fbd0de84b46345f83bcdb045e5445b3019ac19
+    .config/opencode/skills/session-history/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+    .config/opencode/skills/write-agentmemory-skill/SKILL.md: sha256:5838e514f9b00b6794d6cf0dada3c6689a30c3588039b706b370e25b144dd944
+    .config/opencode/skills/write-agentmemory-skill/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+  content_hash: sha256:42ffbff06e3d17b94e76319a2de61f67ea9e9258a8352b2093b072114a8db7f8
+  declared_license: Apache-2.0
+deployments:
+- kind: uri
+  target: mcp
+  value: agentmemory
+  runtime: opencode
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/agents/cavecrew-builder.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:7b7c8e6bfd23b2306356820fd1fde42228fb092bd9e50b272616bb70ca356de4
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/agents/cavecrew-investigator.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:e457b1c5c32decd315cf196821c1f3935df4f12029cd3e1398a35f1b4148af17
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/agents/cavecrew-reviewer.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:85d737e5a08409c1fd7a35be0ceb6411c447ef58be3ef0d341a12c09cb2aac04
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/commands/caveman-init.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:f1eedd94054eaffde55bc239b20a5cd58815e114659f8e120d397b137727c02f
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-agents
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-agents/REFERENCE.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:f53b83f821cae6b1a4e9671e19e4458209d8d9d643fd46844a983a580013e0a1
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-agents/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:d478c3898a8f78ef1f0138b7aac245fd1c6a98639731cc394d1fada5319ae89c
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-agents/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-architecture
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-architecture/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:9c4b3b09a8ce8a6bfd8ad2d1413fa3ff4cc6847baeb379439a7d61b2df1a0993
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-architecture/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-config
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-config/REFERENCE.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:7995246a764598d28862dd0581ca71dca87b9ce934047f14c52a490f57747c65
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-config/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:e0a0464aa6e58a6b53b8a532fd68baa8108ce1d96dcb58fdd0f01632eccf5e56
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-config/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-hooks
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-hooks/REFERENCE.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:8366b9f3910e5fc3f649e8d60f9109147cf40bbdaff4b20dbfdf2b582c6673ec
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-hooks/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:6eee1fcf97aa6971e7cfea29d933c2fda0d80b820f2551253d34f9629be93926
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-hooks/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-mcp-tools
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-mcp-tools/REFERENCE.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:71d76d2e2c06ebfa4018148ed0e57603679cf6358225769196869061de8b682a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-mcp-tools/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:b16fceaddcac2e38392f6fac88dca6dde21b5ff5faa1a0590f514614725c9e6c
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-mcp-tools/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-rest-api
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-rest-api/REFERENCE.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:790d3e7d00436f68af9bff02481fc34af1dc858a1a32512125e044834abf3c7f
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-rest-api/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:69b4a6efbd39a53e2e4b9f3d7ea896c2e8fd7dcb8a65810411d0137274ac2b53
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/agentmemory-rest-api/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/cavecrew
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/cavecrew/README.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:75808dedf30b8bab25e381e27eb260e6506c101118cf0cdeda9d28d14ba99a5b
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/cavecrew/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:534c0a70d4c7728815214a11e80e66cecbd2104f905f96414e6e32504381c002
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-commit
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-commit/README.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:5ceae3f651b8e1f0663e08e43cd15939dbe8dff284b33803b8292a27f5db8237
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-commit/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:c788a282fc75b981b421dfdad5d84ea7f83f946c126daa39cfc7d3f97845e193
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-compress
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-compress/README.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:896a03bc3f2c3220aecab1892a611ec5edefaab047e8a39c498ce8c0197efa8e
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-compress/SECURITY.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:baf2ecebde151969757dfd627bcc3f9d5e89ee5051188b73c476a040e118c7a0
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-compress/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:dd5388f085316f9f6a8b34ad906441023033596f8ac1d63b81fb20e8d3f50283
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-compress/scripts/__init__.py
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:429c3e1c5cc5b9705f28d77f303c728304ae68693913ad3d5ce9b5a44c8ee40f
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-compress/scripts/__main__.py
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-compress/scripts/benchmark.py
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:6ff5098db623154161503595e3ef513516d1d47bed7c264c7e0378581945767b
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-compress/scripts/cli.py
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:da00e6e790232ff470761ab88749f42f753b42630c9b46360e3c56166c5355e9
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-compress/scripts/compress.py
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:c150739658059f532262e1e1fd428e6e862de1b464ac8474a4d5e02b076fd70e
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-compress/scripts/detect.py
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:8dbdce1df5b6ccb049cd2c84b16f3409ac5551abb9fbc07ddd1616393b78b8f5
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-compress/scripts/validate.py
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:c80a080825b2f65da13704e605892fd29f4b635e84f3b136b4702d0a03ed1eea
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-discover
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-discover/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:0483d17fce14ca5bbfcf1e085c180412dc20a672f5e8e4171fd0bbbb6f42b81a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-evidence-review
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-evidence-review/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:05bd896c76a41918fe7b87113dabe852117727a579a7e445891aa41391ed57c2
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-explore
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-explore/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:908f504ce45f5f8517ac7b64dc89fef57c4519d26f92b0b1843febf4b6fe2ac8
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-explore/package.json
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:ab6c6186b9b87d4a68183625d23ef422e05e99aeab9228cac2924fc5391dc7a6
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-explore/tests/skill-file.test.mjs
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:dad62b37f948351424438b3ae272e8b4c8462a78b5ace86ded9f0f7d136edb5c
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-help
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-help/README.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:71c5cdb3d6c2a46bb342592bbce681a03f014ac4d5448b6de05871ca5effcdd7
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-help/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:0bf9ee3fc8a9258b2d5f6b8bf24ac21f0bf2e4b9b4641dbc426b74f18186f81d
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-learn
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-learn/CLAUDE.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:d954541f8cd9805a5ffaa3b0e078109f355067795b129e7c01071a94fd7ca700
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-learn/README.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:ddfc56c25014003ef38de2e15fb712872183ab16c05db47aa342e775b13d3fe4
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-learn/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:05e803e8024786b4abf78cb89ccbd6aa3834a042f398fc84a69f5652368b2d0a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-learn/package.json
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:8a6b98d06c1b12a7b0378a33f16d12432095bc80526338b7d0bb42f3ccd734f9
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-learn/tests/index.js
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:93e0e2e9f6f2ec9ebf0c1ef494ecc0a083f82317aca074e20a1b0b2e50da2e05
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-learn/tests/skill-file.test.mjs
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:9b6ea9cebe98cb24ce29e0f2a55f0af9cd272655a26c482967dc8fb4fff0cbfe
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-manage
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-manage/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:3404a3c8651d63b6a7c02ccda17fcb4fca2489e931bb814580979a9ff548a48e
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-optimize
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-optimize/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:93f391beb93198b5bf9c0c21bc8b7b194e57cb7855fbf05384a4a5d6dd8c06cb
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-review
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-review/README.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:0e356f599e2e4438cead3e694cff2ab610477ef569d376bdb0afadf7e4164bb9
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-review/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:599330563f19b5c59c3efddffcd7e8d9098b74c29817ab422ccd3253b103fcb8
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-setup
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-setup/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:42c8b8eeba19c6d4ffd3c421be60a7e8b5c0e5108fd4496f0be3c7ced90bfd5f
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-stats
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-stats/README.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:25143ad335c798095c5e6d67a744d3176ddbd705c0498a80d416fd8b750b15d6
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman-stats/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:4632f1611a56483df7851a0dabcc1e0c1952393cd8f5d08ddeda17f81a4e1e50
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman/README.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:718adbbc0c565979325b848667a2b2b286f66b5b2efac4817d1478c1722edcc5
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/caveman/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:415d43518f2b1a9498c15a445d4657117b129ee5e81b19454ce348439cc6672b
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/commit-context
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/commit-context/EXAMPLES.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:370fecafbad5a7b467499da038863b383cdd740037c2f29758e43f56c6f064d2
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/commit-context/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:4cc492b975babd4b0c2dcd269d04f3198912d1e6b485820c64a284b9562393fb
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/commit-context/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/commit-history
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/commit-history/EXAMPLES.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:ebbc149695a107663966f1d0aa8e53a8eee93b98b0b81977f398277e7da40576
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/commit-history/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:233d70368cc8da1245e4fb8767534b720ee7eeba910ba92102433f95587547ed
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/commit-history/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/forget
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/forget/EXAMPLES.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:c29ed84d3c391de78e95580d86870e2b10f35841edecb858387b54b8d7679709
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/forget/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:10f1c346c66963b88fe2beca876a414fb2e1b65e755c39547818097fbcb82a34
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/forget/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/handoff
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/handoff/EXAMPLES.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:be825f9c57e26657f8ac0c9854a1ef23f46bec0b20f8aa20bf7424314d1df7b8
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/handoff/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:e4ec7862811a6f83b769dad900c19915cc939c79afd0753651a6888670b2cd7a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/handoff/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/investigate-first
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/investigate-first/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:7cc19dd2fc457eb20d65c44dee4d1b72dcdfcd1617182f5bff666700f2a055d8
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/investigate-first/agents/openai.yaml
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:9836c3e7e71564810abb1eeb66341e8ef180c457d4e121fe772cbf53e41a9268
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/lean-build
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/lean-build/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:4d498073c6312858b220e9a04b7456c2485c734edb077f6bb17d88a7ed96ad7a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/lean-build/agents/openai.yaml
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:8eb3226d28dae6e1d301bee89919e1309574e41b871761155547b1b510500335
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/lesson
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/lesson/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:c3159ff0ebf42f878597bdad27fd111c39cec65233be3b8289d7013c62c28bce
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/lesson/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/megacave
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/megacave/README.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:d5c2e0616e4b1fae610fe4d46d23393c64b43da760b456eb515c6e5926d7a1a4
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/megacave/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:139105296c0686c1ee24610caca1db293ab84162beb0d94aa7a9ad7cbc3352bf
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/memory-discipline
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/memory-discipline/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:259cc7e97ee148b25169d94926642db5c8e305a50d329bb375b629743257732c
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/memory-discipline/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/migration
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/migration/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:fe7cf96a58b0521130fbb886dab2a326869d6ed0001e0306fd244014ba7a9662
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/migration/agents/openai.yaml
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:ca7090ae9c9465fb7075eb650d530757bd73530437a02ae1ed22e41e3bf0ba79
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/ponytail
+  runtime: null
+  scope: project
+  owners:
+  - dietrichgebert/ponytail
+  active_owner: dietrichgebert/ponytail
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/ponytail-audit
+  runtime: null
+  scope: project
+  owners:
+  - dietrichgebert/ponytail
+  active_owner: dietrichgebert/ponytail
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/ponytail-audit/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - dietrichgebert/ponytail
+  active_owner: dietrichgebert/ponytail
+  content_hash: sha256:2b3223a02c386d1263e1b08343cb8eb3a53e444cdafb1d79e26c8ec2a8fcad28
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/ponytail-debt
+  runtime: null
+  scope: project
+  owners:
+  - dietrichgebert/ponytail
+  active_owner: dietrichgebert/ponytail
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/ponytail-debt/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - dietrichgebert/ponytail
+  active_owner: dietrichgebert/ponytail
+  content_hash: sha256:b5ec2762f6ba8c4af9ea7173aa6c9f91b88655a25e43f9de0264f6ce8722b25f
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/ponytail-gain
+  runtime: null
+  scope: project
+  owners:
+  - dietrichgebert/ponytail
+  active_owner: dietrichgebert/ponytail
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/ponytail-gain/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - dietrichgebert/ponytail
+  active_owner: dietrichgebert/ponytail
+  content_hash: sha256:231034a896d6762e4b5c8468287083422c56b499119976ec9f76821f7d083090
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/ponytail-help
+  runtime: null
+  scope: project
+  owners:
+  - dietrichgebert/ponytail
+  active_owner: dietrichgebert/ponytail
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/ponytail-help/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - dietrichgebert/ponytail
+  active_owner: dietrichgebert/ponytail
+  content_hash: sha256:86ab0ce0af70cbeeeef499d5c884873b393f87f86401dcc45553662ce2c1eff9
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/ponytail-review
+  runtime: null
+  scope: project
+  owners:
+  - dietrichgebert/ponytail
+  active_owner: dietrichgebert/ponytail
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/ponytail-review/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - dietrichgebert/ponytail
+  active_owner: dietrichgebert/ponytail
+  content_hash: sha256:33fe4ebe22a460924e5d4a261e223df22e409cc94ab76182bee9fb91a3ef022e
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/ponytail/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - dietrichgebert/ponytail
+  active_owner: dietrichgebert/ponytail
+  content_hash: sha256:9badd22a32e19cb884e46dfa8d3aae82bb81dfa5484105b8b4f0262df823a509
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/recall
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/recall/EXAMPLES.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:67f2d639bd4fde728b121fea7f8bc362fca13ded706216141feca8e61613cc29
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/recall/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:ba014b66f0ebb90539ff44affed7c1dd9a6f9ce8e5efabbff3ceeefdfb627ef4
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/recall/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/recap
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/recap/EXAMPLES.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:94708ca3197b6136e088bb7d881729ac7023713f744481bf671b0306755910a7
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/recap/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:2efb893396cecc1bc8d086a4aa537b25110d4ab7d4afdf6f4f1722ca126bc78f
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/recap/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/remember
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/remember/EXAMPLES.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:13813337e16485717bead89359375fed1df56090a44c354a4fa4f68beb030cd8
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/remember/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:78fb0b4c239a22e2675087e411dc5b5f32a913ddf749a3869d614f478140b4eb
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/remember/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/safe-refactor
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/safe-refactor/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:cd52867aba26aafb53379d43068cef9b2feca3a3fff850f877a99f710ccd02c0
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/safe-refactor/agents/openai.yaml
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:df608465dc32de1926bfc91ea0beabe9bc61198c121ff1eef0d2e6d74dd67ac1
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/session-history
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/session-history/EXAMPLES.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:abef6a646291fab5852eb0df6b2750780d140e4c72edaa54fcb7a2c2c1b16071
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/session-history/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:70d6cd48245bbc0abaf559daa4fbd0de84b46345f83bcdb045e5445b3019ac19
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/session-history/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/surgical-patch
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/surgical-patch/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:81ea9f7b51409970099e04b98875dd65806cd35472f9a774b847030328187387
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/surgical-patch/agents/openai.yaml
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:269d7ea7ce5a40499236f7b70d711727f5650a94686283b657076e3cbd56d92f
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/ultracave
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/ultracave/README.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:8305b34b6d2f6f61bfebc78d2ddf5652e385caf3956467cbae090731c4da723e
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/ultracave/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:a8da5b0b3501b853e1b98f2ae09fe8dc9c0edf481b1d3fa9529f8557011c1ef8
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/verify-and-stop
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/verify-and-stop/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:3d5599f49771b864eba94f27f456fda295c48c1a37fa6ba2f65fdcb13cc32acb
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/verify-and-stop/agents/openai.yaml
+  runtime: null
+  scope: project
+  owners:
+  - juliusbrussee/caveman
+  active_owner: juliusbrussee/caveman
+  content_hash: sha256:9efaaae6ffe812827c1c70af326ebc58b75455f99512f11dc3afccd0298cb45d
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/write-agentmemory-skill
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: null
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/write-agentmemory-skill/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:5838e514f9b00b6794d6cf0dada3c6689a30c3588039b706b370e25b144dd944
+- kind: project-relative
+  target: opencode
+  value: .config/opencode/skills/write-agentmemory-skill/TROUBLESHOOTING.md
+  runtime: null
+  scope: project
+  owners:
+  - rohitg00/agentmemory
+  active_owner: rohitg00/agentmemory
+  content_hash: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
+mcp_servers:
+- agentmemory
+mcp_configs:
+  agentmemory:
+    name: agentmemory
+    transport: stdio
+    env:
+      AGENTMEMORY_URL: ${AGENTMEMORY_URL}
+      AGENTMEMORY_SECRET: ${AGENTMEMORY_SECRET}
+    args:
+    - -y
+    - '@agentmemory/mcp'
+    registry: false
+    command: npx
+    enabled: true
+mcp_target_servers:
+  opencode:
+  - agentmemory
