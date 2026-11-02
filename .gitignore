@@ -1,1 +1,9 @@
 config/btop/btop.log
+
+# APM runs from ~/.apm; anything generated inside config/apm is stray project output
+config/apm/.agents/
+config/apm/.opencode/
+config/apm/.apm-local/
+config/apm/apm_modules/
+config/apm/apm.lock.yaml
+config/apm/opencode.json
