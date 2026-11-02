@@ -44,6 +44,13 @@ hl.config({
 		},
 	},
 	decoration = {
+		wobble = {
+			enabled = true,
+			stiffness = 1000,
+			mesh = 2,
+			intensity = 0.5,
+			damping = 12,
+		},
 		rounding = 14,
 		rounding_power = 2,
 		active_opacity = 1.0,
