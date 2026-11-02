@@ -27,7 +27,9 @@ lifecycle:
   post-install:
     - type: command
       description: Install Caveman OpenCode plugin
-      bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --only opencode --minimal"
+      # --force: APM already deploys the same 9 skills + 3 agents, so the
+      # installer must reclaim them (backs the APM copies up first).
+      bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --only opencode --minimal --force"
       timeoutSec: 180
 
     - type: command
@@ -43,7 +45,8 @@ lifecycle:
   post-update:
     - type: command
       description: Update Caveman OpenCode plugin
-      bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --only opencode --minimal"
+      # Same reason as post-install: apm update re-copies its primitives first.
+      bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --only opencode --minimal --force"
       timeoutSec: 180
 
     - type: command
