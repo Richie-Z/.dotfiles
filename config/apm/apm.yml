@@ -1,0 +1,68 @@
+name: richie-opencode-agent-config
+version: 1.0.0
+description: Global OpenCode skills, AgentMemory MCP, and shared agent instructions.
+targets:
+  - opencode
+
+dependencies:
+  apm:
+    - JuliusBrussee/caveman # have plugin
+    - DietrichGebert/ponytail # have plugin
+    - rohitg00/agentmemory # have plugin
+
+  mcp:
+    - name: agentmemory
+      registry: false
+      transport: stdio
+      command: npx
+      args:
+        - -y
+        - "@agentmemory/mcp"
+      env:
+        AGENTMEMORY_URL: "${AGENTMEMORY_URL}"
+        AGENTMEMORY_SECRET: "${AGENTMEMORY_SECRET}"
+      enabled: true
+
+lifecycle:
+  post-install:
+    - type: command
+      description: Install Caveman OpenCode plugin
+      bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --only opencode --minimal"
+      timeoutSec: 180
+
+    - type: command
+      description: Install Ponytail OpenCode plugin
+      bash: "mise exec -- opencode plugin add @dietrichgebert/ponytail"
+      timeoutSec: 120
+
+    - type: command
+      description: Initialize RTK OpenCode plugin
+      bash: "mise exec -- rtk init --global --opencode"
+      timeoutSec: 30
+
+  post-update:
+    - type: command
+      description: Update Caveman OpenCode plugin
+      bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --only opencode --minimal"
+      timeoutSec: 180
+
+    - type: command
+      description: Update Ponytail OpenCode plugin
+      bash: "mise exec -- opencode plugin add @dietrichgebert/ponytail"
+      timeoutSec: 120
+
+    - type: command
+      description: Refresh RTK OpenCode plugin
+      bash: "mise exec -- rtk init --global --opencode"
+      timeoutSec: 30
+
+  pre-uninstall:
+    - type: command
+      description: Remove Ponytail OpenCode plugin
+      bash: "mise exec -- opencode plugin remove @dietrichgebert/ponytail"
+      timeoutSec: 60
+
+    - type: command
+      description: Remove RTK OpenCode integration
+      bash: "mise exec -- rtk init --uninstall --global --opencode"
+      timeoutSec: 30
