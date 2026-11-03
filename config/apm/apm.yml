@@ -12,7 +12,7 @@ dependencies:
     - JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646 # have plugin
     - DietrichGebert/ponytail # have plugin
     - rohitg00/agentmemory # have plugin
-    - obra/superpowers # OpenCode plugin with superpowers skills
+    - git: https://github.com/obra/superpowers.git # OpenCode V2 plugin
 
   mcp:
     - name: agentmemory
@@ -44,6 +44,13 @@ lifecycle:
       timeoutSec: 120
 
     - type: command
+      description: Install Superpowers OpenCode plugin
+      # Per superpowers INSTALL.md: V2 uses the OpenCode plugin manager, not
+      # symlinks. APM deploys the skill package; this registers the plugin.
+      bash: "mise exec -- opencode plugin add superpowers@git+https://github.com/obra/superpowers.git"
+      timeoutSec: 180
+
+    - type: command
       description: Install AgentMemory OpenCode plugin
       # APM deploys the skills + MCP only; copy the capture plugin and its two
       # commands from the pinned APM checkout so hooks match the deployed version.
@@ -72,6 +79,11 @@ lifecycle:
       description: Update Ponytail OpenCode plugin
       bash: "mise exec -- opencode plugin add @dietrichgebert/ponytail"
       timeoutSec: 120
+
+    - type: command
+      description: Update Superpowers OpenCode plugin
+      bash: "mise exec -- opencode plugin add superpowers@git+https://github.com/obra/superpowers.git"
+      timeoutSec: 180
 
     - type: command
       description: Update AgentMemory OpenCode plugin
@@ -108,6 +120,11 @@ lifecycle:
       description: Remove Ponytail OpenCode plugin
       bash: "mise exec -- opencode plugin remove @dietrichgebert/ponytail"
       timeoutSec: 60
+
+    - type: command
+      description: Remove Superpowers OpenCode plugin
+      bash: "mise exec -- opencode plugin remove superpowers@git+https://github.com/obra/superpowers.git"
+      timeoutSec: 120
 
     - type: command
       description: Remove RTK OpenCode integration
