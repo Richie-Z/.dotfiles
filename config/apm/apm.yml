@@ -12,7 +12,7 @@ dependencies:
     - JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646 # have plugin
     - DietrichGebert/ponytail # have plugin
     - rohitg00/agentmemory # have plugin
-    - obra/superpowers@github+https://github.com/obra/superpowers.git # OpenCode V2 plugin
+    - git: https://github.com/obra/superpowers.git # OpenCode V2 plugin
 
   mcp:
     - name: agentmemory
