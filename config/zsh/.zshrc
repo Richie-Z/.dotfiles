@@ -1,25 +1,8 @@
-# =======================
 # Zsh options
-# =======================
 setopt correct
 # echo 'unset HISTFILE' >>|${ZDOTDIR:-~}/.zshrc
 
-# Homebrew zsh completions (macOS): formulae install `_<cmd>` files into
-# <prefix>/share/zsh/site-functions (e.g. `zsh-completions`). Added before any
-# compinit run so the dump picks them up. .zprofile only loads brew in login
-# shells, so use the known prefixes plus `brew --prefix` when available.
-if [[ "$(detect_os)" = "mac" ]]; then
-  BREW_PREFIXES=(/opt/homebrew /usr/local)
-  command -v brew >/dev/null 2>&1 && BREW_PREFIXES+=("$(brew --prefix)")
-  for prefix in $BREW_PREFIXES; do
-    [[ -d "$prefix/share/zsh/site-functions" ]] &&
-      fpath=("$prefix/share/zsh/site-functions" $fpath)
-  done
-fi
-
-# =======================
 # Oh My Zsh (lazy-loaded)
-# =======================
 export ZSH="$HOME/.oh-my-zsh"
 
 # Lazy-load OMZ and plugins on first prompt
@@ -72,16 +55,16 @@ _zsh_lazy_load_omz() {
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _zsh_lazy_load_omz
 
-# =======================
-# Load aliases
-# =======================
-if [[ -n "$DOTFILES_PATH" && -f "$DOTFILES_PATH/config/.aliases" ]]; then
-  source "$DOTFILES_PATH/config/.aliases"
+# Load completions
+if [[ -n "$DOTFILES_PATH" && -f "$DOTFILES_PATH/config/zsh/completions.zsh" ]]; then
+  source "$DOTFILES_PATH/config/zsh/completions.zsh"
+else
+  echo "[zshrc] DOTFILES_PATH unset, completions not loaded" >&2
 fi
 
-# =======================
+# Load aliases
+
 # yazi (cwd integration)
-# =======================
 y() {
   local tmp cwd
   tmp="$(mktemp -t yazi-cwd.XXXXXX)" || return
@@ -95,177 +78,9 @@ y() {
   rm -f "$tmp"
 }
 
-# =======================
-# Tool integrations (lazy-loaded)
-# =======================
-
-# Mise - lazy load on first command
-_mise_lazy_load() {
-  unfunction mise
-  unfunction _mise_lazy_load
-  eval "$(mise activate zsh)"
-  mise "$@"
-}
-mise() { _mise_lazy_load "$@"; }
-
-# Zoxide - lazy load on first command
-_zoxide_lazy_load() {
-  unfunction z
-  unfunction zi
-  unfunction _zoxide_lazy_load
-  eval "$(zoxide init zsh)"
-  z "$@"
-}
-z() { _zoxide_lazy_load "$@"; }
-zi() { _zoxide_lazy_load "$@"; }
-
-# Fzf - lazy load on first use
-_fzf_lazy_load() {
-  unfunction fzf
-  unfunction _fzf_lazy_load
-  source <(fzf --zsh)
-  fzf "$@"
-}
-fzf() { _fzf_lazy_load "$@"; }
-
-# Crossplane - lazy load
-_crossplane_lazy_load() {
-  unfunction crossplane
-  unfunction _crossplane_lazy_load
-  source <(crossplane completions)
-  crossplane "$@"
-}
-crossplane() { _crossplane_lazy_load "$@"; }
-
-# Helm - lazy load
-_helm_lazy_load() {
-  unfunction helm
-  unfunction _helm_lazy_load
-  helm "$@"
-}
-helm() { _helm_lazy_load "$@"; }
-
-# Herdr - lazy load
-_herdr_lazy_load() {
-  unfunction herdr
-  unfunction _herdr_lazy_load
-  herdr "$@"
-}
-herdr() { _herdr_lazy_load "$@"; }
-
-# k3s - lazy load
-_k3s_lazy_load() {
-  unfunction k3s
-  unfunction _k3s_lazy_load
-  k3s "$@"
-}
-k3s() { _k3s_lazy_load "$@"; }
-
-# Terraform - static completion (fast, keep eager) - load after compinit
-_terraform_lazy_load() {
-  unfunction terraform
-  unfunction _terraform_lazy_load
-  autoload -U +X bashcompinit && bashcompinit
-  complete -o nospace -C /usr/bin/terraform terraform
-  terraform "$@"
-}
-terraform() { _terraform_lazy_load "$@"; }
-
-# =======================
-# Shell completions (cached daily)
-# =======================
-# Generated completions are written as _<cmd> files below and autoloaded via
-# $fpath. Never `source <(cmd completion zsh)` instead: those files self-register
-# and misfire under zsh-autocomplete.
-
-ZSH_COMPLETIONS_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/completions"
-mkdir -p "$ZSH_COMPLETIONS_DIR"
-
-# Regenerate at most once per day (timestamp file)
-_zsh_completions_cache_file="$ZSH_COMPLETIONS_DIR/.last_regen"
-_zsh_should_regen_completions() {
-  [[ ! -f "$_zsh_completions_cache_file" ]] && return 0
-  local last_regen="$(cat "$_zsh_completions_cache_file" 2>/dev/null)"
-  local today="$(date +%s)"
-  ((today - last_regen > 86400)) # 24h
-}
-
-# Each entry: <file-name> <command>. Regenerate when missing or older than its
-# binary, so completions follow tool upgrades.
-_zsh_gen_completions() {
-  local spec fname cmd bin bin_path out
-  for spec in "$@"; do
-    fname="${spec%% *}"
-    cmd="${spec#* }"
-    bin="${cmd%% *}"
-    # whence -p: lazy-load functions defined above shadow the binaries
-    bin_path="$(whence -p "$bin" 2>/dev/null)"
-    [[ -z "$bin_path" ]] && continue
-    out="$ZSH_COMPLETIONS_DIR/_$fname"
-    if [[ -f "$out" && "$out" -nt "$bin_path" ]]; then
-      continue
-    fi
-    # tmp+mv: a Ctrl-C mid-write must not leave a truncated file that is newer
-    # than the binary and so skips every future regen. #compdef guard: reject a
-    # broken generator printing help text (opencode v2.1.4).
-    eval "command $cmd" >"$out.tmp" 2>/dev/null &&
-      [[ "$(head -n1 "$out.tmp")" == '#compdef'* ]] &&
-      mv -f "$out.tmp" "$out" &&
-      _zsh_regened=true
-    rm -f "$out.tmp"
-  done
-}
-
-# Add a new tool here: "<file-name> <command that prints the zsh script>".
-# opencode v2.1.4: `completion zsh` prints help text; re-add when fixed
-_zsh_completion_specs=(
-  "podman podman completion zsh"
-  "kubectl kubectl completion zsh"
-  "gh gh completion -s zsh"
-  "uv uv generate-shell-completion zsh"
-  "bun bun completions"
-  "rustup rustup completions zsh"
-  "cargo rustup completions zsh cargo"
-  "kubectl-neat kubectl-neat completion zsh"
-  "mise mise completion zsh"
-  "helm helm completion zsh"
-  "herdr herdr completion zsh"
-  "k3s k3s completion zsh"
-  "gaal gaal completion zsh"
-  "immich-go immich-go completion zsh"
-  "opencode opencode --completions zsh"
-)
-
-if _zsh_should_regen_completions; then
-  _zsh_regened=false
-  _zsh_gen_completions "${_zsh_completion_specs[@]}"
-  date +%s >"$_zsh_completions_cache_file"
-  # compinit -C trusts an existing dump; drop it when files changed
-  if [[ "$_zsh_regened" = true ]]; then
-    rm -f "$ZSH_COMPLETIONS_DIR/.zcompdump"
-  fi
-fi
-
-# Dedicated dump: OMZ builds its own $ZSH_COMPDUMP before this dir joins $fpath
-fpath=("$ZSH_COMPLETIONS_DIR" $fpath)
-autoload -Uz compinit && compinit -C -d "$ZSH_COMPLETIONS_DIR/.zcompdump"
-
-# docker is the podman-docker shim: reuse podman's completion for `docker`.
-if (($+functions[_podman])); then
-  compdef _podman docker 2>/dev/null
-fi
-
-# Force a full completion regen now (new tool installed, spec list edited) and
-# reload the shell. Wipes each generated file so the mtime-vs-binary skip cannot
-# hide a changed spec, and drops the dump because `compinit -C` trusts it.
-completion-regen() {
-  local spec
-  for spec in "${_zsh_completion_specs[@]}"; do
-    rm -f "$ZSH_COMPLETIONS_DIR/_${spec%% *}"
-  done
-  rm -f "$_zsh_completions_cache_file" "$ZSH_COMPLETIONS_DIR/.zcompdump"
-  exec zsh
-}
+# Completion access via .zshrc-completion wrapper (allow completion-regen invocation without sourcing completions.zsh if file moves)
+.zshrc-completion() { completion-regen "$@"; }
+alias completion='.zshrc-completion'
 
 # Private Shell
 # unset HISTFILE
