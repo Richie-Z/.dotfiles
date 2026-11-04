@@ -38,6 +38,9 @@ local spec = {
   { import = "astrocommunity.pack.terraform" },
   { import = "astrocommunity.pack.json" },
   { import = "astrocommunity.pack.yaml" },
+
+  -- MD
+  { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
 }
 
 return spec
