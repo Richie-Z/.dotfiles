@@ -233,6 +233,7 @@ _zsh_completion_specs=(
   "k3s k3s completion zsh"
   "gaal gaal completion zsh"
   "immich-go immich-go completion zsh"
+  "opencode opencode --completions zsh"
 )
 
 if _zsh_should_regen_completions; then
