@@ -9,7 +9,6 @@ dependencies:
     - JuliusBrussee/caveman
     - DietrichGebert/ponytail
     - rohitg00/agentmemory
-    - git: https://github.com/obra/superpowers.git
 
   mcp:
     - name: agentmemory

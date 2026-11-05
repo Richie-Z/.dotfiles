@@ -173,14 +173,6 @@ dependencies:
     .config/opencode/skills/verify-and-stop/SKILL.md: sha256:3d5599f49771b864eba94f27f456fda295c48c1a37fa6ba2f65fdcb13cc32acb
     .config/opencode/skills/verify-and-stop/agents/openai.yaml: sha256:9efaaae6ffe812827c1c70af326ebc58b75455f99512f11dc3afccd0298cb45d
   content_hash: sha256:d6402e813fae722fa71326a7af7277be0a743f5ec9b9b6ce3d407cd2af5cf90e
-- repo_url: obra/superpowers
-  name: superpowers
-  host: github.com
-  resolved_commit: 22f0b463e7a5e579904dd6211a520321035526f7
-  version: 7.0.2
-  package_type: marketplace_plugin
-  content_hash: sha256:cd595744ffb3dd8fbd03bea818650933b16cac45f88ddc5812ece8e3e06e486a
-  declared_license: MIT
 - repo_url: rohitg00/agentmemory
   name: agentmemory
   host: github.com
