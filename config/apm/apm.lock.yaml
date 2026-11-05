@@ -173,11 +173,19 @@ dependencies:
     .config/opencode/skills/verify-and-stop/SKILL.md: sha256:3d5599f49771b864eba94f27f456fda295c48c1a37fa6ba2f65fdcb13cc32acb
     .config/opencode/skills/verify-and-stop/agents/openai.yaml: sha256:9efaaae6ffe812827c1c70af326ebc58b75455f99512f11dc3afccd0298cb45d
   content_hash: sha256:d6402e813fae722fa71326a7af7277be0a743f5ec9b9b6ce3d407cd2af5cf90e
+- repo_url: obra/superpowers
+  name: superpowers
+  host: github.com
+  resolved_commit: 22f0b463e7a5e579904dd6211a520321035526f7
+  version: 7.0.2
+  package_type: marketplace_plugin
+  content_hash: sha256:cd595744ffb3dd8fbd03bea818650933b16cac45f88ddc5812ece8e3e06e486a
+  declared_license: MIT
 - repo_url: rohitg00/agentmemory
   name: agentmemory
   host: github.com
-  resolved_commit: c6c476d2905926727fa5848a134d7a3b38a7fa98
-  version: 0.9.31
+  resolved_commit: a78401f3de29ada76c614aa624f85071e7b50009
+  version: 0.9.32
   package_type: apm_package
   deployed_files:
   - .config/opencode/skills/agentmemory-agents
@@ -292,7 +300,7 @@ dependencies:
     .config/opencode/skills/session-history/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
     .config/opencode/skills/write-agentmemory-skill/SKILL.md: sha256:5838e514f9b00b6794d6cf0dada3c6689a30c3588039b706b370e25b144dd944
     .config/opencode/skills/write-agentmemory-skill/TROUBLESHOOTING.md: sha256:63cf5b30cc1d271b0bece468adab4fcae650954e412425eb815f2dcb511ddb9a
-  content_hash: sha256:42ffbff06e3d17b94e76319a2de61f67ea9e9258a8352b2093b072114a8db7f8
+  content_hash: sha256:8b3c9c1ede50f183d7466c5cb2740b59a6c0c91c629dfb7ec56e6051013a9252
   declared_license: Apache-2.0
 deployments:
 - kind: uri

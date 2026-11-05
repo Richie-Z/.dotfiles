@@ -1,18 +1,15 @@
 name: richie-opencode-agent-config
 version: 1.0.0
-description: Global OpenCode skills, AgentMemory MCP, and shared agent
-  instructions.
+description: Global OpenCode skills, AgentMemory MCP, and shared agent instructions.
 targets:
   - opencode
 
 dependencies:
   apm:
-    # Pinned to the commit the installer hook below uses, so APM skills and the
-    # plugin never drift apart.
-    - JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646 # have plugin
-    - DietrichGebert/ponytail # have plugin
-    - rohitg00/agentmemory # have plugin
-    - git: https://github.com/obra/superpowers.git # OpenCode V2 plugin
+    - JuliusBrussee/caveman
+    - DietrichGebert/ponytail
+    - rohitg00/agentmemory
+    - git: https://github.com/obra/superpowers.git
 
   mcp:
     - name: agentmemory
@@ -31,11 +28,8 @@ lifecycle:
   post-install:
     - type: command
       description: Install Caveman for OpenCode
-      # --force: APM may deploy the same skills/agents before this hook. The
-      # installer takes ownership and backs the APM copies up for uninstall.
-      bash:
-        "mise exec -- npx -y github:JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646
-        -- --only opencode --minimal --force"
+      # --force: installer backs up APM-deployed copies.
+      bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --only opencode --minimal --force"
       timeoutSec: 180
 
     - type: command
@@ -44,16 +38,19 @@ lifecycle:
       timeoutSec: 120
 
     - type: command
+      description: Install Opencode models discovery
+      bash: "mise exec -- opencode plugin add opencode-models-discovery"
+      timeoutSec: 120
+
+    - type: command
       description: Install Superpowers OpenCode plugin
-      # Per superpowers INSTALL.md: V2 uses the OpenCode plugin manager, not
-      # symlinks. APM deploys the skill package; this registers the plugin.
+      # V2 registers via plugin manager, not symlinks.
       bash: "mise exec -- opencode plugin add superpowers@git+https://github.com/obra/superpowers.git"
       timeoutSec: 180
 
     - type: command
       description: Install AgentMemory OpenCode plugin
-      # APM deploys the skills + MCP only; copy the capture plugin and its two
-      # commands from the pinned APM checkout so hooks match the deployed version.
+      # Copy the capture plugin from the APM checkout so hooks match.
       bash:
         'mkdir -p "$HOME/.config/opencode/plugins" "$HOME/.config/opencode/commands"
         && cp "$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/agentmemory-capture.ts"
@@ -69,15 +66,17 @@ lifecycle:
   post-update:
     - type: command
       description: Update Caveman for OpenCode
-      # Same reason as post-install: apm update may re-copy its primitives first.
-      bash:
-        "mise exec -- npx -y github:JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646
-        -- --only opencode --minimal --force"
+      bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --only opencode --minimal --force"
       timeoutSec: 180
 
     - type: command
       description: Update Ponytail OpenCode plugin
       bash: "mise exec -- opencode plugin add @dietrichgebert/ponytail"
+      timeoutSec: 120
+
+    - type: command
+      description: Update Opencode models discovery
+      bash: "mise exec -- opencode plugin add opencode-models-discovery"
       timeoutSec: 120
 
     - type: command
@@ -87,7 +86,6 @@ lifecycle:
 
     - type: command
       description: Update AgentMemory OpenCode plugin
-      # Same copy as post-install; apm update refreshes apm_modules first.
       bash:
         'cp "$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/agentmemory-capture.ts"
         "$HOME/.config/opencode/plugins/" && cp "$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/commands/"*.md
@@ -100,13 +98,10 @@ lifecycle:
       timeoutSec: 30
 
   pre-uninstall:
-    # --uninstall cannot be scoped with --only: it removes caveman from every
-    # agent integration it owns, then APM prunes its own deployed primitives.
+    # --uninstall cannot be scoped with --only.
     - type: command
       description: Remove Caveman OpenCode plugin
-      bash:
-        "mise exec -- npx -y github:JuliusBrussee/caveman#2e068f735253cce28256744804785f01887d9646
-        -- --uninstall --non-interactive"
+      bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --uninstall --non-interactive"
       timeoutSec: 120
 
     - type: command
@@ -119,6 +114,11 @@ lifecycle:
     - type: command
       description: Remove Ponytail OpenCode plugin
       bash: "mise exec -- opencode plugin remove @dietrichgebert/ponytail"
+      timeoutSec: 60
+
+    - type: command
+      description: Remove Opencode models discovery
+      bash: "mise exec -- opencode plugin remove opencode-models-discovery"
       timeoutSec: 60
 
     - type: command
