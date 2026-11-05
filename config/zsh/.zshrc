@@ -63,6 +63,9 @@ else
 fi
 
 # Load aliases
+if [[ -n "$DOTFILES_PATH" && -f "$DOTFILES_PATH/config/.aliases" ]]; then
+  source "$DOTFILES_PATH/config/.aliases"
+fi
 
 # yazi (cwd integration)
 y() {
