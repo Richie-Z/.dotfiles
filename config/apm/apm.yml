@@ -9,18 +9,47 @@ dependencies:
     - JuliusBrussee/caveman
     - DietrichGebert/ponytail
     - rohitg00/agentmemory
+    - multica-ai/andrej-karpathy-skills
 
   mcp:
     - name: agentmemory
       registry: false
       transport: stdio
-      command: npx
+      command: "mise"
       args:
+        - exec
+        - --
+        - npx
         - -y
         - "@agentmemory/mcp"
       env:
         AGENTMEMORY_URL: "${AGENTMEMORY_URL}"
         AGENTMEMORY_SECRET: "${AGENTMEMORY_SECRET}"
+      enabled: true
+    - name: playwright
+      registry: false
+      transport: stdio
+      command: "mise"
+      args:
+        - exec
+        - --
+        - npx
+        - -y
+        # @latest: the browsers package moves with it.
+        - "@playwright/mcp@latest"
+        - "--headless"
+        - "--browser=chromium"
+      enabled: true
+    - name: context7
+      registry: false
+      transport: stdio
+      command: "mise"
+      args:
+        - exec
+        - --
+        - npx
+        - -y
+        - "@upstash/context7-mcp"
       enabled: true
 
 lifecycle:
@@ -49,7 +78,7 @@ lifecycle:
 
     - type: command
       description: Install AgentMemory OpenCode plugin
-      # Copy the capture plugin from the APM checkout so hooks match.
+      # Files in plugins/ and commands/ auto-load; no config entry.
       bash:
         'mkdir -p "$HOME/.config/opencode/plugins" "$HOME/.config/opencode/commands"
         && cp "$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/agentmemory-capture.ts"
@@ -60,6 +89,17 @@ lifecycle:
     - type: command
       description: Initialize RTK OpenCode plugin
       bash: "mise exec -- rtk init --global --opencode"
+      timeoutSec: 30
+
+    - type: command
+      description: Wrap AgentMemory OpenCode plugin so PluginManager owns it
+      # Files in plugins/ auto-load. opencode refuses default/lifecycle for
+      # them until they appear in opencode.json, so uninstall cannot remove them.
+      bash:
+        'mise exec -- node -e "const f=require(\"fs\"),p=process.argv[1],e=\"./plugins/agentmemory-capture.ts\";
+        const c=JSON.parse(f.readFileSync(p,\"utf8\"));c.plugin=c.plugin||[];
+        if(!c.plugin.includes(e)){c.plugin.push(e);f.writeFileSync(p,JSON.stringify(c,null,2)+\"\n\");}"
+        "$HOME/.config/opencode/opencode.json"'
       timeoutSec: 30
 
   post-update:
@@ -96,6 +136,15 @@ lifecycle:
       bash: "mise exec -- rtk init --global --opencode"
       timeoutSec: 30
 
+    - type: command
+      description: Wrap AgentMemory OpenCode plugin so PluginManager owns it
+      bash:
+        'mise exec -- node -e "const f=require(\"fs\"),p=process.argv[1],e=\"./plugins/agentmemory-capture.ts\";
+        const c=JSON.parse(f.readFileSync(p,\"utf8\"));c.plugin=c.plugin||[];
+        if(!c.plugin.includes(e)){c.plugin.push(e);f.writeFileSync(p,JSON.stringify(c,null,2)+\"\n\");}"
+        "$HOME/.config/opencode/opencode.json"'
+      timeoutSec: 30
+
   pre-uninstall:
     # --uninstall cannot be scoped with --only.
     - type: command
@@ -105,10 +154,14 @@ lifecycle:
 
     - type: command
       description: Remove AgentMemory OpenCode plugin
+      # opencode plugin remove cannot match a ./-style local entry; edit JSON.
       bash:
-        'rm -f "$HOME/.config/opencode/plugins/agentmemory-capture.ts" "$HOME/.config/opencode/commands/recall.md"
-        "$HOME/.config/opencode/commands/remember.md"'
-      timeoutSec: 30
+        'mise exec -- node -e "const f=require(\"fs\"),p=process.argv[1],e=\"./plugins/agentmemory-capture.ts\";
+        const c=JSON.parse(f.readFileSync(p,\"utf8\"));c.plugin=(c.plugin||[]).filter(x=>x!==e);
+        f.writeFileSync(p,JSON.stringify(c,null,2)+\"\n\");" "$HOME/.config/opencode/opencode.json"
+        && rm -f "$HOME/.config/opencode/plugins/agentmemory-capture.ts"
+        "$HOME/.config/opencode/commands/recall.md" "$HOME/.config/opencode/commands/remember.md"'
+      timeoutSec: 60
 
     - type: command
       description: Remove Ponytail OpenCode plugin
