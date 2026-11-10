@@ -1,31 +1,14 @@
-name: richie-opencode-agent-config
+name: opencode-config
 version: 1.0.0
-description: Global OpenCode skills, AgentMemory MCP, and shared agent instructions.
+description: Global OpenCode
 targets:
   - opencode
 
 dependencies:
   apm:
-    - JuliusBrussee/caveman
-    - DietrichGebert/ponytail
-    - rohitg00/agentmemory
     - multica-ai/andrej-karpathy-skills
 
   mcp:
-    - name: agentmemory
-      registry: false
-      transport: stdio
-      command: "mise"
-      args:
-        - exec
-        - --
-        - npx
-        - -y
-        - "@agentmemory/mcp"
-      env:
-        AGENTMEMORY_URL: "${AGENTMEMORY_URL}"
-        AGENTMEMORY_SECRET: "${AGENTMEMORY_SECRET}"
-      enabled: true
     - name: playwright
       registry: false
       transport: stdio
@@ -35,7 +18,6 @@ dependencies:
         - --
         - npx
         - -y
-        # @latest: the browsers package moves with it.
         - "@playwright/mcp@latest"
         - "--headless"
         - "--browser=chromium"
@@ -56,8 +38,7 @@ lifecycle:
   post-install:
     - type: command
       description: Install Caveman for OpenCode
-      # --force: installer backs up APM-deployed copies.
-      bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --only opencode --minimal --force"
+      bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --only opencode --all --force"
       timeoutSec: 180
 
     - type: command
@@ -72,40 +53,18 @@ lifecycle:
 
     - type: command
       description: Install Superpowers OpenCode plugin
-      # V2 registers via plugin manager, not symlinks.
       bash: "mise exec -- opencode plugin add superpowers@git+https://github.com/obra/superpowers.git"
       timeoutSec: 180
-
-    - type: command
-      description: Install AgentMemory OpenCode plugin
-      # Files in plugins/ and commands/ auto-load; no config entry.
-      bash:
-        'mkdir -p "$HOME/.config/opencode/plugins" "$HOME/.config/opencode/commands"
-        && cp "$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/agentmemory-capture.ts"
-        "$HOME/.config/opencode/plugins/" && cp "$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/commands/"*.md
-        "$HOME/.config/opencode/commands/"'
-      timeoutSec: 30
 
     - type: command
       description: Initialize RTK OpenCode plugin
       bash: "mise exec -- rtk init --global --opencode"
       timeoutSec: 30
 
-    - type: command
-      description: Wrap AgentMemory OpenCode plugin so PluginManager owns it
-      # Files in plugins/ auto-load. opencode refuses default/lifecycle for
-      # them until they appear in opencode.json, so uninstall cannot remove them.
-      bash:
-        'mise exec -- node -e "const f=require(\"fs\"),p=process.argv[1],e=\"./plugins/agentmemory-capture.ts\";
-        const c=JSON.parse(f.readFileSync(p,\"utf8\"));c.plugin=c.plugin||[];
-        if(!c.plugin.includes(e)){c.plugin.push(e);f.writeFileSync(p,JSON.stringify(c,null,2)+\"\n\");}"
-        "$HOME/.config/opencode/opencode.json"'
-      timeoutSec: 30
-
   post-update:
     - type: command
       description: Update Caveman for OpenCode
-      bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --only opencode --minimal --force"
+      bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --only opencode --all --force"
       timeoutSec: 180
 
     - type: command
@@ -124,44 +83,15 @@ lifecycle:
       timeoutSec: 180
 
     - type: command
-      description: Update AgentMemory OpenCode plugin
-      bash:
-        'cp "$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/agentmemory-capture.ts"
-        "$HOME/.config/opencode/plugins/" && cp "$HOME/.apm/apm_modules/rohitg00/agentmemory/plugin/opencode/commands/"*.md
-        "$HOME/.config/opencode/commands/"'
-      timeoutSec: 30
-
-    - type: command
       description: Refresh RTK OpenCode plugin
       bash: "mise exec -- rtk init --global --opencode"
       timeoutSec: 30
 
-    - type: command
-      description: Wrap AgentMemory OpenCode plugin so PluginManager owns it
-      bash:
-        'mise exec -- node -e "const f=require(\"fs\"),p=process.argv[1],e=\"./plugins/agentmemory-capture.ts\";
-        const c=JSON.parse(f.readFileSync(p,\"utf8\"));c.plugin=c.plugin||[];
-        if(!c.plugin.includes(e)){c.plugin.push(e);f.writeFileSync(p,JSON.stringify(c,null,2)+\"\n\");}"
-        "$HOME/.config/opencode/opencode.json"'
-      timeoutSec: 30
-
   pre-uninstall:
-    # --uninstall cannot be scoped with --only.
     - type: command
       description: Remove Caveman OpenCode plugin
       bash: "mise exec -- npx -y github:JuliusBrussee/caveman -- --uninstall --non-interactive"
       timeoutSec: 120
-
-    - type: command
-      description: Remove AgentMemory OpenCode plugin
-      # opencode plugin remove cannot match a ./-style local entry; edit JSON.
-      bash:
-        'mise exec -- node -e "const f=require(\"fs\"),p=process.argv[1],e=\"./plugins/agentmemory-capture.ts\";
-        const c=JSON.parse(f.readFileSync(p,\"utf8\"));c.plugin=(c.plugin||[]).filter(x=>x!==e);
-        f.writeFileSync(p,JSON.stringify(c,null,2)+\"\n\");" "$HOME/.config/opencode/opencode.json"
-        && rm -f "$HOME/.config/opencode/plugins/agentmemory-capture.ts"
-        "$HOME/.config/opencode/commands/recall.md" "$HOME/.config/opencode/commands/remember.md"'
-      timeoutSec: 60
 
     - type: command
       description: Remove Ponytail OpenCode plugin
