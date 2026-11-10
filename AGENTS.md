@@ -1,20 +1,21 @@
 # AGENTS.md
 
-Personal dotfiles for an Arch Linux (Hyprland/Wayland) + macOS setup. No build, tests, or lint. Files here are **live system config**: most are symlinked into `$HOME` / `~/.config`, so edits take effect immediately on the running shell/desktop. Verify before changing anything the user's session depends on.
+Personal dotfiles for Arch Linux (Hyprland/Wayland) + macOS. No build, tests, or lint. Most files are **live system config**, symlinked into `$HOME` / `~/.config`, so edits hit the running shell and desktop immediately. This checkout is not always the machine that runs them: verify behavior against the files here, not against `$HOME`.
 
 ## Layout
 
-- `config/<name>/` → deployed as `~/.config/<name>` (kitty, waybar, rofi, yazi, tmux-ish tools, hypr, mise).
-- `config/dolphin/` — KDE/Dolphin rc files (`dolphinrc`, `kiorc`, `filetypesrc`, `trashrc`, `baloofileinformationrc`). Their *contents* link individually into `~/.config/`, not `~/.config/dolphin/`, because KDE reads them there. `FLAT_LIST` in `initialize.sh` / `uninitialize.sh`.
-- `config/apm/` — global APM config (`apm.yml`, `config.json`, `marketplaces.json`, `.apm/instructions/global.instructions.md`). Contents link into `~/.apm/` (`FLAT_HOME_LIST`). Generated state (`apm.lock.yaml`, `apm_modules/`, `deployment-receipts/`, `logs/`) stays machine-local and uncommitted.
-- `config/zsh`, `config/bash`, `config/tmux`, `config/gtk` are special: their *contents* (dotfiles) link into `$HOME/` directly (e.g. `config/zsh/.zshrc` → `~/.zshrc`). This exception list is `IGNORED_LIST` in `scripts/initialize.sh` — update both places when adding a new `$HOME`-level dotfile dir.
-- `config/.aliases` is NOT symlinked; `.zshrc` sources it in-place via `$DOTFILES_PATH`. Alias `cat` picks `batcat` (Debian package name) or `bat` by checking which binary exists — never by distro.
-- `config/zsh/.zprofile` is login-shell only: loads `brew shellenv zsh` when `detect_os` says `mac`. `.zshenv` runs first, so `detect_os` is already defined.
-- `config/refind/` — rEFInd rice (conf, icons, catppuccin theme), NOT symlinked: ESP (`/boot`, vfat) can't symlink. Deploy with `scripts/deploy-refind.sh` (sudo rsync to `/boot/EFI/refind/`, plus `refind_linux.conf` to `/boot/`; `--dry-run` supported). Excludes `refind_x64.efi`/`BOOT.CSV` (pacman-owned). `initialize.sh` skips it via `SKIP_LIST`.
-- `scripts/` — also sourced in-place at runtime (`env-detect.sh`, `clipboard.sh` via `.aliases`). `lib.sh` holds `containsElement` / `unlink_if_ours`, shared by both deploy scripts. `omz-init.sh` bootstraps oh-my-zsh + external plugins, `tmux-init.sh` clones tpm and installs the plugins listed in `.tmux.conf` (needs `tmux` and `git`; exits 0 silently when missing). `test-deploy.sh` smoke-tests link/unlink against a temp `$HOME`.
-- `omz/themes/` — custom oh-my-zsh catppuccin theme (`ZSH_THEME="catppuccin"` in `.zshrc`). Not deployed by `initialize.sh`; must be installed into `$ZSH_CUSTOM/themes` manually.
-- `packages/` — dated pacman dumps (`pacman -Qen` official / `-Qem` AUR). Regenerate with `scripts/dump-pkg.sh`, then commit the new dated files.
-- `obsolete/` — dead configs and multi-MB tmux logs, still git-tracked. Ignore; don't resurrect or "clean up" without asking.
+- `config/<name>/` → `~/.config/<name>`. Run `ls config` for the current list; `REQUIREMENTS` in `scripts/initialize.sh` says which app each one needs.
+- Link exceptions, duplicated in `scripts/initialize.sh` and `scripts/uninitialize.sh` — update both scripts when adding a dir:
+  - `IGNORED_LIST` (`zsh`, `tmux`, `bash`, `gtk`): contents link into `$HOME/` (`config/zsh/.zshrc` → `~/.zshrc`).
+  - `FLAT_LIST` (`dolphin`): contents link into `~/.config/` one file at a time, because KDE reads `dolphinrc` there.
+  - `FLAT_HOME_LIST` (`apm`): contents link into `~/.apm/`.
+  - `SKIP_LIST` (`refind`): ESP is vfat, cannot symlink. Deploy with `scripts/deploy-refind.sh`.
+- `config/.aliases` is sourced in place by `.zshrc`, not linked.
+- `scripts/` holds deploy tooling and runtime shell code (`env-detect.sh`, `clipboard.sh`, `lib.sh`).
+- `omz/themes/` custom catppuccin theme; not deployed, install into `$ZSH_CUSTOM/themes` manually.
+- `packages/` dated pacman dumps; refresh with `scripts/dump-pkg.sh` and commit the new files.
+- `llm/` Ollama Modelfiles.
+- `obsolete/` dead configs and multi-MB logs, git-tracked. Do not resurrect or clean up without asking.
 
 ## Deploy
 
@@ -22,29 +23,32 @@ Personal dotfiles for an Arch Linux (Hyprland/Wayland) + macOS setup. No build, 
 bash scripts/initialize.sh
 ```
 
-Idempotent `ln -sf`. Skips a config dir when its app is missing (`REQUIREMENTS` table at the top: `<dir>:<command>:<os>`, command may list `|` alternatives) or the OS does not match, and prunes that dir's previously deployed links (only ones pointing into the repo) — `--no-prune` keeps them, `--all` links everything anyway. Exit code is 1 if any link failed. Never clobbers real files: an existing non-symlink target prints `Backup needed: <path>` and is skipped — if deployment "did nothing" for a path, that's why. `$DOTFILES_PATH` is hardcoded in `config/zsh/.zshenv` as `$HOME/Documents/Programming/Projects/dotfiles`; runtime-sourced scripts break if the repo moves.
+Idempotent `ln -sf`, skips a config whose app or OS is missing, prunes that config's old links, never overwrites a real file (`Backup needed: <path>`). `bash scripts/test-deploy.sh` proves link/unlink against a temp `$HOME`. Internals: `deploy` skill.
 
-## Hyprland: two parallel configs
+## Hyprland
 
-- `config/hypr/` — **live** (`~/.config/hypr` symlink), classic `.conf` files sourced from `hyprland.conf`.
-- `config/hypr-new/` — experimental `.lua` rewrite, **not deployed** (no `~/.config/hypr-new` exists). Editing it has zero effect on the running desktop. Keep the two in sync intentionally; don't delete either.
+One Lua config: `config/hypr/hyprland.lua` requires `monitors`, `workspaces`, `settings`, `environment`, `windows`, `animations`, `windowrules`, `startup`, `keybindings`. `hypridle.conf` and `hyprlock.conf` stay plain conf.
 
 ## Waybar
 
-- Live: `~/.config/waybar` symlink. Layout is a single centered "dynamic island": every module lives in `modules-center` (`config.jsonc`), module defs in `modules.jsonc`, styles in `style.css` + `mocha.css` (catppuccin mocha `@define-color` vars).
-- Hot reload: `pkill -SIGUSR2 waybar` (same PID afterwards = reload ok). Super+Shift+B runs `launch.sh`, which only *kills* a running waybar — second press starts it again.
-- Icons are Nerd Font MDI literal chars, resolved via the `"Symbols Nerd Font"` fallback in the font stack. Per-icon accent colors use pango `<span foreground='#hex'>` in format strings (CSS `@vars` don't work inside spans); state colors (battery `.warning`/`.critical`, `#idle_inhibitor.activated`) are CSS classes on the module.
-- `custom/media` = playerctl (spotify), the island's middle spacer. Empty script output hides the module; click = play-pause, scroll = next/prev.
-- Visual verify loop (never ship rice blind): `grim` full-screen capture — `grim -g <geom>` is broken against the 3-monitor bounding box, always capture full and crop — then crop/zoom with `uv run --no-project --with pillow python`, then Read the PNG. Measure height/width/gaps by scanning pixel runs, don't eyeball.
-- Glyph gotcha: MDI codepoint names lie (U+F0954 = filled clock blob, U+F034B is a magnifier, not music). Verify coverage with `fc-list ':charset=0xXXXX'` and render candidate glyphs at ~96px with PIL to Read before committing to one.
-- The `ricer` subagent (`.opencode/agents/ricer.md`) encapsulates this loop.
+Centered "dynamic island": every module sits in `modules-center` (`config.jsonc`), definitions in `modules.jsonc`, styles in `style.css` + `mocha.css`. Rice changes: `waybar-rice` skill.
+
+## Shell
+
+Load order: `.zshenv` → `.zshrc` → `completions.zsh` → `.aliases`. Completion cache, lazy loaders, clipboard/OSC 52: `shell` skill.
 
 ## Gotchas
 
-- `~/.zshrc` ends with `unset HISTFILE` ("Private Shell") — intentional, not a bug to fix.
-- `.zshenv` infers distro from display server: Wayland ⇒ Arch, Xorg ⇒ Debian. Weird but deliberate. It breaks on a display-less box (headless Debian ⇒ `LINUX_DISTRO=unknown`), so do not gate portable logic on `LINUX_DISTRO`; check the binary instead. `detect_os` itself only returns `mac` / `linux` / `unknown`.
-- `scripts/clipboard.sh` picks `wl-copy` / `xclip` / `pbcopy` via `env-detect.sh`; alias `ccc`. Requires `$DOTFILES_PATH` set. Over SSH (`detect_ssh` in `env-detect.sh` sees `$SSH_CONNECTION`/`$SSH_CLIENT`/`$SSH_TTY`) it ignores the remote display and emits an OSC 52 sequence so the copy lands on the *local* machine's clipboard (e.g. SSH into a headless Debian box from kitty).
-- Toolchains (node, go, java, gcloud, helm, ...) are managed by mise; global config lives at `config/mise/config.toml` (symlinked to `~/.config/mise`).
-- Shell completions in `.zshrc`: generated completions (podman, kubectl, gh, uv, bun, rustup, cargo, kubectl-neat, opencode) are **not** sourced with `source <(cmd completion zsh)`. Those generated files self-register via a `funcstack[1]`/`compdef` guard that misfires when sourced under oh-my-zsh + zsh-autocomplete, throwing `_arguments: can only be called from completion function` at startup. Instead `.zshrc` writes each into `$ZSH_COMPLETIONS_DIR` (`~/.cache/zsh/completions/`, machine-local, not committed), adds it to `$fpath`, and runs `compinit -C -d "$ZSH_COMPLETIONS_DIR/.zcompdump"` with a **dedicated dump file** (OMZ's own `$ZSH_COMPDUMP` is built before the dir is added and would keep them unresolved). Files regenerate only when older than the tool binary. Static completions in `/usr/share/zsh/site-functions` (pacman, yay, yazi, zoxide, eza, fd, rg, bat, mise, ...) autoload via `$fpath` and need no setup.
-- No `.gitignore`; large logs in `obsolete/` are committed on purpose (or at least in fact) — don't add ignore rules retroactively without asking.
-- Commit style seen in history: Conventional Commits, mostly `feat:` / `refactor:`, terse subjects.
+- `.zshenv` infers `LINUX_DISTRO` from the display server: Wayland ⇒ arch, Xorg ⇒ debian. Never gate portable logic on it, check the binary instead. `detect_os` returns only `mac` / `linux` / `unknown`.
+- "Private Shell" block at the end of `.zshrc` is commented out, so `unset HISTFILE` is not active.
+- `$DOTFILES_PATH` = `$PROGRAMMING_PATH/Projects/dotfiles`, set in `.zshenv`. Moving the repo breaks runtime-sourced scripts.
+- `.gitignore` exists (btop log, stray apm output). Do not add rules retroactively without asking.
+- Commit style: Conventional Commits, terse subjects.
+
+## Skills
+
+Project skills live in `.opencode/skills/`. Load one when the task matches:
+
+- `deploy` — `initialize.sh` / `uninitialize.sh` internals, `REQUIREMENTS`, prune and backup behavior, rEFInd ESP deploy, deploy smoke test.
+- `waybar-rice` — island layout, reload, pango colors, grim pixel verification, MDI glyphs.
+- `shell` — completions cache and dump, lazy loaders, clipboard over SSH, distro inference quirk.
