@@ -52,3 +52,4 @@ Project skills live in `.opencode/skills/`. Load one when the task matches:
 - `deploy` — `initialize.sh` / `uninitialize.sh` internals, `REQUIREMENTS`, prune and backup behavior, rEFInd ESP deploy, deploy smoke test.
 - `waybar-rice` — island layout, reload, pango colors, grim pixel verification, MDI glyphs.
 - `shell` — completions cache and dump, lazy loaders, clipboard over SSH, distro inference quirk.
+- `apm` — add APM packages / MCP servers in `config/apm/apm.yml`, lockfile, lifecycle hooks, which files are linked vs generated.
