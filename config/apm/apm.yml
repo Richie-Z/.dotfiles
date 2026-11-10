@@ -33,6 +33,11 @@ dependencies:
         - -y
         - "@upstash/context7-mcp"
       enabled: true
+    - name: notion
+      registry: false
+      transport: http
+      url: "https://mcp.notion.com/mcp"
+      enabled: true
 
 lifecycle:
   post-install:
