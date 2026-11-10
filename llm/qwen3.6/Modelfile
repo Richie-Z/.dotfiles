@@ -1,0 +1,4 @@
+FROM hf.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive:IQ4_XS
+TEMPLATE {{ .Prompt }}
+PARAMETER num_ctx 32768
+
