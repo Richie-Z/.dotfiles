@@ -7,6 +7,9 @@ ING=(
   immich.dreadwrym.my.id
   agentmemory.dreadwrym.my.id
   9router.dreadwrym.my.id
+  argocd.dreadwrym.my.id
+  multica.dreadwrym.my.id
+  api.multica.dreadwrym.my.id
 )
 B="# BEGIN homelab"
 E="# END homelab"
