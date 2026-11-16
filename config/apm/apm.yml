@@ -21,7 +21,6 @@ dependencies:
         - "@playwright/mcp@latest"
         - "--headless"
         - "--browser=chromium"
-      enabled: true
     - name: context7
       registry: false
       transport: stdio
@@ -32,12 +31,17 @@ dependencies:
         - npx
         - -y
         - "@upstash/context7-mcp"
-      enabled: true
-    - name: notion
+    # - name: notion
+    #   registry: false
+    #   transport: http
+    #   url: "https://mcp.notion.com/mcp"
+    - name: penpot
       registry: false
       transport: http
-      url: "https://mcp.notion.com/mcp"
-      enabled: true
+      url: "https://penpot.dreadwrym.my.id/mcp/stream?userToken={env:PENPOT_USER_TOKEN}"
+      headers:
+        CF-Access-Client-Id: "{env:PENPOT_CF_ACCESS_CLIENT_ID}"
+        CF-Access-Client-Secret: "{env:PENPOT_CF_ACCESS_CLIENT_SECRET}"
 
 lifecycle:
   post-install:
