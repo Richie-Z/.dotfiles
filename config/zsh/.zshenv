@@ -147,9 +147,12 @@ gcloud() { _mise_gcloud_lazy_load "$@"; }
 # Kubectl krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-# agentmemory plugin (OpenCode auto-capture)
-export AGENTMEMORY_URL="https://agentmemory.dreadwrym.my.id"
-# Only set when readable: an empty SECRET would still be exported as a string
-# and silently fail auth, and a missing file must not spam every shell's stderr.
-[ -r "$HOME/.agentmemory/secret" ] &&
-  export AGENTMEMORY_SECRET="$(cat "$HOME/.agentmemory/secret")"
+# some sensitive envs
+[ -r "$HOME/.penpot/penpot-cf-access-client-id" ] &&
+  export PENPOT_CF_ACCESS_CLIENT_ID="$(cat "$HOME/.penpot/penpot-cf-access-client-id")"
+
+[ -r "$HOME/.penpot/penpot-cf-access-client-secret" ] &&
+  export PENPOT_CF_ACCESS_CLIENT_SECRET="$(cat "$HOME/.penpot/penpot-cf-access-client-secret")"
+
+[ -r "$HOME/.penpot/user-token" ] &&
+  export PENPOT_USER_TOKEN="$(cat "$HOME/.penpot/user-token")"
