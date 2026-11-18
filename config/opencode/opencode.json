@@ -115,7 +115,7 @@
           }
         },
         "FUCKING-FREE": {
-          "name": "FUCKING-FREE",
+          "name": "FUCKING FREE (Combo)",
           "modelID": "FUCKING-FREE",
           "capabilities": {
             "tools": true,
@@ -137,7 +137,7 @@
           }
         },
         "deepseek-v4.1-flash": {
-          "name": "DeepSeek V4.1 Flash",
+          "name": "DeepSeek V4.1 Flash 1017 (Combo)",
           "modelID": "deepseek-v4.1-flash",
           "capabilities": {
             "tools": true,
