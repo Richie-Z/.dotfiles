@@ -5,7 +5,7 @@
       "package": "@opencode/ai/providers/openai-compatible",
       "settings": {
         "baseURL": "https://9router.dreadwrym.my.id/v1",
-        "apiKey": "{env:NINEROUTER_API_KEY}",
+        "apiKey": "{file:~/.secret/9router-api-key}",
         "modelsDiscovery": {
           "enabled": true
         }
@@ -39,10 +39,10 @@
       },
       "penpot": {
         "type": "remote",
-        "url": "https://penpot.dreadwrym.my.id/mcp/stream?userToken={env:PENPOT_USER_TOKEN}",
+        "url": "https://penpot.dreadwrym.my.id/mcp/stream?userToken={file:~/.secret/penpot-user-token}",
         "headers": {
-          "CF-Access-Client-Id": "{env:PENPOT_CF_ACCESS_CLIENT_ID}",
-          "CF-Access-Client-Secret": "{env:PENPOT_CF_ACCESS_CLIENT_SECRET}"
+          "CF-Access-Client-Id": "{file:~/.secret/penpot-cf-access-client-id}",
+          "CF-Access-Client-Secret": "{file:~/.secret/penpot-cf-access-client-secret}"
         }
       }
     }
