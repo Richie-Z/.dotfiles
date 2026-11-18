@@ -11,14 +11,39 @@ Plugins:
 | superpowers | `superpowers@git+https://github.com/obra/superpowers.git` | `opencode plugin add superpowers@git+https://github.com/obra/superpowers.git` | `opencode plugin remove superpowers@git+https://github.com/obra/superpowers.git` |
 | rtk | local `plugins/rtk.ts` | `rtk init --global --opencode` | `rtk init --uninstall --global --opencode` |
 
-MCP servers:
+MCP servers (global):
 
 | Server | Type | Command / URL |
 | --- | --- | --- |
-| playwright | local | `mise exec -- npx -y @playwright/mcp@latest --headless --browser=chromium` |
 | context7 | local | `mise exec -- npx -y @upstash/context7-mcp` |
-| penpot | remote | `https://penpot.dreadwrym.my.id/mcp/stream` |
 
-Skills: caveman adds `caveman*`, `megacave`, `ultracave`, `cavecrew`; ponytail adds `ponytail*`; superpowers adds `brainstorming`, `test-driven-development`, `systematic-debugging` and 12 more. Project skills live in `.opencode/skills/`.
+Playwright and Penpot are not global. Add them to the project that needs them.
 
-Secrets live in `~/.secret/` (mode 700, files 600): `9router-api-key`, `penpot-user-token`, `penpot-cf-access-client-id`, `penpot-cf-access-client-secret`. Config uses `{file:~/.secret/<name>}` so the OpenCode service reads them directly; it does not inherit shell exports.
+Skills: caveman adds `caveman*`, `megacave`, `ultracave`, `cavecrew`; ponytail adds `ponytail*`; superpowers adds `brainstorming`, `test-driven-development`, `systematic-debugging` and 12 more.
+
+Secrets live in `~/.secret/` (mode 700, files 600): `9router-api-key`. Config uses `{file:~/.secret/<name>}` so the OpenCode service reads them directly; it does not inherit shell exports.
+
+## Scope: global vs project
+
+Keep globally only what every project uses. A global skill costs one description line per prompt; a global MCP server costs tool schemas and a live connection in every session.
+
+Global agent: add it under `agents` in `opencode.json` to keep it tracked. `agents/<name>.md` also loads globally, but that directory is gitignored here because plugins write into it.
+
+Project skill: `.opencode/skills/<id>/SKILL.md` with `name` and `description` frontmatter. The directory name is the ID. No config entry needed.
+
+Project MCP, run from the project root:
+
+```sh
+opencode mcp add <name> --url <url>                 # remote
+opencode mcp add <name> -- npx -y <package>         # local
+```
+
+Omit `--global`; the command writes to the project config. `/mcps` connects or disconnects a server for the current session without editing files.
+
+Turn off a global server in one project by redeclaring it in that project's config with `"disabled": true`. Repeat its `type` and `command` or `url`; the nearer config replaces the whole server object.
+
+Do not toggle with `policies` `mcp.use` or `skill.use` denies. Policies evaluate broadest-last, so a global deny cannot be re-allowed by a project. Use a `permissions` deny for a skill instead:
+
+```jsonc
+{ "permissions": [{ "action": "skill", "resource": "<id>", "effect": "deny" }] }
+```
