@@ -8,7 +8,6 @@ Plugins:
 | --- | --- | --- | --- |
 | caveman | `github:JuliusBrussee/caveman` | `npx -y github:JuliusBrussee/caveman -- --only opencode --all --force` | `npx -y github:JuliusBrussee/caveman -- --uninstall --non-interactive` |
 | ponytail | `@dietrichgebert/ponytail` | `opencode plugin add @dietrichgebert/ponytail` | `opencode plugin remove @dietrichgebert/ponytail` |
-| models discovery | `opencode-models-discovery` | `opencode plugin add opencode-models-discovery` | `opencode plugin remove opencode-models-discovery` |
 | superpowers | `superpowers@git+https://github.com/obra/superpowers.git` | `opencode plugin add superpowers@git+https://github.com/obra/superpowers.git` | `opencode plugin remove superpowers@git+https://github.com/obra/superpowers.git` |
 | rtk | local `plugins/rtk.ts` | `rtk init --global --opencode` | `rtk init --uninstall --global --opencode` |
 

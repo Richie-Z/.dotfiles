@@ -14,7 +14,6 @@
   },
   "plugins": [
     "@dietrichgebert/ponytail",
-    "opencode-models-discovery",
     "superpowers@git+https://github.com/obra/superpowers.git"
   ],
   "mcp": {
