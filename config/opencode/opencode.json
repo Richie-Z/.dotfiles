@@ -113,6 +113,57 @@
             "context": 1000000,
             "output": 131072
           }
+        },
+        "FUCKING-FREE": {
+          "name": "FUCKING-FREE",
+          "modelID": "FUCKING-FREE",
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true,
+              "toggle": true
+            }
+          },
+          "limit": {
+            "context": 128000,
+            "output": 32000
+          }
+        },
+        "deepseek-v4.1-flash": {
+          "name": "DeepSeek V4.1 Flash",
+          "modelID": "deepseek-v4.1-flash",
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true,
+              "toggle": true,
+              "effort": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max"
+              ]
+            }
+          },
+          "limit": {
+            "context": 1000000,
+            "output": 384000
+          }
         }
       }
     }
