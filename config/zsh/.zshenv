@@ -156,3 +156,6 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 [ -r "$HOME/.penpot/user-token" ] &&
   export PENPOT_USER_TOKEN="$(cat "$HOME/.penpot/user-token")"
+
+[ -r "$HOME/.9router/api-key" ] &&
+  export NINEROUTER_API_KEY="$(cat "$HOME/.9router/api-key")"

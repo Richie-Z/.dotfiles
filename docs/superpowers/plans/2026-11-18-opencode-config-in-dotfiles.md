@@ -14,7 +14,7 @@
 
 - Symlink only these entries into `~/.config/opencode/`: `opencode.json`, `cli.json`, `AGENTS.md`, `themes/`.
 - Never track or link: `service.json`, `plugins/`, `skills/`, `commands/`, `agents/`, `.caveman-*`, `.playwright-mcp`, `opencode.json.bak`.
-- No secret in any tracked file. Provider key is `{env:9ROUTER_API_KEY}`, read from `~/.9router/api-key` by `.zshenv`.
+- No secret in any tracked file. Provider key is `{env:NINEROUTER_API_KEY}`, read from `~/.9router/api-key` by `.zshenv`.
 - Update both `scripts/initialize.sh` and `scripts/uninitialize.sh` for any new list.
 - `bash scripts/test-deploy.sh` must pass after every task.
 - Conventional Commits, stage named files only.
@@ -76,7 +76,7 @@ Keep everything from `## Behavior` down, including the `<!-- caveman-begin -->` 
       "package": "@opencode/ai/providers/openai-compatible",
       "settings": {
         "baseURL": "https://9router.dreadwrym.my.id/v1",
-        "apiKey": "{env:9ROUTER_API_KEY}",
+        "apiKey": "{env:NINEROUTER_API_KEY}",
         "modelsDiscovery": {
           "enabled": true
         }
@@ -194,7 +194,7 @@ git commit -m "feat(opencode): track global config and deploy it per file"
 - Modify: `config/zsh/.zshenv:148-158`
 
 **Interfaces:**
-- Produces: `9ROUTER_API_KEY` exported when `~/.9router/api-key` is readable; consumed by the `{env:9ROUTER_API_KEY}` reference from Task 1.
+- Produces: `9ROUTER_API_KEY` exported when `~/.9router/api-key` is readable; consumed by the `{env:NINEROUTER_API_KEY}` reference from Task 1.
 
 - [ ] **Step 1: Add the guarded export**
 

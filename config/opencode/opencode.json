@@ -5,7 +5,7 @@
       "package": "@opencode/ai/providers/openai-compatible",
       "settings": {
         "baseURL": "https://9router.dreadwrym.my.id/v1",
-        "apiKey": "{env:9ROUTER_API_KEY}",
+        "apiKey": "{env:NINEROUTER_API_KEY}",
         "modelsDiscovery": {
           "enabled": true
         }
