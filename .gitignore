@@ -15,5 +15,8 @@ config/opencode/.playwright-mcp/
 config/opencode/opencode.json.bak
 config/opencode/*.pre-dotfiles
 
+# Global skill bodies are restored from config/agents/.skill-lock.json
+config/agents/skills/
+
 # Superpowers plans/specs are session scratch, not dotfiles
 docs/superpowers/

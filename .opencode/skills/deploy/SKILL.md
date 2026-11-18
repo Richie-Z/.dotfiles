@@ -42,6 +42,7 @@ Decided by the lists at the top of `initialize.sh`:
 - Prune only removes links whose `readlink` starts with `config/` (`unlink_if_ours` in `lib.sh`). Foreign symlinks and real files survive.
 - `uninitialize.sh` duplicates the link lists but has no `REQUIREMENTS`: it unlinks regardless of installed apps. Adding a new dir that links into `$HOME` (contents or whole dir) or flat means editing both scripts plus the Layout section of `AGENTS.md`.
 - `--all` exists for machines missing the apps; the smoke test uses it too.
+- `config/agents/skills/` is gitignored; the tracked `.skill-lock.json` restores it with `npx skills update -g -y`.
 
 ## rEFInd (ESP, Arch only)
 

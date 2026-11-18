@@ -9,7 +9,7 @@ Plugins:
 | superpowers | `superpowers@git+https://github.com/obra/superpowers.git` | `opencode plugin add superpowers@git+https://github.com/obra/superpowers.git` | `opencode plugin remove superpowers@git+https://github.com/obra/superpowers.git` |
 | rtk | local `plugins/rtk.ts` | `rtk init --global --opencode` | `rtk init --uninstall --global --opencode` |
 
-Skills (global, via the `skills` CLI into `~/.agents/skills/`, which OpenCode discovers; tracked at `config/agents/` and linked to `~/.agents`):
+Skills (global, via the `skills` CLI into `~/.agents/skills/`, which OpenCode discovers; only `config/agents/.skill-lock.json` is tracked, and `~/.agents` is linked to `config/agents`):
 
 | Skill | Source | Install |
 | --- | --- | --- |
@@ -19,7 +19,9 @@ Skills (global, via the `skills` CLI into `~/.agents/skills/`, which OpenCode di
 
 Remove with `npx -y skills remove -g <skill>`.
 
-Global skill installs and updates write into the tracked `config/agents/`; commit those changes.
+Restore missing global skills on a fresh machine with `npx -y skills update -g -y`; it reads the tracked lock and refetches missing bodies.
+
+Global skill installs and updates write the tracked lock at `config/agents/.skill-lock.json` and ignored bodies under `config/agents/skills/`; commit the lock change.
 
 MCP servers (global):
 
