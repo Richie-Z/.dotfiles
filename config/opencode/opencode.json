@@ -9,7 +9,7 @@
       },
       "models": {
         "dr/deeprelay/deepseek-v4.1-flash": {
-          "name": "DeepSeek V4.1 Flash",
+          "name": "DeepSeek V4.1 Flash (deeprelay)",
           "modelID": "dr/deeprelay/deepseek-v4.1-flash",
           "capabilities": {
             "tools": true,
@@ -38,7 +38,7 @@
           }
         },
         "dr/deeprelay/kimi-k3": {
-          "name": "Kimi K3",
+          "name": "Kimi K3 (deeprelay)",
           "modelID": "dr/deeprelay/kimi-k3",
           "capabilities": {
             "tools": true,
@@ -66,7 +66,7 @@
           }
         },
         "dr/deeprelay/glm-5.3": {
-          "name": "GLM 5.3",
+          "name": "GLM 5.3 (deeprelay)",
           "modelID": "dr/deeprelay/glm-5.3",
           "capabilities": {
             "tools": true,
@@ -90,7 +90,7 @@
           }
         },
         "dr/deeprelay/glm-5.3-flash": {
-          "name": "GLM 5.3 Flash",
+          "name": "GLM 5.3 Flash (deeprelay)",
           "modelID": "dr/deeprelay/glm-5.3-flash",
           "capabilities": {
             "tools": true,
@@ -174,16 +174,6 @@
   ],
   "mcp": {
     "servers": {
-      "playwright": {
-        "type": "local",
-        "command": [
-          "npx",
-          "-y",
-          "@playwright/mcp@latest",
-          "--headless",
-          "--browser=chromium"
-        ]
-      },
       "context7": {
         "type": "local",
         "command": [
@@ -191,14 +181,6 @@
           "-y",
           "@upstash/context7-mcp"
         ]
-      },
-      "penpot": {
-        "type": "remote",
-        "url": "https://penpot.dreadwrym.my.id/mcp/stream?userToken={file:~/.secret/penpot-user-token}",
-        "headers": {
-          "CF-Access-Client-Id": "{file:~/.secret/penpot-cf-access-client-id}",
-          "CF-Access-Client-Secret": "{file:~/.secret/penpot-cf-access-client-secret}"
-        }
       }
     }
   }
