@@ -13,8 +13,6 @@
     }
   },
   "plugins": [
-    "./plugins/caveman",
-    "./plugins/rtk.ts",
     "@dietrichgebert/ponytail",
     "opencode-models-discovery",
     "superpowers@git+https://github.com/obra/superpowers.git"
@@ -23,11 +21,21 @@
     "servers": {
       "playwright": {
         "type": "local",
-        "command": ["mise", "exec", "--", "npx", "-y", "@playwright/mcp@latest", "--headless", "--browser=chromium"]
+        "command": [
+          "npx",
+          "-y",
+          "@playwright/mcp@latest",
+          "--headless",
+          "--browser=chromium"
+        ]
       },
       "context7": {
         "type": "local",
-        "command": ["mise", "exec", "--", "npx", "-y", "@upstash/context7-mcp"]
+        "command": [
+          "npx",
+          "-y",
+          "@upstash/context7-mcp"
+        ]
       },
       "penpot": {
         "type": "remote",

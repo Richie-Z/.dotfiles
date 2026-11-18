@@ -14,3 +14,6 @@ config/opencode/.ponytail-active
 config/opencode/.playwright-mcp/
 config/opencode/opencode.json.bak
 config/opencode/*.pre-dotfiles
+
+# Superpowers plans/specs are session scratch, not dotfiles
+docs/superpowers/
