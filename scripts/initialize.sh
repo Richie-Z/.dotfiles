@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 IGNORED_LIST=('zsh' 'tmux' 'bash' 'gtk')
+HOME_DIR_LIST=('agents')
 # Directories whose *contents* link into ~/.config/ individually, for apps that
 # read plain files there (KDE: dolphinrc, kiorc, ...) instead of a dir.
 FLAT_LIST=('dolphin')
@@ -105,6 +106,10 @@ link_contents() { # link_contents <source dir> <dest dir>
 # link step (dir link, or per-file links for IGNORED_LIST / FLAT_LIST).
 prune() { # prune <config dir> <source path>
   local base="$1" src="$2" dest subitem
+  if containsElement "$base" "${HOME_DIR_LIST[@]}"; then
+    unlink_if_ours "$HOME/.$base"
+    return
+  fi
   if containsElement "$base" "${IGNORED_LIST[@]}"; then
     dest="$HOME"
   elif containsElement "$base" "${FLAT_LIST[@]}"; then
@@ -174,7 +179,14 @@ for item in "$CONFIG_DIR"/*; do
     continue
   fi
 
-  if containsElement "$base" "${IGNORED_LIST[@]}"; then
+  if containsElement "$base" "${HOME_DIR_LIST[@]}"; then
+    target="$HOME/.$base"
+    if [ -e "$target" ] && [ ! -L "$target" ]; then
+      echo "Backup needed: $target (already exists and is not a symlink)"
+    else
+      link "$item" "$target"
+    fi
+  elif containsElement "$base" "${IGNORED_LIST[@]}"; then
     # Contents link into $HOME/ (e.g. config/zsh/.zshrc -> ~/.zshrc)
     link_contents "$item" "$HOME"
   elif containsElement "$base" "${FLAT_LIST[@]}"; then

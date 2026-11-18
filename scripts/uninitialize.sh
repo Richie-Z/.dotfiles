@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 IGNORED_LIST=('zsh' 'tmux' 'bash' 'gtk')
+HOME_DIR_LIST=('agents')
 FLAT_LIST=('dolphin') # contents link into ~/.config/, not the directory itself
 
 DRY_RUN=false
@@ -20,7 +21,9 @@ for item in "$CONFIG_DIR"/*; do
   [ -e "$item" ] || continue
   base="$(basename "$item")"
 
-  if ! containsElement "$base" "${IGNORED_LIST[@]}" &&
+  if containsElement "$base" "${HOME_DIR_LIST[@]}"; then
+    unlink_if_ours "$HOME/.$base"
+  elif ! containsElement "$base" "${IGNORED_LIST[@]}" &&
     ! containsElement "$base" "${FLAT_LIST[@]}"; then
     unlink_if_ours "$HOME/.config/$base"
   elif [ -d "$item" ]; then

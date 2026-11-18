@@ -1,0 +1,39 @@
+{
+  "version": 3,
+  "skills": {
+    "karpathy-guidelines": {
+      "source": "multica-ai/andrej-karpathy-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/multica-ai/andrej-karpathy-skills.git",
+      "commit": "2c606141936f1eeef17fa3043a72095b4765b9c2",
+      "skillPath": "skills/karpathy-guidelines/SKILL.md",
+      "skillFolderHash": "e119339197d600aa39a24fd7a95c946800c9c949",
+      "pluginName": "andrej-karpathy-skills",
+      "installedAt": "2026-11-18T09:32:58.748Z",
+      "updatedAt": "2026-11-18T09:32:58.748Z"
+    },
+    "caveman": {
+      "source": "JuliusBrussee/caveman",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/JuliusBrussee/caveman.git",
+      "commit": "a192894723a8f47e7f504c7b5041967ff1f18e55",
+      "skillPath": "skills/caveman/SKILL.md",
+      "skillFolderHash": "b314dd99b2b8723aae2de5a22079914567f2e58f",
+      "installedAt": "2026-11-18T10:05:19.407Z",
+      "updatedAt": "2026-11-18T10:05:19.407Z"
+    },
+    "ponytail": {
+      "source": "DietrichGebert/ponytail",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/DietrichGebert/ponytail.git",
+      "commit": "96608e078b2d5ea607c5c3b8b5a54d1c1fba6846",
+      "skillPath": "skills/ponytail/SKILL.md",
+      "skillFolderHash": "e8d3fa76e7ff9223a784dbd4bcfc9ff46b3fa55d",
+      "installedAt": "2026-11-18T10:05:30.080Z",
+      "updatedAt": "2026-11-18T10:05:30.080Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  }
+}
