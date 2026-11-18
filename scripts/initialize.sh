@@ -69,7 +69,9 @@ if ! $DRY_RUN; then
 fi
 
 link() { # link <source> <target>
-  if $DRY_RUN; then
+  if [ -e "$2" ] && [ ! -L "$2" ]; then
+    echo "Backup needed: $2 (already exists and is not a symlink)"
+  elif $DRY_RUN; then
     echo "[dry-run] ln -sf $1 $2"
   elif rm -f "$2" && ln -s "$1" "$2"; then
     # rm first: `ln -sf src existing-dirlink` nests a link inside the dir
@@ -81,58 +83,17 @@ link() { # link <source> <target>
   fi
 }
 
-# Link every entry of a directory into a destination dir (dotfiles included)
-link_contents() { # link_contents <source dir> <dest dir>
-  local src="$1" dest="$2" subitem target
-  if [ ! -d "$src" ]; then
-    link "$src" "$dest/$(basename "$src")"
-    return
-  fi
-  shopt -s dotglob
-  $DRY_RUN || mkdir -p "$dest"
-  for subitem in "$src"/*; do
-    [[ -e "$subitem" ]] || continue
-    target="$dest/$(basename "$subitem")"
-    if [ -e "$target" ] && [ ! -L "$target" ]; then
-      echo "Backup needed: $target (already exists and is not a symlink)"
-    else
-      link "$subitem" "$target"
-    fi
-  done
-  shopt -u dotglob # restore default behaviour
-}
-
-# Remove every deployed link for a config dir, using the same targets as the
-# link step (dir link, or per-file links for IGNORED_LIST / FLAT_LIST).
+# Remove every deployed link for a config dir, at the targets config_links names.
 prune() { # prune <config dir> <source path>
-  local base="$1" src="$2" dest subitem
-  if containsElement "$base" "${HOME_DIR_LIST[@]}"; then
-    unlink_if_ours "$HOME/.$base"
-    return
-  fi
-  if containsElement "$base" "${IGNORED_LIST[@]}"; then
-    dest="$HOME"
-  elif containsElement "$base" "${FLAT_LIST[@]}"; then
-    dest="$HOME/.config"
-  else
-    unlink_if_ours "$HOME/.config/$base"
-    return
-  fi
-  if [ ! -d "$src" ]; then
-    unlink_if_ours "$HOME/.config/$base"
-    return
-  fi
-  shopt -s dotglob
-  for subitem in "$src"/*; do
-    [[ -e "$subitem" ]] || continue
-    unlink_if_ours "$dest/$(basename "$subitem")"
-  done
-  shopt -u dotglob
+  local src target
+  while IFS=$'\t' read -r src target; do
+    unlink_if_ours "$target"
+  done < <(config_links "$1" "$2")
 }
 
 # Print skip reason for a config dir, or return 1 when it can be linked
 skip_reason() { # skip_reason <config dir>
-  local req dir cmd os found c
+  local req dir cmd os c
   for req in "${REQUIREMENTS[@]}"; do
     IFS=: read -r dir cmd os <<<"$req"
     [ "$dir" = "$1" ] || continue
@@ -140,20 +101,15 @@ skip_reason() { # skip_reason <config dir>
       echo "needs $os, running $OS"
       return 0
     fi
-    if [ -n "$cmd" ]; then
-      found=false
-      local IFS='|'
-      for c in $cmd; do
-        command -v "$c" >/dev/null 2>&1 || [ -e "$c" ] && {
-          found=true
-          break
-        }
-      done
-      $found || {
-        echo "$cmd not installed"
-        return 0
-      }
-    fi
+    [ -z "$cmd" ] && return 1
+    local IFS='|'
+    for c in $cmd; do
+      if command -v "$c" >/dev/null 2>&1 || [ -e "$c" ]; then
+        return 1
+      fi
+    done
+    echo "$cmd not installed"
+    return 0
   done
   return 1
 }
@@ -179,28 +135,9 @@ for item in "$CONFIG_DIR"/*; do
     continue
   fi
 
-  if containsElement "$base" "${HOME_DIR_LIST[@]}"; then
-    target="$HOME/.$base"
-    if [ -e "$target" ] && [ ! -L "$target" ]; then
-      echo "Backup needed: $target (already exists and is not a symlink)"
-    else
-      link "$item" "$target"
-    fi
-  elif containsElement "$base" "${IGNORED_LIST[@]}"; then
-    # Contents link into $HOME/ (e.g. config/zsh/.zshrc -> ~/.zshrc)
-    link_contents "$item" "$HOME"
-  elif containsElement "$base" "${FLAT_LIST[@]}"; then
-    # Contents link into ~/.config/ (e.g. config/dolphin/dolphinrc)
-    link_contents "$item" "$HOME/.config"
-  else
-    # Not ignored: link directly to ~/.config/
-    target="$HOME/.config/$base"
-    if [ -e "$target" ] && [ ! -L "$target" ]; then
-      echo "Backup needed: $target (already exists and is not a symlink)"
-    else
-      link "$item" "$target"
-    fi
-  fi
+  while IFS=$'\t' read -r src target; do
+    link "$src" "$target"
+  done < <(config_links "$base" "$item")
 done
 
 if $FAILED; then
