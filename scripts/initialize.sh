@@ -6,6 +6,9 @@ IGNORED_LIST=('zsh' 'tmux' 'bash' 'gtk')
 FLAT_LIST=('dolphin')
 # Directories whose *contents* link into ~/.<name>/ (app-owned config dirs).
 FLAT_HOME_LIST=('apm')
+# Directories whose *contents* link into ~/.config/<name>/ one file at a time,
+# for apps that write runtime state into that same directory.
+SUBDIR_LIST=('opencode')
 SKIP_LIST=('refind') # not linkable, ESP deploy via scripts/deploy-refind.sh
 
 # "<config dir>:<required command>:<os>" — empty command = any, empty os = any.
@@ -29,6 +32,7 @@ REQUIREMENTS=(
   'mise:mise:'
   'nwg-displays:nwg-displays:linux'
   'nwg-look:nwg-look:linux'
+  'opencode:opencode:'
   'rofi:rofi:linux'
   'waybar:waybar:linux'
   'wlogout:wlogout:linux'
@@ -111,6 +115,8 @@ prune() { # prune <config dir> <source path>
     dest="$HOME"
   elif containsElement "$base" "${FLAT_HOME_LIST[@]}"; then
     dest="$HOME/.$base"
+  elif containsElement "$base" "${SUBDIR_LIST[@]}"; then
+    dest="$HOME/.config/$base"
   elif containsElement "$base" "${FLAT_LIST[@]}"; then
     dest="$HOME/.config"
   else
@@ -187,6 +193,9 @@ for item in "$CONFIG_DIR"/*; do
   elif containsElement "$base" "${FLAT_HOME_LIST[@]}"; then
     # Contents link into ~/.<app>/ (e.g. config/apm/apm.yml -> ~/.apm/apm.yml)
     link_contents "$item" "$HOME/.$base"
+  elif containsElement "$base" "${SUBDIR_LIST[@]}"; then
+    # Contents link into ~/.config/<name>/ (e.g. config/opencode/cli.json)
+    link_contents "$item" "$HOME/.config/$base"
   else
     # Not ignored: link directly to ~/.config/
     target="$HOME/.config/$base"

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "providers": {
+    "9router": {
+      "package": "@opencode/ai/providers/openai-compatible",
+      "settings": {
+        "baseURL": "https://9router.dreadwrym.my.id/v1",
+        "apiKey": "{env:9ROUTER_API_KEY}",
+        "modelsDiscovery": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "plugins": [
+    "@dietrichgebert/ponytail",
+    "opencode-models-discovery",
+    "superpowers@git+https://github.com/obra/superpowers.git"
+  ],
+  "mcp": {
+    "servers": {
+      "playwright": {
+        "type": "local",
+        "command": ["mise", "exec", "--", "npx", "-y", "@playwright/mcp@latest", "--headless", "--browser=chromium"]
+      },
+      "context7": {
+        "type": "local",
+        "command": ["mise", "exec", "--", "npx", "-y", "@upstash/context7-mcp"]
+      },
+      "penpot": {
+        "type": "remote",
+        "url": "https://penpot.dreadwrym.my.id/mcp/stream?userToken={env:PENPOT_USER_TOKEN}",
+        "headers": {
+          "CF-Access-Client-Id": "{env:PENPOT_CF_ACCESS_CLIENT_ID}",
+          "CF-Access-Client-Secret": "{env:PENPOT_CF_ACCESS_CLIENT_SECRET}"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "theme": {
+    "name": "catppuccin-translucent",
+    "mode": "system"
+  },
+  "session": {
+    "sidebar": "auto",
+    "thinking": "show",
+    "image_preview": true,
+    "markdown": "rendered"
+  },
+  "attention": {
+    "notifications": true,
+    "sound": true
+  },
+  "animations": true,
+  "highlights": true,
+  "prompt": {
+    "image_preview": true
+  }
+}
