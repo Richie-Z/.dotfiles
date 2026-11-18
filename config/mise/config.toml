@@ -1,5 +1,4 @@
 [tools]
-apm = "latest"
 helm = "latest"
 node = "26"
 opencode = { version = "latest", allow_builds = ["@opencode/cli"] }
