@@ -180,7 +180,10 @@
           "npx",
           "-y",
           "@upstash/context7-mcp"
-        ]
+        ],
+        "environment": {
+          "CONTEXT7_API_KEY": "{file:~/.secret/context7-api-key}"
+        }
       }
     }
   }
