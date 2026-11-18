@@ -9,14 +9,17 @@ Plugins:
 | superpowers | `superpowers@git+https://github.com/obra/superpowers.git` | `opencode plugin add superpowers@git+https://github.com/obra/superpowers.git` | `opencode plugin remove superpowers@git+https://github.com/obra/superpowers.git` |
 | rtk | local `plugins/rtk.ts` | `rtk init --global --opencode` | `rtk init --uninstall --global --opencode` |
 
-Skills (global, via the `skills` CLI into `~/.agents/skills/`, which OpenCode discovers; nothing lands in this repo):
+Skills (global, via the `skills` CLI into `~/.agents/skills/`, which OpenCode discovers; tracked at `config/agents/` and linked to `~/.agents`):
 
 | Skill | Source | Install |
 | --- | --- | --- |
 | caveman | `JuliusBrussee/caveman` | `npx -y skills add -g JuliusBrussee/caveman --skill caveman -y` |
+| karpathy-guidelines | `multica-ai/andrej-karpathy-skills` | `npx -y skills add -g multica-ai/andrej-karpathy-skills --skill karpathy-guidelines -y` |
 | ponytail | `DietrichGebert/ponytail` | `npx -y skills add -g DietrichGebert/ponytail --skill ponytail -y` |
 
 Remove with `npx -y skills remove -g <skill>`.
+
+Global skill installs and updates write into the tracked `config/agents/`; commit those changes.
 
 MCP servers (global):
 

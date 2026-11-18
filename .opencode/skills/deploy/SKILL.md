@@ -1,6 +1,6 @@
 ---
 name: deploy
-description: Use when running or changing dotfiles deployment — initialize.sh, uninitialize.sh, link lists (REQUIREMENTS, IGNORED_LIST, FLAT_LIST, SKIP_LIST), prune and backup behavior, rEFInd ESP deploy, or the deploy smoke test.
+description: Use when running or changing dotfiles deployment — initialize.sh, uninitialize.sh, link lists (REQUIREMENTS, IGNORED_LIST, HOME_DIR_LIST, FLAT_LIST, SKIP_LIST), prune and backup behavior, rEFInd ESP deploy, or the deploy smoke test.
 ---
 
 # Deploy
@@ -28,6 +28,7 @@ Decided by the lists at the top of `initialize.sh`:
 | List | Members | Target |
 | --- | --- | --- |
 | `IGNORED_LIST` | `zsh` `tmux` `bash` `gtk` | contents → `$HOME/` |
+| `HOME_DIR_LIST` | `agents` | dir → `$HOME/.<name>` |
 | `FLAT_LIST` | `dolphin` | contents → `~/.config/` |
 | `SKIP_LIST` | `refind` | never linked |
 | none of them | everything else | dir → `~/.config/<name>` |
@@ -39,7 +40,7 @@ Decided by the lists at the top of `initialize.sh`:
 - `link()` runs `rm -f` before `ln -s`: `ln -sf src existing-dirlink` nests a link inside the dir, and `-n` / `-h` differ between GNU and BSD.
 - A real file at the target is never clobbered. The script prints `Backup needed: <path>` and moves on, so a "missing" link usually means this.
 - Prune only removes links whose `readlink` starts with `config/` (`unlink_if_ours` in `lib.sh`). Foreign symlinks and real files survive.
-- `uninitialize.sh` duplicates the link lists but has no `REQUIREMENTS`: it unlinks regardless of installed apps. Adding a new dir that links into `$HOME` or flat means editing both scripts plus the Layout section of `AGENTS.md`.
+- `uninitialize.sh` duplicates the link lists but has no `REQUIREMENTS`: it unlinks regardless of installed apps. Adding a new dir that links into `$HOME` (contents or whole dir) or flat means editing both scripts plus the Layout section of `AGENTS.md`.
 - `--all` exists for machines missing the apps; the smoke test uses it too.
 
 ## rEFInd (ESP, Arch only)

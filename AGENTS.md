@@ -7,6 +7,7 @@ Personal dotfiles for Arch Linux (Hyprland/Wayland) + macOS. No build, tests, or
 - `config/<name>/` → `~/.config/<name>`. Run `ls config` for the current list; `REQUIREMENTS` in `scripts/initialize.sh` says which app each one needs.
 - Link exceptions, duplicated in `scripts/initialize.sh` and `scripts/uninitialize.sh` — update both scripts when adding a dir:
   - `IGNORED_LIST` (`zsh`, `tmux`, `bash`, `gtk`): contents link into `$HOME/` (`config/zsh/.zshrc` → `~/.zshrc`).
+  - `HOME_DIR_LIST` (`agents`): the directory itself links into `$HOME/` with a leading dot (`config/agents` → `~/.agents`).
   - `FLAT_LIST` (`dolphin`): contents link into `~/.config/` one file at a time, because KDE reads `dolphinrc` there.
   - `SKIP_LIST` (`refind`): ESP is vfat, cannot symlink. Deploy with `scripts/deploy-refind.sh`.
 - `config/.aliases` is sourced in place by `.zshrc`, not linked.
