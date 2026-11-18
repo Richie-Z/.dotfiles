@@ -5,9 +5,118 @@
       "package": "@opencode/ai/providers/openai-compatible",
       "settings": {
         "baseURL": "https://9router.dreadwrym.my.id/v1",
-        "apiKey": "{file:~/.secret/9router-api-key}",
-        "modelsDiscovery": {
-          "enabled": true
+        "apiKey": "{file:~/.secret/9router-api-key}"
+      },
+      "models": {
+        "dr/deeprelay/deepseek-v4-pro": {
+          "name": "DeepSeek V4 Pro",
+          "modelID": "dr/deeprelay/deepseek-v4-pro",
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true,
+              "toggle": true,
+              "effort": [
+                "high",
+                "max"
+              ]
+            }
+          },
+          "limit": {
+            "context": 1000000,
+            "output": 384000
+          }
+        },
+        "dr/deeprelay/deepseek-v4.1-flash": {
+          "name": "DeepSeek V4.1 Flash",
+          "modelID": "dr/deeprelay/deepseek-v4.1-flash",
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true,
+              "toggle": true,
+              "effort": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max"
+              ]
+            }
+          },
+          "limit": {
+            "context": 1000000,
+            "output": 384000
+          }
+        },
+        "dr/deeprelay/kimi-k3": {
+          "name": "Kimi K3",
+          "modelID": "dr/deeprelay/kimi-k3",
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true,
+              "toggle": false,
+              "effort": [
+                "low",
+                "medium",
+                "high",
+                "max"
+              ]
+            }
+          },
+          "limit": {
+            "context": 1048576,
+            "output": 131072
+          }
+        },
+        "dr/deeprelay/kimi-k3.1-pro": {
+          "name": "Kimi K3.1 Pro",
+          "modelID": "dr/deeprelay/kimi-k3.1-pro",
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true,
+              "toggle": false,
+              "effort": [
+                "low",
+                "medium",
+                "high",
+                "max"
+              ]
+            }
+          },
+          "limit": {
+            "context": 1048576,
+            "output": 131072
+          }
         }
       }
     }
