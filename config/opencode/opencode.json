@@ -8,31 +8,6 @@
         "apiKey": "{file:~/.secret/9router-api-key}"
       },
       "models": {
-        "dr/deeprelay/deepseek-v4-pro": {
-          "name": "DeepSeek V4 Pro",
-          "modelID": "dr/deeprelay/deepseek-v4-pro",
-          "capabilities": {
-            "tools": true,
-            "input": [
-              "text"
-            ],
-            "output": [
-              "text"
-            ],
-            "reasoning": {
-              "supported": true,
-              "toggle": true,
-              "effort": [
-                "high",
-                "max"
-              ]
-            }
-          },
-          "limit": {
-            "context": 1000000,
-            "output": 384000
-          }
-        },
         "dr/deeprelay/deepseek-v4.1-flash": {
           "name": "DeepSeek V4.1 Flash",
           "modelID": "dr/deeprelay/deepseek-v4.1-flash",
@@ -90,9 +65,33 @@
             "output": 131072
           }
         },
-        "dr/deeprelay/kimi-k3.1-pro": {
-          "name": "Kimi K3.1 Pro",
-          "modelID": "dr/deeprelay/kimi-k3.1-pro",
+        "dr/deeprelay/glm-5.3": {
+          "name": "GLM 5.3",
+          "modelID": "dr/deeprelay/glm-5.3",
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true,
+              "toggle": false,
+              "effort": [
+                "thinking"
+              ]
+            }
+          },
+          "limit": {
+            "context": 1000000,
+            "output": 128000
+          }
+        },
+        "dr/deeprelay/glm-5.3-flash": {
+          "name": "GLM 5.3 Flash",
+          "modelID": "dr/deeprelay/glm-5.3-flash",
           "capabilities": {
             "tools": true,
             "input": [
@@ -106,15 +105,12 @@
               "supported": true,
               "toggle": false,
               "effort": [
-                "low",
-                "medium",
-                "high",
-                "max"
+                "thinking"
               ]
             }
           },
           "limit": {
-            "context": 1048576,
+            "context": 1000000,
             "output": 131072
           }
         }
