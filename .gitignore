@@ -1,5 +1,8 @@
 config/btop/btop.log
 
+# Superpowers SDD scratch (ledger, briefs, review packages)
+.superpowers/
+
 # APM runs from ~/.apm; anything generated inside config/apm is stray project output
 config/apm/.agents/
 config/apm/.opencode/
