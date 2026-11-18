@@ -4,9 +4,6 @@ IGNORED_LIST=('zsh' 'tmux' 'bash' 'gtk')
 # Directories whose *contents* link into ~/.config/ individually, for apps that
 # read plain files there (KDE: dolphinrc, kiorc, ...) instead of a dir.
 FLAT_LIST=('dolphin')
-# Directories whose *contents* link into ~/.config/<name>/ one file at a time,
-# for apps that write runtime state into that same directory.
-SUBDIR_LIST=('opencode')
 SKIP_LIST=('refind') # not linkable, ESP deploy via scripts/deploy-refind.sh
 
 # "<config dir>:<required command>:<os>" — empty command = any, empty os = any.
@@ -110,8 +107,6 @@ prune() { # prune <config dir> <source path>
   local base="$1" src="$2" dest subitem
   if containsElement "$base" "${IGNORED_LIST[@]}"; then
     dest="$HOME"
-  elif containsElement "$base" "${SUBDIR_LIST[@]}"; then
-    dest="$HOME/.config/$base"
   elif containsElement "$base" "${FLAT_LIST[@]}"; then
     dest="$HOME/.config"
   else
@@ -185,9 +180,6 @@ for item in "$CONFIG_DIR"/*; do
   elif containsElement "$base" "${FLAT_LIST[@]}"; then
     # Contents link into ~/.config/ (e.g. config/dolphin/dolphinrc)
     link_contents "$item" "$HOME/.config"
-  elif containsElement "$base" "${SUBDIR_LIST[@]}"; then
-    # Contents link into ~/.config/<name>/ (e.g. config/opencode/cli.json)
-    link_contents "$item" "$HOME/.config/$base"
   else
     # Not ignored: link directly to ~/.config/
     target="$HOME/.config/$base"

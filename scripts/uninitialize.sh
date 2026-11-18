@@ -2,7 +2,6 @@
 
 IGNORED_LIST=('zsh' 'tmux' 'bash' 'gtk')
 FLAT_LIST=('dolphin') # contents link into ~/.config/, not the directory itself
-SUBDIR_LIST=('opencode') # contents link into ~/.config/<name>/ (e.g. ~/.config/opencode/cli.json)
 
 DRY_RUN=false
 for arg in "$@"; do
@@ -22,13 +21,11 @@ for item in "$CONFIG_DIR"/*; do
   base="$(basename "$item")"
 
   if ! containsElement "$base" "${IGNORED_LIST[@]}" &&
-    ! containsElement "$base" "${FLAT_LIST[@]}" &&
-    ! containsElement "$base" "${SUBDIR_LIST[@]}"; then
+    ! containsElement "$base" "${FLAT_LIST[@]}"; then
     unlink_if_ours "$HOME/.config/$base"
   elif [ -d "$item" ]; then
     dest="$HOME"
     containsElement "$base" "${FLAT_LIST[@]}" && dest="$HOME/.config"
-    containsElement "$base" "${SUBDIR_LIST[@]}" && dest="$HOME/.config/$base"
     shopt -s dotglob
     for subitem in "$item"/*; do
       [[ -e "$subitem" ]] || continue

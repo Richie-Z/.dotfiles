@@ -8,7 +8,6 @@ Personal dotfiles for Arch Linux (Hyprland/Wayland) + macOS. No build, tests, or
 - Link exceptions, duplicated in `scripts/initialize.sh` and `scripts/uninitialize.sh` — update both scripts when adding a dir:
   - `IGNORED_LIST` (`zsh`, `tmux`, `bash`, `gtk`): contents link into `$HOME/` (`config/zsh/.zshrc` → `~/.zshrc`).
   - `FLAT_LIST` (`dolphin`): contents link into `~/.config/` one file at a time, because KDE reads `dolphinrc` there.
-  - `SUBDIR_LIST` (`opencode`): contents link into `~/.config/opencode/` one file at a time, because OpenCode writes runtime state (`service.json`, `plugins/`, `skills/`) into that directory.
   - `SKIP_LIST` (`refind`): ESP is vfat, cannot symlink. Deploy with `scripts/deploy-refind.sh`.
 - `config/.aliases` is sourced in place by `.zshrc`, not linked.
 - `scripts/` holds deploy tooling and runtime shell code (`env-detect.sh`, `clipboard.sh`, `lib.sh`).
@@ -42,7 +41,7 @@ Load order: `.zshenv` → `.zshrc` → `completions.zsh` → `.aliases`. Complet
 - `.zshenv` infers `LINUX_DISTRO` from the display server: Wayland ⇒ arch, Xorg ⇒ debian. Never gate portable logic on it, check the binary instead. `detect_os` returns only `mac` / `linux` / `unknown`.
 - "Private Shell" block at the end of `.zshrc` is commented out, so `unset HISTFILE` is not active.
 - `$DOTFILES_PATH` = `$PROGRAMMING_PATH/Projects/dotfiles`, set in `.zshenv`. Moving the repo breaks runtime-sourced scripts.
-- OpenCode config is tracked in `config/opencode/` and linked per file. Do not edit `~/.config/opencode/opencode.json` for MCP servers or plugins from the CLI without committing the change here, or the next deploy overwrites it.
+- `config/opencode/` is linked as a whole directory, and OpenCode writes runtime state into it (`service.json` holds a password). Those paths are in `.gitignore`; never `git add` them. Config edits made through the CLI land in the repo, so commit them.
 - `.gitignore` exists (btop log, `.superpowers/` scratch). Do not add rules retroactively without asking.
 - Commit style: Conventional Commits, terse subjects.
 

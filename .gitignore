@@ -2,3 +2,15 @@ config/btop/btop.log
 
 # Superpowers SDD scratch (ledger, briefs, review packages)
 .superpowers/
+
+# OpenCode runtime state written into the linked config dir (service.json holds a password)
+config/opencode/service.json
+config/opencode/skills/
+config/opencode/commands/
+config/opencode/agents/
+config/opencode/plugins/
+config/opencode/.caveman-*
+config/opencode/.ponytail-active
+config/opencode/.playwright-mcp/
+config/opencode/opencode.json.bak
+config/opencode/*.pre-dotfiles

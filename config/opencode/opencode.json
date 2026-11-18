@@ -13,6 +13,8 @@
     }
   },
   "plugins": [
+    "./plugins/caveman",
+    "./plugins/rtk.ts",
     "@dietrichgebert/ponytail",
     "opencode-models-discovery",
     "superpowers@git+https://github.com/obra/superpowers.git"

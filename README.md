@@ -20,7 +20,7 @@ bash scripts/test-deploy.sh         # link/unlink smoke test in a temp HOME
 
 ### opencode
 
-Tracked config lives in `config/opencode/` and is linked per file into `~/.config/opencode/`. Runtime state there (`service.json`, `plugins/`, `skills/`) stays machine-local.
+Tracked config lives in `config/opencode/`, linked as a directory to `~/.config/opencode/`. OpenCode writes runtime state into it (`service.json`, `plugins/`, `skills/`), which `.gitignore` keeps out of git.
 
 Plugins:
 

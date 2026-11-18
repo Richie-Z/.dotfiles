@@ -27,7 +27,7 @@ export HOME
 # --dry-run must not create anything
 bash "$SCRIPT_DIR/initialize.sh" --dry-run >/dev/null
 check "dry-run leaves .config empty" test ! -e "$HOME/.config/btop"
-check "dry-run leaves subdir config empty" test ! -e "$HOME/.config/opencode"
+check "dry-run leaves opencode config empty" test ! -e "$HOME/.config/opencode"
 
 # --all: link every config regardless of which apps this machine has
 bash "$SCRIPT_DIR/initialize.sh" --all >/dev/null
@@ -35,19 +35,16 @@ check "dir config linked" test -L "$HOME/.config/btop"
 check "HOME-level dotfile linked" test -L "$HOME/.zshrc"
 check "flat config linked into .config" test -L "$HOME/.config/dolphinrc"
 check "no dolphin dir link" test ! -e "$HOME/.config/dolphin"
-check "subdir config file linked" test -L "$HOME/.config/opencode/opencode.json"
-check "subdir nested dir linked" test -L "$HOME/.config/opencode/themes"
+check "whole-dir config linked" test -L "$HOME/.config/opencode"
 
 # Foreign symlink and real file must survive uninitialize
 mkdir -p "$TMP/elsewhere"
 ln -s "$TMP/elsewhere" "$HOME/.config/foreign"
 printf 'keep\n' >"$HOME/.config/real-file"
-printf 'keep\n' >"$HOME/.config/opencode/service.json"
 
 bash "$SCRIPT_DIR/uninitialize.sh" >/dev/null
 check "our link removed" test ! -e "$HOME/.zshrc"
-check "subdir config link removed" test ! -e "$HOME/.config/opencode/opencode.json"
-check "runtime file in subdir kept" test -f "$HOME/.config/opencode/service.json"
+check "whole-dir config link removed" test ! -e "$HOME/.config/opencode"
 check "foreign symlink kept" test -L "$HOME/.config/foreign"
 check "real file kept" test -f "$HOME/.config/real-file"
 
