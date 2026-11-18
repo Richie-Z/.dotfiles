@@ -1,0 +1,12 @@
+ING=(
+  harbor.dreadwrym.my.id
+  jenkins.dreadwrym.my.id
+  grafana.dreadwrym.my.id
+  immich.dreadwrym.my.id
+  agentmemory.dreadwrym.my.id
+  9router.dreadwrym.my.id
+  omniroute.dreadwrym.my.id
+  argocd.dreadwrym.my.id
+  multica.dreadwrym.my.id
+  api.multica.dreadwrym.my.id
+)
