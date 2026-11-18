@@ -29,7 +29,7 @@ Decided by the lists at the top of `initialize.sh`:
 | --- | --- | --- |
 | `IGNORED_LIST` | `zsh` `tmux` `bash` `gtk` | contents → `$HOME/` |
 | `FLAT_LIST` | `dolphin` | contents → `~/.config/` |
-| `FLAT_HOME_LIST` | `apm` | contents → `~/.apm/` |
+| `SUBDIR_LIST` | `opencode` | contents → `~/.config/opencode/` |
 | `SKIP_LIST` | `refind` | never linked |
 | none of them | everything else | dir → `~/.config/<name>` |
 
@@ -40,7 +40,7 @@ Decided by the lists at the top of `initialize.sh`:
 - `link()` runs `rm -f` before `ln -s`: `ln -sf src existing-dirlink` nests a link inside the dir, and `-n` / `-h` differ between GNU and BSD.
 - A real file at the target is never clobbered. The script prints `Backup needed: <path>` and moves on, so a "missing" link usually means this.
 - Prune only removes links whose `readlink` starts with `config/` (`unlink_if_ours` in `lib.sh`). Foreign symlinks and real files survive.
-- `uninitialize.sh` duplicates the link lists but has no `REQUIREMENTS`: it unlinks regardless of installed apps. Adding a new dir that links into `$HOME`, flat, or `~/.<name>` means editing both scripts plus the Layout section of `AGENTS.md`.
+- `uninitialize.sh` duplicates the link lists but has no `REQUIREMENTS`: it unlinks regardless of installed apps. Adding a new dir that links into `$HOME`, flat, or a subdir means editing both scripts plus the Layout section of `AGENTS.md`.
 - `--all` exists for machines missing the apps; the smoke test uses it too.
 
 ## rEFInd (ESP, Arch only)

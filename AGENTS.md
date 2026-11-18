@@ -8,7 +8,7 @@ Personal dotfiles for Arch Linux (Hyprland/Wayland) + macOS. No build, tests, or
 - Link exceptions, duplicated in `scripts/initialize.sh` and `scripts/uninitialize.sh` — update both scripts when adding a dir:
   - `IGNORED_LIST` (`zsh`, `tmux`, `bash`, `gtk`): contents link into `$HOME/` (`config/zsh/.zshrc` → `~/.zshrc`).
   - `FLAT_LIST` (`dolphin`): contents link into `~/.config/` one file at a time, because KDE reads `dolphinrc` there.
-  - `FLAT_HOME_LIST` (`apm`): contents link into `~/.apm/`.
+  - `SUBDIR_LIST` (`opencode`): contents link into `~/.config/opencode/` one file at a time, because OpenCode writes runtime state (`service.json`, `plugins/`, `skills/`) into that directory.
   - `SKIP_LIST` (`refind`): ESP is vfat, cannot symlink. Deploy with `scripts/deploy-refind.sh`.
 - `config/.aliases` is sourced in place by `.zshrc`, not linked.
 - `scripts/` holds deploy tooling and runtime shell code (`env-detect.sh`, `clipboard.sh`, `lib.sh`).
@@ -42,7 +42,8 @@ Load order: `.zshenv` → `.zshrc` → `completions.zsh` → `.aliases`. Complet
 - `.zshenv` infers `LINUX_DISTRO` from the display server: Wayland ⇒ arch, Xorg ⇒ debian. Never gate portable logic on it, check the binary instead. `detect_os` returns only `mac` / `linux` / `unknown`.
 - "Private Shell" block at the end of `.zshrc` is commented out, so `unset HISTFILE` is not active.
 - `$DOTFILES_PATH` = `$PROGRAMMING_PATH/Projects/dotfiles`, set in `.zshenv`. Moving the repo breaks runtime-sourced scripts.
-- `.gitignore` exists (btop log, stray apm output). Do not add rules retroactively without asking.
+- OpenCode config is tracked in `config/opencode/` and linked per file. Do not edit `~/.config/opencode/opencode.json` for MCP servers or plugins from the CLI without committing the change here, or the next deploy overwrites it.
+- `.gitignore` exists (btop log, `.superpowers/` scratch). Do not add rules retroactively without asking.
 - Commit style: Conventional Commits, terse subjects.
 
 ## Skills
@@ -52,4 +53,3 @@ Project skills live in `.opencode/skills/`. Load one when the task matches:
 - `deploy` — `initialize.sh` / `uninitialize.sh` internals, `REQUIREMENTS`, prune and backup behavior, rEFInd ESP deploy, deploy smoke test.
 - `waybar-rice` — island layout, reload, pango colors, grim pixel verification, MDI glyphs.
 - `shell` — completions cache and dump, lazy loaders, clipboard over SSH, distro inference quirk.
-- `apm` — edit `config/apm/apm.yml` by hand for APM packages, MCP servers and OpenCode plugins (lifecycle hooks), then `apm install`.
