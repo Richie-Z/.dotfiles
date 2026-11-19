@@ -183,6 +183,33 @@
             "output": 128000
           }
         },
+        "of/DeepSeek-V4.1-Flash-1017-Free": {
+          "name": "DeepSeek V4.1 Flash 1017 Free (openference)",
+          "modelID": "of/DeepSeek-V4.1-Flash-1017-Free",
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true,
+              "toggle": true,
+              "effort": [
+                "max",
+                "high",
+                "low"
+              ]
+            }
+          },
+          "limit": {
+            "context": 1048576,
+            "output": 384000
+          }
+        },
         "FUCKING-FREE": {
           "name": "FUCKING FREE (Combo)",
           "modelID": "FUCKING-FREE",
