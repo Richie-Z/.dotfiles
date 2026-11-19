@@ -132,6 +132,57 @@
             "output": 131072
           }
         },
+        "pecut/pecut/glm-5.3": {
+          "name": "GLM 5.3 (pecutopus)",
+          "modelID": "pecut/pecut/glm-5.3",
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true,
+              "toggle": false,
+              "effort": [
+                "thinking"
+              ]
+            }
+          },
+          "limit": {
+            "context": 1000000,
+            "output": 128000
+          }
+        },
+        "of/GLM-5.3-Flash-Free": {
+          "name": "GLM 5.3 Flash Free (openference)",
+          "modelID": "of/GLM-5.3-Flash-Free",
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true,
+              "toggle": false,
+              "effort": [
+                "max",
+                "high",
+                "low"
+              ]
+            }
+          },
+          "limit": {
+            "context": 1048576,
+            "output": 128000
+          }
+        },
         "FUCKING-FREE": {
           "name": "FUCKING FREE (Combo)",
           "modelID": "FUCKING-FREE",
