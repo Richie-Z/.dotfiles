@@ -26,190 +26,6 @@
         "apiKey": "{file:~/.secret/9router-api-key}"
       },
       "models": {
-        "dr/deeprelay/deepseek-v4.1-flash": {
-          "name": "DeepSeek V4.1 Flash (deeprelay)",
-          "modelID": "dr/deeprelay/deepseek-v4.1-flash",
-          "capabilities": {
-            "tools": true,
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ],
-            "reasoning": {
-              "supported": true,
-              "toggle": true,
-              "effort": [
-                "low",
-                "medium",
-                "high",
-                "xhigh",
-                "max"
-              ]
-            }
-          },
-          "limit": {
-            "context": 1000000,
-            "output": 384000
-          }
-        },
-        "dr/deeprelay/kimi-k3": {
-          "name": "Kimi K3 (deeprelay)",
-          "modelID": "dr/deeprelay/kimi-k3",
-          "capabilities": {
-            "tools": true,
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ],
-            "reasoning": {
-              "supported": true,
-              "toggle": false,
-              "effort": [
-                "low",
-                "medium",
-                "high",
-                "max"
-              ]
-            }
-          },
-          "limit": {
-            "context": 1048576,
-            "output": 131072
-          }
-        },
-        "dr/deeprelay/glm-5.3": {
-          "name": "GLM 5.3 (deeprelay)",
-          "modelID": "dr/deeprelay/glm-5.3",
-          "capabilities": {
-            "tools": true,
-            "input": [
-              "text"
-            ],
-            "output": [
-              "text"
-            ],
-            "reasoning": {
-              "supported": true,
-              "toggle": false,
-              "effort": [
-                "thinking"
-              ]
-            }
-          },
-          "limit": {
-            "context": 1000000,
-            "output": 128000
-          }
-        },
-        "dr/deeprelay/glm-5.3-flash": {
-          "name": "GLM 5.3 Flash (deeprelay)",
-          "modelID": "dr/deeprelay/glm-5.3-flash",
-          "capabilities": {
-            "tools": true,
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ],
-            "reasoning": {
-              "supported": true,
-              "toggle": false,
-              "effort": [
-                "thinking"
-              ]
-            }
-          },
-          "limit": {
-            "context": 1000000,
-            "output": 131072
-          }
-        },
-        "pecut/pecut/glm-5.3": {
-          "name": "GLM 5.3 (pecutopus)",
-          "modelID": "pecut/pecut/glm-5.3",
-          "capabilities": {
-            "tools": true,
-            "input": [
-              "text"
-            ],
-            "output": [
-              "text"
-            ],
-            "reasoning": {
-              "supported": true,
-              "toggle": false,
-              "effort": [
-                "thinking"
-              ]
-            }
-          },
-          "limit": {
-            "context": 1000000,
-            "output": 128000
-          }
-        },
-        "of/GLM-5.3-Flash-Free": {
-          "name": "GLM 5.3 Flash Free (openference)",
-          "modelID": "of/GLM-5.3-Flash-Free",
-          "capabilities": {
-            "tools": true,
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ],
-            "reasoning": {
-              "supported": true,
-              "toggle": false,
-              "effort": [
-                "max",
-                "high",
-                "low"
-              ]
-            }
-          },
-          "limit": {
-            "context": 1048576,
-            "output": 128000
-          }
-        },
-        "of/DeepSeek-V4.1-Flash-1017-Free": {
-          "name": "DeepSeek V4.1 Flash 1017 Free (openference)",
-          "modelID": "of/DeepSeek-V4.1-Flash-1017-Free",
-          "capabilities": {
-            "tools": true,
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ],
-            "reasoning": {
-              "supported": true,
-              "toggle": true,
-              "effort": [
-                "max",
-                "high",
-                "low"
-              ]
-            }
-          },
-          "limit": {
-            "context": 1048576,
-            "output": 384000
-          }
-        },
         "FUCKING-FREE": {
           "name": "FUCKING FREE (Combo)",
           "modelID": "FUCKING-FREE",
@@ -259,6 +75,53 @@
           "limit": {
             "context": 1000000,
             "output": 384000
+          }
+        },
+        "GLM5.3-Flash": {
+          "name": "GLM 5.3 Flash (Combo)",
+          "modelID": "GLM5.3-Flash",
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true,
+              "toggle": false,
+              "effort": [
+                "thinking"
+              ]
+            }
+          },
+          "limit": {
+            "context": 1000000,
+            "output": 131072
+          }
+        },
+        "qwen4-max": {
+          "name": "Qwen4 Max (Combo)",
+          "modelID": "qwen4-max",
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true,
+              "toggle": true
+            }
+          },
+          "limit": {
+            "context": 1000000,
+            "output": 65536
           }
         }
       }
