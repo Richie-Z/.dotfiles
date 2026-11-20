@@ -102,6 +102,30 @@
             "output": 131072
           }
         },
+        "GLM5.3": {
+          "name": "GLM 5.3 (Combo)",
+          "modelID": "GLM5.3",
+          "capabilities": {
+            "tools": true,
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ],
+            "reasoning": {
+              "supported": true,
+              "toggle": false,
+              "effort": [
+                "thinking"
+              ]
+            }
+          },
+          "limit": {
+            "context": 1000000,
+            "output": 128000
+          }
+        },
         "qwen4-max": {
           "name": "Qwen4 Max (Combo)",
           "modelID": "qwen4-max",
