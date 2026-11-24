@@ -16,14 +16,6 @@
           "CONTEXT7_API_KEY": "{file:~/.secret/context7-api-key}"
         }
       },
-      // "reddit": {
-      //   "type": "local",
-      //   "command": [
-      //     "npx",
-      //     "-y",
-      //     "reddit-mcp-server"
-      //   ]
-      // }
     }
   },
   "providers": {
