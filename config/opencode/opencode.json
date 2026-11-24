@@ -52,7 +52,7 @@
             }
           },
           "limit": {
-            "context": 128000,
+            "context": 200000,
             "output": 32000
           }
         },
@@ -70,14 +70,7 @@
             ],
             "reasoning": {
               "supported": true,
-              "toggle": true,
-              "effort": [
-                "low",
-                "medium",
-                "high",
-                "xhigh",
-                "max"
-              ]
+              "toggle": true
             }
           },
           "limit": {
@@ -132,28 +125,6 @@
           "limit": {
             "context": 1000000,
             "output": 128000
-          }
-        },
-        "qwen4-max": {
-          "name": "Qwen4 Max (Combo)",
-          "modelID": "qwen4-max",
-          "capabilities": {
-            "tools": true,
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ],
-            "reasoning": {
-              "supported": true,
-              "toggle": true
-            }
-          },
-          "limit": {
-            "context": 1000000,
-            "output": 65536
           }
         },
         "opus-5.5": {
