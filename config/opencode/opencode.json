@@ -33,7 +33,9 @@
             "tools": true,
             "input": [
               "text",
-              "image"
+              "image",
+              "audio",
+              "video"
             ],
             "output": [
               "text"
@@ -84,7 +86,9 @@
             "tools": true,
             "input": [
               "text",
-              "image"
+              "image",
+              "video",
+              "pdf"
             ],
             "output": [
               "text"
@@ -133,7 +137,8 @@
             "tools": true,
             "input": [
               "text",
-              "image"
+              "image",
+              "pdf"
             ],
             "output": [
               "text"
