@@ -56,8 +56,8 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd _zsh_lazy_load_omz
 
 # Load completions
-if [[ -n "$DOTFILES_PATH" && -f "$DOTFILES_PATH/config/zsh/completions.zsh" ]]; then
-  source "$DOTFILES_PATH/config/zsh/completions.zsh"
+if [[ -n "$DOTFILES_PATH" && -f "$DOTFILES_PATH/config/completions.zsh" ]]; then
+  source "$DOTFILES_PATH/config/completions.zsh"
 else
   echo "[zshrc] DOTFILES_PATH unset, completions not loaded" >&2
 fi

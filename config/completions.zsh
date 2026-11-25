@@ -27,7 +27,8 @@ _zoxide_lazy_load() {
   unfunction zi
   unfunction _zoxide_lazy_load
   eval "$(zoxide init zsh)"
-  z "$@"; }
+  z "$@"
+}
 z() { _zoxide_lazy_load "$@"; }
 zi() { _zoxide_lazy_load "$@"; }
 
